@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bdudley <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 16:13:28 by koparker          #+#    #+#             */
-/*   Updated: 2019/09/10 17:50:46 by koparker         ###   ########.fr       */
+/*   Updated: 2019/09/11 14:27:19 by bdudley          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@
 # include <math.h>
 # include <mlx.h>
 # include <stdio.h>
-
+#define  DW 600
+#define DH 600
 # define COLOR_DEFAULT 0xFFFFFF
 
 typedef struct		s_point
