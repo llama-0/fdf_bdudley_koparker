@@ -6,7 +6,7 @@
 /*   By: bdudley <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 16:28:36 by koparker          #+#    #+#             */
-/*   Updated: 2019/09/11 17:45:59 by bdudley          ###   ########.fr       */
+/*   Updated: 2019/09/11 18:59:41 by bdudley          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,22 +30,21 @@ void    draw_plane(t_point ***head, t_data *data, int **img_arr)
     int j;
     int step_x;
     int step_y;
-    int delta_x;
-    int delta_y;
 
     j = 0;
     step_y = DH / data->size_y;
-    delta_y = DH - step_y * data->size_y;
-    printf("size_x |%zu|\n", data->size_x);
-    while (j < DH )
+    step_x = DW / data->size_x;
+    printf("step`-x |%d|\n", step_x);
+    printf("step`-y |%d|\n", step_y);
+    (void)head;
+    while (j < DH)
     {
         i = 0;
-        step_x = DW / data->size_x;
-        delta_x = DW - step_x * data->size_x;
-        while (i < DW )
+        while (i < DW)
         {
-            if (i % step_x == 0 || j % step_y == 0 ||
-            i == DW - delta_x - 1 || j == DH - delta_y - 1)
+            if ((i % step_x == 0 || j % step_y == 0)
+            && ((size_t)j)<= ((data->size_y - 1) * (step_y))
+            && ((size_t)i)<= ((data->size_x - 1)* (step_x)))
             {
                 if ((*head)[j / step_y][i / step_x].alt != 0)
                     (*img_arr)[j * DW + i] = 0xFFFFF;
