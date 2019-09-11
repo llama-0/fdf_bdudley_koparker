@@ -6,7 +6,7 @@
 /*   By: bdudley <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 16:13:28 by koparker          #+#    #+#             */
-/*   Updated: 2019/09/11 18:26:45 by bdudley          ###   ########.fr       */
+/*   Updated: 2019/09/11 21:34:47 by bdudley          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@
 
 typedef struct		s_point
 {
-	double			x;
-	double			y;
+	int			x;
+	int			y;
 	int				alt;
 	int				has_color; // default 0 (no color)
 	int				color;
@@ -33,7 +33,6 @@ typedef struct		s_point
 
 typedef struct			s_data
 {
-//	size_t				capacity_x; //max
 	size_t				size_x; //use
 	size_t				capacity_y;
 	size_t				size_y;

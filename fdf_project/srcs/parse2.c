@@ -42,6 +42,8 @@ t_point		**new_array(t_point		***prev_array, t_data	*data)
 			array[j][i].alt = 0;
 			array[j][i].has_color = 0;
 			array[j][i].color = 0;
+			array[j][i].x = 0;
+			array[j][i].y = 0;
 			i++;
 		}
 		j++;

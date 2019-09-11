@@ -6,7 +6,7 @@
 /*   By: bdudley <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/15 14:10:37 by koparker          #+#    #+#             */
-/*   Updated: 2019/09/11 17:46:30 by bdudley          ###   ########.fr       */
+/*   Updated: 2019/09/11 17:58:37 by bdudley          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,15 @@ int	valid_nbr(char *spl, t_point ***point, int i, int j)
 		if (ft_strcmp(spl, "0") == 0)
 		{
 			(*point)[j][i].alt = n;
-//			(*point)[j][i].y = j;
-//            (*point)[j][i].x = i;
+			(*point)[j][i].y = j;
+            (*point)[j][i].x = i;
 			return (1);
 		}
 		else
 			return (0);
 	}
-//    (*point)[j][i].x = i;
-//    (*point)[j][i].y = j;
+    (*point)[j][i].x = i;
+    (*point)[j][i].y = j;
 	(*point)[j][i].alt = n;
 //	printf("(*point)->alt = %d\n", (*point)->alt);
 	return (1);
