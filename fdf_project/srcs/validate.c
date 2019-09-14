@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bdudley <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/15 14:10:37 by koparker          #+#    #+#             */
-/*   Updated: 2019/09/11 17:58:37 by bdudley          ###   ########.fr       */
+/*   Updated: 2019/09/14 18:56:57 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,20 @@ int	valid_nbr(char *spl, t_point ***point, int i, int j)
 	int		n;
 	char    *tmp;
 
-	tmp = spl;			   
+	tmp = spl;		
+	//printf("i  = %d and j = %d, tmp == |%s|\n", i, j, tmp);	   
 	n = ft_atoi(tmp);
-//	printf("atoi check = |%d|\n", n);		
+	//	printf("atoi check = |%d|\n", n);		
 	if (n == 0)
 	{
 		if (ft_strcmp(spl, "0") == 0)
 		{
+
+			//printf("NBRRRRRRRRRRR\n");
 			(*point)[j][i].alt = n;
 			(*point)[j][i].y = j;
             (*point)[j][i].x = i;
+			
 			return (1);
 		}
 		else
@@ -35,6 +39,7 @@ int	valid_nbr(char *spl, t_point ***point, int i, int j)
     (*point)[j][i].x = i;
     (*point)[j][i].y = j;
 	(*point)[j][i].alt = n;
+	//printf("NBR\n");
 //	printf("(*point)->alt = %d\n", (*point)->alt);
 	return (1);
 }
