@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bdudley <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 16:28:36 by koparker          #+#    #+#             */
-/*   Updated: 2019/09/14 19:52:09 by koparker         ###   ########.fr       */
+/*   Updated: 2019/09/14 21:44:13 by bdudley          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,9 @@ void    draw_line_low(t_point *p1, t_point *p2, int **img_arr, t_data *data)
     x = p1->x * step_x;
     while (x < p2->x * step_x)
     {
-        (*img_arr)[y + x] = 0xFFFFFF;
-       // mlx_pixel_put(mlx_ptr, win_ptr, x, p1->y * step_y * DH, 0xFFFFFF);
+        printf("x %d | y %d\n" , x, y);
+        printf("x + y %d\n", x + y);
+        (*img_arr)[y * DH + x] = 0xFFFFFF;
         if (diff > 0)
         {
             y = y + y_i;
@@ -117,7 +118,7 @@ void    draw_line_high(t_point *p1, t_point *p2, int **img_arr, t_data *data)
     printf("p1->y %d and p2->y %d\n", p1->y, p2->y);
     while (y < p2->y * step_y)
     {
-       // mlx_pixel_put(mlx_ptr, win_ptr, p1->x * step_x, y * DW, 0xFFFFFF);
+        printf("x %d | y %d | DW %d" , x, y, DW);
         printf("x + y * DW %d\n", x + y * DW);
         (*img_arr)[x + y * DW] = 0xFFFFFF;
         if (diff > 0)
@@ -132,36 +133,13 @@ void    draw_line_high(t_point *p1, t_point *p2, int **img_arr, t_data *data)
      printf("Nastya\n");
 }
 
-//static void iso(int *x, int *y)
-//{
-//    int previous_x;
-//    int previous_y;
-//
-//    previous_x = *x;
-//    previous_y = *y;
-//    *x = previous_x * cos(0.523599) - previous_y * sin(0.523599);
-//    *y = previous_y * cos(0.523599) + previous_x * sin(0.523599);
-//}
-//
-//static void riso(int *x, int *y)
-//{
-//    int previous_x;
-//    int previous_y;
-//
-//    previous_x = *x;
-//    previous_y = *y;
-//    *x = previous_x * cos(5.75959) - previous_y * sin(5.75959);
-//    *y = previous_y * cos(5.75959) + previous_x * sin(5.75959);
-//}
-
-
 void    plot(t_point *p1, t_point *p2, int **img_arr, t_data *data)
 {
     if (abs(p2->y - p1->y) < abs(p2->x - p1->x))
     {
+        printf("draw_line_low\n");
         if (p1->x > p2->x)
         {
-            printf("draw_line_low\n");
             draw_line_low(p2, p1, img_arr, data);
         }
         else
@@ -235,10 +213,6 @@ void    draw_plane(t_point ***head, t_data *data, int **img_arr)
 //    previous_y = (*head)[0][1].y;
 //    (*head)[0][1].x = previous_x * cos(5.75959) - previous_y * sin(5.75959);
 //    (*head)[0][1].y = previous_y * cos(5.75959) + previous_x * sin(5.75959);
-    // (*head)[0][0].x = 0;
-    // (*head)[0][0].y = 0;
-    // (*head)[0][1].x = 1;
-    //         (*head)[0][1].y = 1;
     //       //  printf("x_0, y_1 %d %d\n", (*head)[0][1].x, (*head)[0][1].y);
     j = 0;
     while (j < data->size_y)
@@ -246,13 +220,9 @@ void    draw_plane(t_point ***head, t_data *data, int **img_arr)
         i = 0;
         while (i < data->size_x)
         {
-            if (i < data->size_x - 1) {
-                //iso(&(*head)[j][i].x, &(*head)[j][i].y);
-           //    iso(&(*head)[j][i + 1].x, &(*head)[j][i + 1].y);
+            if (i < data->size_x - 1)
+            {
                 plot(&((*head)[j][i]), &((*head)[j][i + 1]), img_arr, data);
-               // plot(&((*head)[j][i]), &((*head)[j][i + 1]), img_arr, data);
-               // riso(&(*head)[j][i].x, &(*head)[j][i].y);
-              // riso(&(*head)[j][i + 1].x, &(*head)[j][i + 1].y);
             }
             if (j < data->size_y - 1) {
                // iso(&(*head)[j][i].x, &(*head)[j][i].y);
