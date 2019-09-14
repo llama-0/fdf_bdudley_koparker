@@ -6,7 +6,7 @@
 /*   By: bdudley <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 16:13:28 by koparker          #+#    #+#             */
-/*   Updated: 2019/09/11 21:34:47 by bdudley          ###   ########.fr       */
+/*   Updated: 2019/09/11 23:31:05 by bdudley          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 # include <math.h>
 # include <mlx.h>
 # include <stdio.h>
-#define  DW 600
-#define DH 600
+#define  DW 1000
+#define DH 1000
 # define COLOR_DEFAULT 0xFFFFFF
 
 typedef struct		s_point

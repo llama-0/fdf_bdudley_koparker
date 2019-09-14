@@ -6,11 +6,14 @@
 /*   By: bdudley <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 16:28:36 by koparker          #+#    #+#             */
-/*   Updated: 2019/09/11 21:35:34 by bdudley          ###   ########.fr       */
+/*   Updated: 2019/09/11 23:34:05 by bdudley          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fdf.h>
+
+void    *mlx_ptr;
+void    *win_ptr;
 
 //    printf("step`-x |%d|\n", step_x);
 //    printf("step`-y |%d|\n", step_y);
@@ -73,12 +76,10 @@ void    draw_line_low(t_point *p1, t_point *p2, int **img_arr, t_data *data)
     diff = 2 * dy - dx;
     y = p1->y;
     x = p1->x * step_x;
-   // printf("step_x %d\n", step_x);
-    //printf("p1->x %d - p1->y %d     p2->x %d - p2->y %d\n", p1->x, p1->y, p2->x, p2->y);
     while (x < p2->x * step_x)
     {
-       // printf("! %d ", p1->y * DH + x);
-        (*img_arr)[p1->y * step_y * DH + x] = 0xFFFFFF;
+        (*img_arr)[p1->y * step_y + x] = 0xFFFFFF;
+       // mlx_pixel_put(mlx_ptr, win_ptr, x, p1->y * step_y * DH, 0xFFFFFF);
         if (diff > 0)
         {
             y = y + y_i;
@@ -87,7 +88,6 @@ void    draw_line_low(t_point *p1, t_point *p2, int **img_arr, t_data *data)
         diff = diff + 2 * dy;
         x++;
     }
-   // printf("\n");
 }
 
 void    draw_line_high(t_point *p1, t_point *p2, int **img_arr, t_data *data)
@@ -114,15 +114,15 @@ void    draw_line_high(t_point *p1, t_point *p2, int **img_arr, t_data *data)
     diff = 2 * dx - dy;
     x = p1->x;
     y = p1->y * step_y;
+    printf("KIKII\n");
     while (y < p2->y * step_y)
     {
-//        if (y < p2->y * step_y / 2)
-//            (*img_arr)[p1->x * DW + y] = 0xFFFFFF;
-//        else
-            (*img_arr)[p1->x * step_x + y * DW] = 0xFFFFFF;
+       // mlx_pixel_put(mlx_ptr, win_ptr, p1->x * step_x, y * DW, 0xFFFFFF);
+    //   printf("p1->x * step_x + y * DW %d\n", p1->x + y * DW);
+            (*img_arr)[p1->x * step_x +  y * DW] = 0xFFFFFF;
         if (diff > 0)
         {
-            x = x + x_i;
+            x = x + x_i*;
             diff = diff - 2 * dy;
         }
         diff = diff + 2 * dx;
@@ -130,50 +130,139 @@ void    draw_line_high(t_point *p1, t_point *p2, int **img_arr, t_data *data)
     }
 }
 
+//static void iso(int *x, int *y)
+//{
+//    int previous_x;
+//    int previous_y;
+//
+//    previous_x = *x;
+//    previous_y = *y;
+//    *x = previous_x * cos(0.523599) - previous_y * sin(0.523599);
+//    *y = previous_y * cos(0.523599) + previous_x * sin(0.523599);
+//}
+//
+//static void riso(int *x, int *y)
+//{
+//    int previous_x;
+//    int previous_y;
+//
+//    previous_x = *x;
+//    previous_y = *y;
+//    *x = previous_x * cos(5.75959) - previous_y * sin(5.75959);
+//    *y = previous_y * cos(5.75959) + previous_x * sin(5.75959);
+//}
+
+
 void    plot(t_point *p1, t_point *p2, int **img_arr, t_data *data)
 {
     if (abs(p2->y - p1->y) < abs(p2->x - p1->x))
     {
-        p1->x > p2->x ? draw_line_low(p2, p1, img_arr, data) : draw_line_low(p1, p2, img_arr, data);
+        if (p1->x > p2->x)
+        {
+            printf("GOGO\n");
+         //   iso(&(p2->x), &(p2->y));
+            draw_line_low(p2, p1, img_arr, data);
+         //   riso(&(p2->x), &(p2->y));
+        }
+        else
+        {
+         //   iso(&(p1->x), &(p1->y));
+            draw_line_low(p1, p2, img_arr, data);
+          //  riso(&(p1->x), &(p1->y));
+        }
     }
     else
     {
+        printf("LOLO\n");
         p1->y > p2->y ? draw_line_high(p2, p1, img_arr, data) : draw_line_high(p1, p2, img_arr, data);
+//        if (p1->y > p2->y)
+//        {
+//            iso(&(p2->x), &(p2->y));
+//            draw_line_high(p2, p1, img_arr, data);
+//            riso(&(p2->x), &(p2->y));
+//        }
+//        else
+//        {
+//            iso(&(p1->x), &(p1->y));
+//            draw_line_high(p1, p2, img_arr, data);
+//            riso(&(p1->x), &(p1->y));
+//        }
     }
 }
 
-//void    draw_line_y(t_point *p1, t_point *p2, int **img_arr, t_data *data)
-//{
-//    int dir_y;
-//    int step_y;
-//    int i;
-//
-//    step_y = DH / data->size_y;
-//    dir_y = abs(p1->y - p2->y) > 0 ? 1 : -1;
-//    i = p1->y * step_y;
-//    while (i < p2->y * step_y)
-//    {
-//        (*img_arr)[i * DH + p1->x * DW] = 0xFFFFFF;
-//        i++;
-//    }
-//
-//}
+static void iso(int *x, int *y)
+{
+    int previous_x;
+    int previous_y;
+
+    previous_x = *x;
+    previous_y = *y;
+    *x = previous_x * cos(0.523599) - previous_y * sin(0.523599);
+    *y = previous_y * cos(0.523599) + previous_x * sin(0.523599);
+}
+
+static void riso(int *x, int *y)
+{
+    int previous_x;
+    int previous_y;
+
+    previous_x = *x;
+    previous_y = *y;
+    *x = previous_x * cos(5.75959) - previous_y * sin(5.75959);
+    *y = previous_y * cos(5.75959) + previous_x * sin(5.75959);
+}
+
 
 void    draw_plane(t_point ***head, t_data *data, int **img_arr)
 {
     size_t i;
     size_t j;
 
+//    j = 0;
+//    while (j < data->size_y)
+//    {
+//        i = 1;
+//        while (i < data->size_x) {
+//        //    printf("POPO\n");
+//            iso(&(*head)[j][i].x, &(*head)[j][i].y);
+//            i++;
+//        }
+//        j++;
+//    }
+
+//    int previous_x;
+//    int previous_y;
+//
+//    previous_x = (*head)[0][1].x;
+//    previous_y = (*head)[0][1].y;
+//    (*head)[0][1].x = previous_x * cos(5.75959) - previous_y * sin(5.75959);
+//    (*head)[0][1].y = previous_y * cos(5.75959) + previous_x * sin(5.75959);
+    (*head)[0][0].x = 0;
+    (*head)[0][0].y = 0;
+    (*head)[0][1].x = 1;
+            (*head)[0][1].y = 1;
+          //  printf("x_0, y_1 %d %d\n", (*head)[0][1].x, (*head)[0][1].y);
     j = 0;
     while (j < data->size_y)
     {
         i = 0;
         while (i < data->size_x)
         {
-            if (i < data->size_x - 1)
+            if (i < data->size_x - 1) {
+                //iso(&(*head)[j][i].x, &(*head)[j][i].y);
+           //    iso(&(*head)[j][i + 1].x, &(*head)[j][i + 1].y);
                 plot(&((*head)[j][i]), &((*head)[j][i + 1]), img_arr, data);
-            if (j < data->size_y - 1)
+               // plot(&((*head)[j][i]), &((*head)[j][i + 1]), img_arr, data);
+               // riso(&(*head)[j][i].x, &(*head)[j][i].y);
+              // riso(&(*head)[j][i + 1].x, &(*head)[j][i + 1].y);
+            }
+            if (j < data->size_y - 1) {
+               // iso(&(*head)[j][i].x, &(*head)[j][i].y);
+             //  iso(&(*head)[j + 1][i].x, &(*head)[j + 1][i].y);
                 plot(&((*head)[j][i]), &((*head)[j + 1][i]), img_arr, data);
+                //riso(&(*head)[j][i].x, &(*head)[j][i].y);
+               // riso(&(*head)[j + 1][i].x, &(*head)[j + 1][i].y);
+            }
             i++;
         }
         j++;
@@ -182,8 +271,7 @@ void    draw_plane(t_point ***head, t_data *data, int **img_arr)
 
 void    find_open(t_point ***head, t_data *data)
 {
-    void    *mlx_ptr;
-    void    *win_ptr;
+
     void    *img_ptr;
     int     *img_arr;
     int     bits_per_pixel;
