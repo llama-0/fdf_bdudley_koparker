@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bdudley <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/15 14:10:37 by koparker          #+#    #+#             */
-/*   Updated: 2019/09/14 18:56:57 by koparker         ###   ########.fr       */
+/*   Updated: 2019/09/15 11:40:44 by bdudley          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,32 +15,18 @@
 int	valid_nbr(char *spl, t_point ***point, int i, int j)
 {
 	int		n;
-	char    *tmp;
+	char	*tmp;
 
-	tmp = spl;		
-	//printf("i  = %d and j = %d, tmp == |%s|\n", i, j, tmp);	   
+	tmp = spl;
 	n = ft_atoi(tmp);
-	//	printf("atoi check = |%d|\n", n);		
 	if (n == 0)
 	{
-		if (ft_strcmp(spl, "0") == 0)
-		{
-
-			//printf("NBRRRRRRRRRRR\n");
-			(*point)[j][i].alt = n;
-			(*point)[j][i].y = j;
-            (*point)[j][i].x = i;
-			
-			return (1);
-		}
-		else
+		if (ft_strcmp(spl, "0") != 0)
 			return (0);
 	}
-    (*point)[j][i].x = i;
-    (*point)[j][i].y = j;
+	(*point)[j][i].x = i;
+	(*point)[j][i].y = j;
 	(*point)[j][i].alt = n;
-	//printf("NBR\n");
-//	printf("(*point)->alt = %d\n", (*point)->alt);
 	return (1);
 }
 
@@ -49,21 +35,18 @@ int	valid_color(char *spl, t_point ***point, int i, int j)
 	int		color;
 	char	*tmp;
 
-	color = 0;
 	tmp = spl;
-    (*point)[j][i].color = 0xFFFFFF;
-//	if ((tmp = ft_strchr(spl, ',')) != NULL)
-//	{
-//		//if ((color = ft_atoi_hex(tmp)) == 0)
-//		//	return (0);
-//		(*point)[j][i].color = 0xFFFFFF;
-//		return (1);
-//	}
-//	else
-//	{
-//		//(*point)->has_color = 0;
-//		(*point)[j][i].color = 0;
-//		return (1);
-//	}
-	return (1); //return (0);
+	(*point)[j][i].color = 0xFFFFFF;
+	(*point)[j][i].has_color = 0;
+	if ((tmp = ft_strchr(spl, ',')) != NULL)
+	{
+		if ((color = ft_atoi_hex(tmp)) == 0)
+		{
+			printf("I ne znau color |%d|", color); //delete
+			return (0);
+		}
+		(*point)[j][i].color = color;
+		return (1);
+	}
+	return (1);
 }

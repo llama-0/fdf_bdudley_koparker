@@ -26,7 +26,7 @@ int	ft_atoi_hex(char *s)
 	res = 0;
 	while (s[i])
 	{
-		if (ft_isdigit(s[i]) == 1 )
+		if (ft_isdigit(s[i]) == 1)
 			res = res * 16 + s[i] - '0';
 		else if (s[i] >= 'a' && s[i] <= 'f')
 			res = res * 16 + s[i] - 'a' + 10;
