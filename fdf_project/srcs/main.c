@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 16:28:36 by koparker          #+#    #+#             */
-/*   Updated: 2019/09/15 16:00:48 by koparker         ###   ########.fr       */
+/*   Updated: 2019/09/15 18:13:19 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ void    draw_line_low(t_point *p1, t_point *p2, int **img_arr, t_data *data)
     {
         printf("x %d | y %d\n" , x, y); //delete
         printf("x + y %d\n", x + y); //delete
-        (*img_arr)[y * DW + x] = 0xFFFFFF;
+        if (x >= 0 && y >= 0 && y < DH && x < DW)
+			(*img_arr)[y * DW + x] = 0xFFFFFF;
         if (diff > 0)
         {
             y = y + y_i;
@@ -82,11 +83,13 @@ void    draw_line_high(t_point *p1, t_point *p2, int **img_arr, t_data *data)
     x = p1->x;
     y = p1->y;
     // printf("p1->y %d and p2->y %d\n", p1->y, p2->y); //delete
+
     while (y < p2->y)
     {
-        // printf("x %d | y %d\n" , x, y); //delete
+        printf("x %d | y %d  !! %d\n" , x, y, p2->y); //delete
         printf("x + y * DW %d\n", x + y * DW); //delete
-        (*img_arr)[x + y * DW] = 0xFFFFFF;
+		if (x >= 0 && y >= 0 && y < DH && x < DW)
+			(*img_arr)[x + y * DW] = 0xFFFFFF;
         if (diff > 0)
         {
             x = x + x_i;
@@ -127,11 +130,35 @@ void		plot(t_point *p1, t_point *p2, int **img_arr, t_data *data)
 	}
 }
 
+static void iso(int *x, int *y)
+{
+	int previous_x;
+	int previous_y;
+
+	previous_x = *x;
+	previous_y = *y;
+	*x = previous_x * cos(0.523599) - previous_y * sin(0.523599);
+	*y = previous_y * cos(0.523599) + previous_x * sin(0.523599);
+}
+
 void		draw_plane(t_point ***head, t_data *data, int **img_arr)
 {
 	size_t	i;
 	size_t	j;
 
+	j = 0;
+   	while (j < data->size_y)
+   	{
+       i = 0;
+       while (i < data->size_x) {
+       //    printf("POPO\n");
+           printf("x, y %d %d\n", (*head)[j][i].x, (*head)[j][i].y);
+           iso(&(*head)[j][i].x, &(*head)[j][i].y);
+           printf("x, y %d %d\n", (*head)[j][i].x, (*head)[j][i].y);
+           i++;
+       }
+       j++;
+   	}
 	j = 0;
 	while (j < data->size_y)
 	{

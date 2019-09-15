@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/15 16:47:52 by koparker          #+#    #+#             */
-/*   Updated: 2019/09/15 15:49:31 by koparker         ###   ########.fr       */
+/*   Updated: 2019/09/15 17:39:32 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,15 @@ void	coord_to_pixel(t_point ***arr, t_data *data)
 	size_t	j;
 	size_t	step_x;
 	size_t	step_y;
+	// size_t	delta_x;
+	// size_t	delta_y;
+	// size_t	phi;
 
 	step_x = (data->size_x > 1) ? (DW - 1) / (data->size_x - 1) : DW - 1;
 	step_y = (data->size_y > 1) ? (DH - 1) / (data->size_y - 1) : DH - 1;
+	// delta_x = (step_x * (data->size_x)) / 2;
+	// delta_y = (step_y * (data->size_y)) / 2;
+	// delta_x > delta_y ? phi = delta_x : phi = delta_y;
 	j = 0;
 	while (j < data->size_y)
 	{
