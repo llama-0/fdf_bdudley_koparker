@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parcing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bdudley <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/15 16:47:52 by koparker          #+#    #+#             */
-/*   Updated: 2019/09/15 12:40:35 by bdudley          ###   ########.fr       */
+/*   Updated: 2019/09/15 15:22:17 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ void		error_message(int index, t_point ***points, t_data	*data, char ***str)
 	else if (index == 2)
 		ft_putendl("Invalid length cart");
 	else if (index == 3)
-		ft_putendl("Memory allocated");
+		ft_putendl("Memory allocation failed");
 	delete_array(points, data);
-	//delete split
+	//TODO: delete split
 	exit(1);
 
 }
@@ -67,4 +67,35 @@ t_point		**read_file(const int fd, t_data *data)
 		data->size_y++;
 	}
 	return (points);
+}
+
+void	coord_to_pixel(t_point ***arr, t_data *data)
+{
+	size_t	i;
+	size_t	j;
+	size_t	step_x;
+	size_t	step_y;
+
+	if (data->size_x < data->size_y)
+	{
+		step_x = DW / (data->size_x);
+		step_y = DH / (data->size_y - 1);
+	}
+	else
+	{
+		step_x = DW / (data->size_x - 1);
+		step_y = DH / (data->size_y);
+	}
+	j = 0;
+	while (j < data->size_y)
+	{
+		i = 0;
+		while (i < data->size_x)
+		{
+			(*arr)[j][i].x *= step_x;
+			(*arr)[j][i].y *= step_y;
+			i++;
+		}
+		j++;
+	}
 }

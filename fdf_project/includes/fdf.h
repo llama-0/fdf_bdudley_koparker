@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bdudley <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 16:13:28 by koparker          #+#    #+#             */
-/*   Updated: 2019/09/15 12:36:35 by bdudley          ###   ########.fr       */
+/*   Updated: 2019/09/15 15:08:37 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 # include <mlx.h>
 # include <stdio.h>
 
-# define DW 1000
-# define DH 1000
+# define DW 50
+# define DH 50
 
 typedef struct			s_point
 {
@@ -58,6 +58,7 @@ void					print(t_point **points, t_data *data);
 t_point					**new_array(t_point		***prev_array, t_data	*data);
 void					delete_array(t_point		***prev_array, t_data	*data);
 void					init_array(t_point		***array, t_data	*data, int j, int i);
+void					coord_to_pixel(t_point ***arr, t_data *data);
 
 void					error_message(int index, t_point ***points, t_data	*data, char ***str);
 #endif

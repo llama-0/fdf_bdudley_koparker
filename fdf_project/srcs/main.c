@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bdudley <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 16:28:36 by koparker          #+#    #+#             */
-/*   Updated: 2019/09/15 13:41:41 by bdudley          ###   ########.fr       */
+/*   Updated: 2019/09/15 15:23:50 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ void	print(t_point **points, t_data *data)
 	{
 		for (size_t i = 0; i < data->size_x; i++)
 		{
-			printf("%d ", points[j][i].alt);
+			printf("(%d,", points[j][i].x);
+			printf("%d) ", points[j][i].y);
 		}
 		printf("\n");
 	}
@@ -32,24 +33,20 @@ void    draw_line_low(t_point *p1, t_point *p2, int **img_arr, t_data *data)
     int dy;
     int y_i;
     int y;
-    int step_x;
-    int step_y;
     int x;
 
-    step_y = DH / data->size_y;
-    step_x = DW / data->size_x;
-    dx = (p2->x - p1->x)*step_x;
-    dy = (p2->y - p1->y)*step_y;
-    y_i = DH;
+    dx = p2->x - p1->x;
+    dy = p2->y - p1->y;
+    y_i = 1;
     if (dy < 0)
     {
-        y_i = -y_i;
+        y_i = -1;
         dy = -dy;
     }
     diff = 2 * dy - dx;
-    y = p1->y * step_y;
-    x = p1->x * step_x;
-    while (x < p2->x * step_x)
+    y = p1->y;
+    x = p1->x;
+    while (x < p2->x)
     {
         printf("x %d | y %d\n" , x, y); //delete
         printf("x + y %d\n", x + y); //delete
@@ -71,28 +68,24 @@ void    draw_line_high(t_point *p1, t_point *p2, int **img_arr, t_data *data)
     int dy;
     int x_i;
     int y;
-    int step_y;
-    int step_x;
     int x;
 
-    step_y = DH / data->size_y;
-    step_x = DW / data->size_x;
-    dx = (p2->x - p1->x)*step_x;
-    dy = (p2->y - p1->y)*step_y;
-    x_i = DW;
+    dx = p2->x - p1->x;
+    dy = p2->y - p1->y;
+    x_i = 1;
     if (dx < 0)
     {
-        x_i = -x_i;
+        x_i = -1;
         dx = -dx;
     }
     diff = 2 * dx - dy;
-    x = p1->x * step_x;
-    y = p1->y * step_y;
-    printf("p1->y %d and p2->y %d\n", p1->y, p2->y); //delete
-    while (y < p2->y * step_y)
+    x = p1->x;
+    y = p1->y;
+    // printf("p1->y %d and p2->y %d\n", p1->y, p2->y); //delete
+    while (y < p2->y)
     {
-        printf("x %d | y %d | DW %d" , x, y, DW); //delete
-        printf("x + y * DW %d\n", x + y * DW); //delete
+        // printf("x %d | y %d | DW %d" , x, y, DW); //delete
+        // printf("x + y * DW %d\n", x + y * DW); //delete
         (*img_arr)[x + y * DW] = 0xFFFFFF;
         if (diff > 0)
         {
@@ -190,6 +183,7 @@ int			main(int ac, char **av)
 	if ((fd = open(av[1], O_RDONLY)) >= 0)
 	{
 		head = read_file(fd, &data);
+		coord_to_pixel(&head, &data);
 		print(head, &data);
 		close(fd);
 	}
