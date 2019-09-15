@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 16:28:36 by koparker          #+#    #+#             */
-/*   Updated: 2019/09/15 15:23:50 by koparker         ###   ########.fr       */
+/*   Updated: 2019/09/15 16:00:48 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void    draw_line_low(t_point *p1, t_point *p2, int **img_arr, t_data *data)
     {
         printf("x %d | y %d\n" , x, y); //delete
         printf("x + y %d\n", x + y); //delete
-        (*img_arr)[y * DH + x] = 0xFFFFFF;
+        (*img_arr)[y * DW + x] = 0xFFFFFF;
         if (diff > 0)
         {
             y = y + y_i;
@@ -84,8 +84,8 @@ void    draw_line_high(t_point *p1, t_point *p2, int **img_arr, t_data *data)
     // printf("p1->y %d and p2->y %d\n", p1->y, p2->y); //delete
     while (y < p2->y)
     {
-        // printf("x %d | y %d | DW %d" , x, y, DW); //delete
-        // printf("x + y * DW %d\n", x + y * DW); //delete
+        // printf("x %d | y %d\n" , x, y); //delete
+        printf("x + y * DW %d\n", x + y * DW); //delete
         (*img_arr)[x + y * DW] = 0xFFFFFF;
         if (diff > 0)
         {
@@ -93,7 +93,7 @@ void    draw_line_high(t_point *p1, t_point *p2, int **img_arr, t_data *data)
             diff = diff - 2 * dy;
         }
         diff = diff + 2 * dx;
-        printf("%f diff and x %d\n", diff, x); //delete
+        //printf("%f diff and x %d\n", diff, x); //delete
         y++;
     }
      printf("Nastya\n"); //delete
