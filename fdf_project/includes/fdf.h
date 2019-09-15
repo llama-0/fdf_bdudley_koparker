@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 16:13:28 by koparker          #+#    #+#             */
-/*   Updated: 2019/09/15 18:18:05 by koparker         ###   ########.fr       */
+/*   Updated: 2019/09/15 22:56:45 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,11 @@
 # include <mlx.h>
 # include <stdio.h>
 
-# define DW 1000
-# define DH 500
+# define DW 50
+# define DH 50
+
+# define DW_IM DW * 2
+# define DH_IM DH * 2
 
 typedef struct			s_point
 {

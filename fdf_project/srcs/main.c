@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 16:28:36 by koparker          #+#    #+#             */
-/*   Updated: 2019/09/15 18:13:19 by koparker         ###   ########.fr       */
+/*   Updated: 2019/09/15 23:10:26 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,10 @@ void    draw_line_low(t_point *p1, t_point *p2, int **img_arr, t_data *data)
 
     dx = p2->x - p1->x;
     dy = p2->y - p1->y;
-    y_i = 1;
+    y_i = DW_IM;
     if (dy < 0)
     {
-        y_i = -1;
+        y_i = -y_i;
         dy = -dy;
     }
     diff = 2 * dy - dx;
@@ -49,9 +49,12 @@ void    draw_line_low(t_point *p1, t_point *p2, int **img_arr, t_data *data)
     while (x < p2->x)
     {
         printf("x %d | y %d\n" , x, y); //delete
-        printf("x + y %d\n", x + y); //delete
-        if (x >= 0 && y >= 0 && y < DH && x < DW)
-			(*img_arr)[y * DW + x] = 0xFFFFFF;
+        //printf("x + y %d\n", x + y); //delete
+        if (x >= 0 && y >= 0 && y < DH_IM * DW_IM && x < DW_IM)
+		{	
+			printf("Vilena\n");
+			(*img_arr)[y + x] = 0xFFFFFF;
+		}
         if (diff > 0)
         {
             y = y + y_i;
@@ -60,6 +63,7 @@ void    draw_line_low(t_point *p1, t_point *p2, int **img_arr, t_data *data)
         diff = diff + 2 * dy;
         x++;
     }
+	printf("Buy Vilena\n");
 }
 
 void    draw_line_high(t_point *p1, t_point *p2, int **img_arr, t_data *data)
@@ -83,13 +87,17 @@ void    draw_line_high(t_point *p1, t_point *p2, int **img_arr, t_data *data)
     x = p1->x;
     y = p1->y;
     // printf("p1->y %d and p2->y %d\n", p1->y, p2->y); //delete
-
+	printf("p1->y %d, p2->y %d\n", p1->y, p2->y);
     while (y < p2->y)
     {
-        printf("x %d | y %d  !! %d\n" , x, y, p2->y); //delete
-        printf("x + y * DW %d\n", x + y * DW); //delete
-		if (x >= 0 && y >= 0 && y < DH && x < DW)
-			(*img_arr)[x + y * DW] = 0xFFFFFF;
+        printf("=======x %d | y %d\n" , x, y); //delete
+        //printf("x + y * DW %d\n", x + y * DW); //delete
+		if (x >= 0 && y >= 0 && y < DH_IM * DW_IM && x < DW_IM)
+		{
+			printf("x %d | y %d  !! %d\n" , x, y, y);
+			// printf("Nastya\n"); 
+			(*img_arr)[x + y] = 0xFFFFFF;
+		}
         if (diff > 0)
         {
             x = x + x_i;
@@ -97,9 +105,9 @@ void    draw_line_high(t_point *p1, t_point *p2, int **img_arr, t_data *data)
         }
         diff = diff + 2 * dx;
         //printf("%f diff and x %d\n", diff, x); //delete
-        y++;
+        y += DW_IM;
     }
-     printf("Nastya\n"); //delete
+     printf("Buy Nastya\n"); //delete
 }
 
 void		plot(t_point *p1, t_point *p2, int **img_arr, t_data *data)
@@ -137,7 +145,7 @@ static void iso(int *x, int *y)
 
 	previous_x = *x;
 	previous_y = *y;
-	*x = previous_x * cos(0.523599) - previous_y * sin(0.523599);
+	*x = previous_x * cos(0.523599) - previous_y / DW_IM /DW * sin(0.523599);
 	*y = previous_y * cos(0.523599) + previous_x * sin(0.523599);
 }
 
@@ -146,6 +154,7 @@ void		draw_plane(t_point ***head, t_data *data, int **img_arr)
 	size_t	i;
 	size_t	j;
 
+print(*head, data);
 	j = 0;
    	while (j < data->size_y)
    	{
@@ -159,6 +168,8 @@ void		draw_plane(t_point ***head, t_data *data, int **img_arr)
        }
        j++;
    	}
+	   printf("asss\n");
+	   print(*head, data);
 	j = 0;
 	while (j < data->size_y)
 	{
@@ -187,13 +198,14 @@ void		find_open(t_point ***head, t_data *data)
 	win.size_line = 0;
 	win.endian = 0;
 	win.mlx_ptr = mlx_init();
-	win.win_ptr = mlx_new_window(win.mlx_ptr, DW * 2, DH * 2, "Koperker");
-	win.img_ptr = mlx_new_image(win.mlx_ptr, DW, DH);
+	win.win_ptr = mlx_new_window(win.mlx_ptr, DW_IM * 2, DH_IM * 2, "Koperker");
+	win.img_ptr = mlx_new_image(win.mlx_ptr, DW_IM, DH_IM);
 	win.img_arr = (int *)mlx_get_data_addr(win.img_ptr,
 			&win.bits_per_pixel, &win.size_line, &win.endian);
 	draw_plane(head, data, &win.img_arr);
+	printf("Sofia\n");
 	mlx_put_image_to_window(win.mlx_ptr, win.win_ptr,
-			win.img_ptr, DW / 4, DH / 4);
+			win.img_ptr, 0, 0);
 	mlx_loop(win.mlx_ptr);
 }
 
