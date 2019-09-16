@@ -19,8 +19,8 @@
 # include <mlx.h>
 # include <stdio.h>
 
-# define DW 50
-# define DH 50
+# define DW 5
+# define DH 5
 
 # define DW_IM DW * 2
 # define DH_IM DH * 2
