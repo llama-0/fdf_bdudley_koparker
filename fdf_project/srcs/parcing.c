@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/15 16:47:52 by koparker          #+#    #+#             */
-/*   Updated: 2019/09/15 22:30:09 by koparker         ###   ########.fr       */
+/*   Updated: 2019/09/16 14:20:45 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,22 +83,28 @@ void	coord_to_pixel(t_point ***arr, t_data *data)
 	printf("sas\n");
 	step_x = (data->size_x > 1) ? (DW - 1) / (data->size_x - 1) : DW - 1;
 	step_y = (data->size_y > 1) ? (DH - 1) / (data->size_y - 1) : DH - 1;
-	delta_x = (data->size_x > 1) ? (step_x * (data->size_x - 1)) / 2 : (DW / 2 - 1);
-	delta_y = (data->size_y > 1) ? (step_y * (data->size_y - 1)) / 2 : (DH / 2 - 1);
+	// delta_x = (data->size_x > 1) ? (step_x * (data->size_x - 1)) / 2 : (DW / 2 - 1);
+	// delta_y = (data->size_y > 1) ? (step_y * (data->size_y - 1)) / 2 : (DH / 2 - 1);
 	// delta_x > delta_y ? phi = delta_x : phi = delta_y;
-	printf("dekta_x %zu and delta y %zu \n", delta_x, delta_y);
+	// printf("dekta_x %zu and delta y %zu \n", delta_x, delta_y);
 	j = 0;
 	while (j < data->size_y)
 	{
 		i = 0;
 		while (i < data->size_x)
 		{
-			// (*arr)[j][i].x *= step_x;
-			// (*arr)[j][i].y *= step_y;
-			(*arr)[j][i].x = (*arr)[j][i].x * step_x + delta_x;
-			(*arr)[j][i].y = ((*arr)[j][i].y * step_y + delta_y) * DW_IM;
+			 (*arr)[j][i].x *= step_x;
+			 (*arr)[j][i].y *= step_y;
+			// (*arr)[j][i].x = (*arr)[j][i].x * step_x + delta_x;
+			// (*arr)[j][i].y = ((*arr)[j][i].y * step_y + delta_y) * DW_IM;
 			i++;
 		}
 		j++;
 	}
+}
+
+void	shift_coords(int *x, int *y, int shift)
+{
+	*x += shift;
+	*y += shift; 
 }

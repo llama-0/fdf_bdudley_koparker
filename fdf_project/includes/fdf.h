@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 16:13:28 by koparker          #+#    #+#             */
-/*   Updated: 2019/09/15 22:56:45 by koparker         ###   ########.fr       */
+/*   Updated: 2019/09/16 14:21:26 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,14 @@
 # include <mlx.h>
 # include <stdio.h>
 
-# define DW 50
-# define DH 50
+# define DW 200
+# define DH 200
 
 # define DW_IM DW * 2
 # define DH_IM DH * 2
+
+#define SIN(x) sin(x * 3.141592653589/180) 
+#define COS(x) cos(x * 3.141592653589/180)
 
 typedef struct			s_point
 {
@@ -62,6 +65,7 @@ t_point					**new_array(t_point		***prev_array, t_data	*data);
 void					delete_array(t_point		***prev_array, t_data	*data);
 void					init_array(t_point		***array, t_data	*data, int j, int i);
 void					coord_to_pixel(t_point ***arr, t_data *data);
+void					shift_coords(int *x, int *y, int shift);
 
 void					error_message(int index, t_point ***points, t_data	*data, char ***str);
 #endif

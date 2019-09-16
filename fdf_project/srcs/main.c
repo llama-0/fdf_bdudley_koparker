@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 16:28:36 by koparker          #+#    #+#             */
-/*   Updated: 2019/09/15 23:10:26 by koparker         ###   ########.fr       */
+/*   Updated: 2019/09/16 15:01:28 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,91 @@ void	print(t_point **points, t_data *data)
 	}
 }
 
+// void    draw_line_low(t_point *p1, t_point *p2, int **img_arr, t_data *data)
+// {
+//     double diff;
+//     int dx;
+//     int dy;
+//     int y_i;
+//     int y;
+//     int x;
+
+//     dx = p2->x - p1->x;
+//     dy = p2->y - p1->y;
+//     y_i = 1;
+//     if (dy < 0)
+//     {
+//         y_i = -y_i;
+//         dy = -dy;
+//     }
+//     diff = 2 * dy - dx;
+//     y = p1->y;
+//     x = p1->x;
+//     while (x < p2->x)
+//     {
+//         // printf("x %d | y %d\n" , x, y); //delete
+//         //printf("x + y %d\n", x + y); //delete
+//         if (x >= 0 && y >= 0 && y < DH_IM * DW_IM && x < DW)
+// 		{	
+// 			// printf("Vilena\n");
+// 			(*img_arr)[y * DW_IM + x] = 0xFFFFFF;
+// 		}
+//         if (diff > 0)
+//         {
+//             y = y + y_i;
+//             diff = diff - 2 * dx;
+//         }
+//         diff = diff + 2 * dy;
+//         x++;
+//     }
+// 	printf("Buy Vilena\n");
+// }
+
+// void    draw_line_high(t_point *p1, t_point *p2, int **img_arr, t_data *data)
+// {
+//     double diff;
+//     int dx;
+//     int dy;
+//     int x_i;
+//     int y;
+//     int x;
+
+//     dx = p2->x - p1->x;
+//     dy = p2->y - p1->y;
+//     x_i = 1;
+//     if (dx < 0)
+//     {
+//         x_i = -x_i;
+//         dx = -dx;
+//     }
+//     diff = 2 * dx - dy;
+//     x = p1->x;
+//     y = p1->y;
+//     // printf("p1->y %d and p2->y %d\n", p1->y, p2->y); //delete
+// 	//  printf("p1->y %d, p2->y %d\n", p1->y, p2->y);
+//     while (y < p2->y)
+//     {
+//        // printf("=======x %d | y %d\n" , x, y); //delete
+//         //printf("x + y * DW %d\n", x + y * DW); //delete
+// 		if (x >= 0 && y >= 0 && y < DH_IM * DW_IM && x < DW)
+// 		{
+// 			// printf("x %d | y %d\n" , x, y * DW);
+// 			// printf("Nastya\n"); 
+// 			// shift_coords(&x, &y, 10);
+// 			(*img_arr)[x + y * DW_IM] = 0xFFFFFF;
+// 		}
+//         if (diff > 0)
+//         {
+//             x = x + x_i;
+//             diff = diff - 2 * dy;
+//         }
+//         diff = diff + 2 * dx;
+//         //printf("%f diff and x %d\n", diff, x); //delete
+//         y += 1;
+//     }
+//      printf("Buy Nastya\n"); //delete
+// }
+
 void    draw_line_low(t_point *p1, t_point *p2, int **img_arr, t_data *data)
 {
     double diff;
@@ -34,26 +119,34 @@ void    draw_line_low(t_point *p1, t_point *p2, int **img_arr, t_data *data)
     int y_i;
     int y;
     int x;
+	int step_x;
+	int step_y;
+	int shift_x;
+	int shift_y;
 
-    dx = p2->x - p1->x;
-    dy = p2->y - p1->y;
-    y_i = DW_IM;
+	step_x = (data->size_x > 1) ? (DW - 1) / (data->size_x - 1) : DW - 1;
+	step_y = (data->size_y > 1) ? (DH - 1) / (data->size_y - 1) : DH - 1;
+    dx = (p2->x - p1->x) * step_x;
+    dy = (p2->y - p1->y) * step_y;
+    y_i = DH;
     if (dy < 0)
     {
         y_i = -y_i;
         dy = -dy;
     }
     diff = 2 * dy - dx;
-    y = p1->y;
-    x = p1->x;
-    while (x < p2->x)
+	shift_x = 10;
+	shift_y = 10;
+    y = p1->y * step_y + shift_y;
+    x = p1->x * step_x + shift_x;
+    while (x < p2->x * step_x)
     {
-        printf("x %d | y %d\n" , x, y); //delete
+        //printf("x %d | y %d\n" , x, y); //delete
         //printf("x + y %d\n", x + y); //delete
-        if (x >= 0 && y >= 0 && y < DH_IM * DW_IM && x < DW_IM)
+        if (x >= 0 && y >= 0 && y < DH_IM * DW_IM && x < DW)
 		{	
-			printf("Vilena\n");
-			(*img_arr)[y + x] = 0xFFFFFF;
+			// printf("Vilena\n");
+			(*img_arr)[y * DW_IM + x] = 0xFFFFFF;
 		}
         if (diff > 0)
         {
@@ -74,29 +167,38 @@ void    draw_line_high(t_point *p1, t_point *p2, int **img_arr, t_data *data)
     int x_i;
     int y;
     int x;
+	int step_x;
+	int step_y;
+	int shift_x;
+	int shift_y;
 
-    dx = p2->x - p1->x;
-    dy = p2->y - p1->y;
-    x_i = 1;
+	step_x = (data->size_x > 1) ? (DW - 1) / (data->size_x - 1) : DW - 1;
+	step_y = (data->size_y > 1) ? (DH - 1) / (data->size_y - 1) : DH - 1;
+    shift_x = 10;
+	shift_y = 10;
+    y = p1->y * step_y + shift_y;
+    x = p1->x * step_x + shift_x;
+    x_i = DW;
     if (dx < 0)
     {
-        x_i = -1;
+        x_i = -x_i;
         dx = -dx;
     }
     diff = 2 * dx - dy;
-    x = p1->x;
-    y = p1->y;
+    x = p1->x * step_x;
+    y = p1->y * step_y;
     // printf("p1->y %d and p2->y %d\n", p1->y, p2->y); //delete
-	printf("p1->y %d, p2->y %d\n", p1->y, p2->y);
-    while (y < p2->y)
+	//  printf("p1->y %d, p2->y %d\n", p1->y, p2->y);
+    while (y < p2->y * step_y)
     {
-        printf("=======x %d | y %d\n" , x, y); //delete
+       // printf("=======x %d | y %d\n" , x, y); //delete
         //printf("x + y * DW %d\n", x + y * DW); //delete
-		if (x >= 0 && y >= 0 && y < DH_IM * DW_IM && x < DW_IM)
+		if (x >= 0 && y >= 0 && y < DH_IM * DW_IM && x < DW)
 		{
-			printf("x %d | y %d  !! %d\n" , x, y, y);
+			// printf("x %d | y %d\n" , x, y * DW);
 			// printf("Nastya\n"); 
-			(*img_arr)[x + y] = 0xFFFFFF;
+			// shift_coords(&x, &y, 10);
+			(*img_arr)[x + y * DW_IM] = 0xFFFFFF;
 		}
         if (diff > 0)
         {
@@ -105,7 +207,7 @@ void    draw_line_high(t_point *p1, t_point *p2, int **img_arr, t_data *data)
         }
         diff = diff + 2 * dx;
         //printf("%f diff and x %d\n", diff, x); //delete
-        y += DW_IM;
+        y++;
     }
      printf("Buy Nastya\n"); //delete
 }
@@ -142,34 +244,36 @@ static void iso(int *x, int *y)
 {
 	int previous_x;
 	int previous_y;
+	int alpha;
 
+	alpha = 45;
 	previous_x = *x;
 	previous_y = *y;
-	*x = previous_x * cos(0.523599) - previous_y / DW_IM /DW * sin(0.523599);
-	*y = previous_y * cos(0.523599) + previous_x * sin(0.523599);
+	*x = (previous_x * COS(alpha) - previous_y * SIN(alpha));
+	*y = (previous_y * COS(alpha) + previous_x * SIN(alpha));
 }
 
 void		draw_plane(t_point ***head, t_data *data, int **img_arr)
 {
 	size_t	i;
 	size_t	j;
-
-print(*head, data);
-	j = 0;
-   	while (j < data->size_y)
-   	{
-       i = 0;
-       while (i < data->size_x) {
-       //    printf("POPO\n");
-           printf("x, y %d %d\n", (*head)[j][i].x, (*head)[j][i].y);
-           iso(&(*head)[j][i].x, &(*head)[j][i].y);
-           printf("x, y %d %d\n", (*head)[j][i].x, (*head)[j][i].y);
-           i++;
-       }
-       j++;
-   	}
-	   printf("asss\n");
-	   print(*head, data);
+	
+// print(*head, data);
+// 	j = 0;
+//    	while (j < data->size_y)
+//    	{
+//        i = 0;
+//        while (i < data->size_x) {
+//        //    printf("POPO\n");
+//            printf("before x, y %d %d\n", (*head)[j][i].x, (*head)[j][i].y);
+//            iso(&(*head)[j][i].x, &(*head)[j][i].y);
+//            printf("after x, y %d %d\n", (*head)[j][i].x, (*head)[j][i].y);
+//            i++;
+//        }
+//        j++;
+//    	}
+// 	   printf("asss\n");
+// 	   print(*head, data);
 	j = 0;
 	while (j < data->size_y)
 	{
@@ -198,7 +302,7 @@ void		find_open(t_point ***head, t_data *data)
 	win.size_line = 0;
 	win.endian = 0;
 	win.mlx_ptr = mlx_init();
-	win.win_ptr = mlx_new_window(win.mlx_ptr, DW_IM * 2, DH_IM * 2, "Koperker");
+	win.win_ptr = mlx_new_window(win.mlx_ptr, DW_IM, DH_IM, "Koperker");
 	win.img_ptr = mlx_new_image(win.mlx_ptr, DW_IM, DH_IM);
 	win.img_arr = (int *)mlx_get_data_addr(win.img_ptr,
 			&win.bits_per_pixel, &win.size_line, &win.endian);
@@ -222,7 +326,7 @@ int			main(int ac, char **av)
 	if ((fd = open(av[1], O_RDONLY)) >= 0)
 	{
 		head = read_file(fd, &data);
-		coord_to_pixel(&head, &data);
+		//coord_to_pixel(&head, &data);
 		print(head, &data);
 		close(fd);
 	}
