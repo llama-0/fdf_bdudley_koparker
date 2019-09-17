@@ -33,7 +33,7 @@ LIBFT = -L libft -lft
 
 OBJ = $(addprefix $(FDF_SRC), $(SRC:%.c=%.o))
 
-HDR = -I fdf_project/includes -I libft/includes
+HDR = -I fdf_project/includes -I libft/includes -I tools_fdf/minilibx_macos
 
 all: $(NAME)
 
