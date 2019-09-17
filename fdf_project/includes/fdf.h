@@ -19,11 +19,11 @@
 # include <mlx.h>
 # include <stdio.h>
 
-# define DW 200
-# define DH 200
+# define DW 50
+# define DH 50
 
-# define DW_IM DW * 2
-# define DH_IM DH * 2
+# define DW_IM DW * 4
+# define DH_IM DH * 4
 
 #define SIN(x) sin(x * 3.141592653589/180) 
 #define COS(x) cos(x * 3.141592653589/180)
