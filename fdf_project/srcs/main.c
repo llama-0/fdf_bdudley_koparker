@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 16:28:36 by koparker          #+#    #+#             */
-/*   Updated: 2019/09/16 15:01:28 by koparker         ###   ########.fr       */
+/*   Updated: 2019/09/17 23:55:25 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,13 +124,13 @@ void    draw_line_low(t_point *p1, t_point *p2, int **img_arr, t_data *data)
 	int shift_x;
 	int shift_y;
 
-	step_x = (data->size_x > 1) ? (DW - 1) / (data->size_x - 1) : DW - 1;
-	step_y = (data->size_y > 1) ? (DH - 1) / (data->size_y - 1) : DH - 1;
+	// step_x = (data->size_x > 1) ? (DW - 1) / (data->size_x - 1) : DW - 1;
+	// step_y = (data->size_y > 1) ? (DH - 1) / (data->size_y - 1) : DH - 1;
     // dx = (p2->x - p1->x) * step_x;
     // dy = (p2->y - p1->y) * step_y;
     // y_i = DH;
 	dx = p2->x - p1->x;
-	dy = p2->y - p2->y;
+	dy = p2->y - p1->y;
 	y_i = 1;
     if (dy < 0)
     {
@@ -138,22 +138,25 @@ void    draw_line_low(t_point *p1, t_point *p2, int **img_arr, t_data *data)
         dy = -dy;
     }
     diff = 2 * dy - dx;
+	//printf("!diff = %f dx = %d dy = %d\n", diff, dx, dy);
 	shift_x = DW;
 	shift_y = DH;
     // y = p1->y * step_y + shift_y;
     // x = p1->x * step_x + shift_x;
 	y = p1->y + shift_y;
 	x = p1->x + shift_x;
-    while (x <= p2->x + shift_x)
+    while (x < p2->x + shift_x)
     {
+		//printf("low == x %d | y * DW_IM %d\n" , x, y * DW_IM); 
         //printf("x %d | y %d\n" , x, y); //delete
         //printf("x + y %d\n", x + y); //delete
-        if (x >= 0 && y >= 0 && y < DH_IM * DW_IM && x < DW + shift_x)
+        if (x >= 0 && y >= 0 && y < DH_IM * DW_IM && x < DW_IM)
 		{	
 			// printf("Vilena\n");
 			printf("low == x %d | y * DW_IM %d\n" , x, y * DW_IM); //delete
 			(*img_arr)[y * DW_IM + x] = 0xFFFFFF;
 		}
+		//printf("diff = %f\n", diff);
         if (diff > 0)
         {
             y = y + y_i;
@@ -178,13 +181,13 @@ void    draw_line_high(t_point *p1, t_point *p2, int **img_arr, t_data *data)
 	int shift_x;
 	int shift_y;
 
-	step_x = (data->size_x > 1) ? (DW - 1) / (data->size_x - 1) : DW - 1;
-	step_y = (data->size_y > 1) ? (DH - 1) / (data->size_y - 1) : DH - 1;
+	// step_x = (data->size_x > 1) ? (DW - 1) / (data->size_x - 1) : DW - 1;
+	// step_y = (data->size_y > 1) ? (DH - 1) / (data->size_y - 1) : DH - 1;
 	// dx = (p2->x - p1->x) * step_x;
     // dy = (p2->y - p1->y) * step_y;
     // x_i = DW;
 	dx = p2->x - p1->x;
-	dy = p2->y - p2->y;
+	dy = p2->y - p1->y;
 	x_i = 1;
     if (dx < 0)
     {
@@ -202,11 +205,11 @@ void    draw_line_high(t_point *p1, t_point *p2, int **img_arr, t_data *data)
     // printf("p1->y %d and p2->y %d\n", p1->y, p2->y); //delete
 	//  printf("p1->y %d, p2->y %d\n", p1->y, p2->y);
     // while (y <= p2->y * step_y + shift_y)
-	while (y <= p2->y + shift_y)
+	while (y < p2->y + shift_y)
     {
        // printf("=======x %d | y %d\n" , x, y); //delete
         //printf("x + y * DW %d\n", x + y * DW); //delete
-		if (x >= 0 && y >= 0 && y < DH_IM * DW_IM && x < DW + shift_x)
+		if (x >= 0 && y >= 0 && y < DH_IM * DW_IM && x < DW_IM)
 		{
 			printf("high == x %d | y * DW_IM %d\n" , x, y * DW_IM);
 			// printf("Nastya\n"); 
@@ -263,8 +266,8 @@ static void iso(int *x, int *y)
 	previous_x = *x;
 	previous_y = *y;
 	// printf("old == %d %d\n", *x, *y);
-	*x = (previous_x * COS(alpha) - previous_y * SIN(alpha));
-	*y = (previous_y * COS(alpha) + previous_x * SIN(alpha));
+	*x = trunc((previous_x * COS(alpha)) - trunc(previous_y * SIN(alpha)));
+	*y = trunc((previous_y * COS(alpha)) + trunc(previous_x * SIN(alpha)));
 	// printf("new == %d %d\n", *x, *y);
 }
 
@@ -275,8 +278,8 @@ void		draw_plane(t_point ***head, t_data *data, int **img_arr)
 	int step_x;
 	int step_y;
 
-	step_x = (data->size_x > 1) ? (DW - 1) / (data->size_x - 1) : DW - 1;
-	step_y = (data->size_y > 1) ? (DH - 1) / (data->size_y - 1) : DH - 1;
+	// step_x = (data->size_x > 1) ? (DW - 1) / (data->size_x - 1) : DW - 1;
+	// step_y = (data->size_y > 1) ? (DH - 1) / (data->size_y - 1) : DH - 1;
 	
 	// print(*head, data);
 	j = 0;
@@ -285,8 +288,8 @@ void		draw_plane(t_point ***head, t_data *data, int **img_arr)
        i = 0;
        while (i < data->size_x) {
        //    printf("POPO\n");
-	   		(*head)[j][i].x *= step_x;
-			(*head)[j][i].y *= step_y;
+	   		// (*head)[j][i].x *= step_x;
+			// (*head)[j][i].y *= step_y;
         	printf("before x, y %d %d\n", (*head)[j][i].x, (*head)[j][i].y);
         	iso(&(*head)[j][i].x, &(*head)[j][i].y);
         	printf("after x, y %d %d\n", (*head)[j][i].x, (*head)[j][i].y);
@@ -324,7 +327,7 @@ void		find_open(t_point ***head, t_data *data)
 	win.size_line = 0;
 	win.endian = 0;
 	win.mlx_ptr = mlx_init();
-	win.win_ptr = mlx_new_window(win.mlx_ptr, DW_IM * 2, DH_IM * 2, "Koperker");
+	win.win_ptr = mlx_new_window(win.mlx_ptr, DW_IM, DH_IM, "Koperker");
 	win.img_ptr = mlx_new_image(win.mlx_ptr, DW_IM, DH_IM);
 	win.img_arr = (int *)mlx_get_data_addr(win.img_ptr,
 			&win.bits_per_pixel, &win.size_line, &win.endian);
@@ -348,7 +351,7 @@ int			main(int ac, char **av)
 	if ((fd = open(av[1], O_RDONLY)) >= 0)
 	{
 		head = read_file(fd, &data);
-		//coord_to_pixel(&head, &data);
+		coord_to_pixel(&head, &data);
 		print(head, &data);
 		close(fd);
 	}
