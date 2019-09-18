@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_and_plot.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bdudley <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/18 17:19:15 by koparker          #+#    #+#             */
-/*   Updated: 2019/09/18 21:51:24 by bdudley          ###   ########.fr       */
+/*   Updated: 2019/09/18 22:08:46 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,14 @@ static void	draw_line_low(t_point *p1, t_point *p2, int **img_arr)
 	}
 }
 
+int			get_color(int prev, int next, int step)
+{
+
+}
+
 static void	draw_line_high(t_point *p1, t_point *p2, int **img_arr)
 {
 	t_draw_line	l;
-	int			prev_color;
 
 	l.dx = p2->x - p1->x;
 	l.dy = p2->y - p1->y;
@@ -57,15 +61,11 @@ static void	draw_line_high(t_point *p1, t_point *p2, int **img_arr)
 	l.diff = 2 * l.dx - l.dy;
 	l.y = p1->y + SHIFT_Y / 2;
 	l.x = p1->x + SHIFT_X / 2;
-	prev_color = p1
 	while (l.y < p2->y + SHIFT_Y / 2 + 1)
 	{
 		if (l.x >= 0 && l.y >= 0 && l.y < DH_IM * DW_IM && l.x < DW_IM)
 		{
-			if (p1->has_color == 1 || p2->has_color == 1)
-				(*img_arr)[l.x + l.y * DW_IM] = get_color(prev_color, l.y * DW_IM); //todo
-			else
-				(*img_arr)[l.x + l.y * DW_IM] = DEFAULT;
+			(*img_arr)[l.x + l.y * DW_IM] = DEFAULT;
 		}
 		if (l.diff > 0)
 		{
