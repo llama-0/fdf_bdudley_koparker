@@ -6,7 +6,7 @@
 /*   By: bdudley <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 16:13:28 by koparker          #+#    #+#             */
-/*   Updated: 2019/09/18 19:25:41 by bdudley          ###   ########.fr       */
+/*   Updated: 2019/09/18 20:16:04 by bdudley          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ void					init_array(t_point		***array, t_data	*data, int j, int i);
 void					coord_to_pixel(t_data *data);
 void					shift_coords(int *x, int *y, int shift);
 
+void					new_image(t_data *data);
 void					draw_plane(t_data *data, int **img_arr);
 void					apply_rotation(t_data *data, int keycode);
 void					apply_projection(t_data *data, int keycode);

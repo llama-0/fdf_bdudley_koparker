@@ -6,7 +6,7 @@
 /*   By: bdudley <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 16:28:36 by koparker          #+#    #+#             */
-/*   Updated: 2019/09/18 19:26:39 by bdudley          ###   ########.fr       */
+/*   Updated: 2019/09/18 19:58:01 by bdudley          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,17 @@ void        find_open(t_data *data)
 //                            win.img_ptr, 0, 0);
  // mlx_hook(win.win_ptr, 34, 0, &(key_release(7, head, data)), NULL);
    mlx_loop(data->win.mlx_ptr);
+}
+
+void        new_image(t_data *data)
+{
+    mlx_clear_window(data->win.mlx_ptr, data->win.win_ptr);
+    int i = -1;
+    while (++i < DW_IM * DH_IM)
+        (data->win.img_arr)[i] = 0x0;
+    draw_plane(data, &data->win.img_arr);
+    mlx_put_image_to_window(data->win.mlx_ptr, data->win.win_ptr,
+                            data->win.img_ptr, 0, 0);
 }
 
 int			main(int ac, char **av)
