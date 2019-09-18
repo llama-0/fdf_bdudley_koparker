@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 16:28:36 by koparker          #+#    #+#             */
-/*   Updated: 2019/09/18 14:25:46 by koparker         ###   ########.fr       */
+/*   Updated: 2019/09/18 15:54:33 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -311,23 +311,28 @@ void		draw_plane(t_point ***head, t_data *data, int **img_arr)
 	}
 }
 
-void		find_open(t_point ***head, t_data *data)
+int mlx_close(void  *param)
 {
-	t_window	win;
-
-	win.bits_per_pixel = 0;
-	win.size_line = 0;
-	win.endian = 0;
-	win.mlx_ptr = mlx_init();
-	win.win_ptr = mlx_new_window(win.mlx_ptr, DW_IM, DH_IM, "Koperker");
-	win.img_ptr = mlx_new_image(win.mlx_ptr, DW_IM, DH_IM);
-	win.img_arr = (int *)mlx_get_data_addr(win.img_ptr,
-			&win.bits_per_pixel, &win.size_line, &win.endian);
-	draw_plane(head, data, &win.img_arr);
-	printf("Sofia\n");
-	mlx_put_image_to_window(win.mlx_ptr, win.win_ptr,
-			win.img_ptr, 0, 0);
-	mlx_loop(win.mlx_ptr);
+   (void *)param ;
+   exit(0);
+}
+void        find_open(t_point ***head, t_data *data)
+{
+   t_window    win;
+   void *p;
+   int     (*m_c)(void *param);
+   m_c = mlx_close;
+   win.mlx_ptr = mlx_init();
+   win.win_ptr = mlx_new_window(win.mlx_ptr, DW_IM, DH_IM, "Koperker");
+   win.img_ptr = mlx_new_image(win.mlx_ptr, DW_IM, DH_IM);
+   win.img_arr = (int *)mlx_get_data_addr(win.img_ptr,
+                                          &win.bits_per_pixel, &win.size_line, &win.endian);
+   draw_plane(head, data, &win.img_arr);
+  //printf(“Sofia\n”);
+   mlx_put_image_to_window(win.mlx_ptr, win.win_ptr,
+                           win.img_ptr, 0, 0);
+   mlx_hook(win.win_ptr, 17, 0, m_c, p);
+   mlx_loop(win.mlx_ptr);
 }
 
 int			main(int ac, char **av)
