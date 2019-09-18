@@ -42,6 +42,7 @@ void        find_open(t_data *data)
 //    draw_plane(data, &win.img_arr);
 //    mlx_put_image_to_window(win.mlx_ptr, win.win_ptr,
 //                            win.img_ptr, 0, 0);
+new_image(data);
    mlx_hook(data->win.win_ptr, 17, 0, mlx_close, NULL);
    mlx_hook(data->win.win_ptr, 2, 0, key_release, data);
   //  draw_plane(data, &win.img_arr);

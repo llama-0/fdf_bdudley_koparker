@@ -12,19 +12,19 @@
 
 #include <fdf.h>
 
-static void rotate_OZ(int *x, int *y)
+static void rotate_OZ(int *x, int *y, size_t rotate)
 {
 	int previous_x;
 	int previous_y;
 
 	previous_x = *x - DW / 2;
 	previous_y = *y - DH / 2;
-	*x = trunc((previous_x * COS(ALPHA)) - trunc(previous_y * SIN(ALPHA))) + DW / 2;
-	*y = trunc((previous_y * COS(ALPHA)) + trunc(previous_x * SIN(ALPHA))) + DH / 2;
+	*x = trunc((previous_x * COS(rotate)) - trunc(previous_y * SIN(rotate))) + DW / 2;
+	*y = trunc((previous_y * COS(rotate)) + trunc(previous_x * SIN(rotate))) + DH / 2;
 }
 
 // TODO: add rotation_OX, rotation_OY; remove iso. 
-void	apply_rotation(t_data *data, int keycode)
+void	apply_rotation(t_data *data)
 {
 	size_t	i;
 	size_t	j;
@@ -35,8 +35,7 @@ void	apply_rotation(t_data *data, int keycode)
        	i = 0;
        	while (i < data->size_x)
 		{
-        	if (keycode == 6)
-				rotate_OZ(&(data->arr)[j][i].x, &(data->arr)[j][i].y);
+       		rotate_OZ(&(data->arr)[j][i].x, &(data->arr)[j][i].y, data->rotate_z);
 			i++;
       	}
        	j++;

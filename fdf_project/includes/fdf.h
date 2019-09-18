@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bdudley <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 16:13:28 by koparker          #+#    #+#             */
-/*   Updated: 2019/09/18 20:53:05 by koparker         ###   ########.fr       */
+/*   Updated: 2019/09/18 22:00:22 by bdudley          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,9 @@ typedef struct			s_data
 	size_t				size_x;
 	size_t				capacity_y;
 	size_t				size_y;
+	size_t				rotate_x;
+	size_t				rotate_y;
+	size_t				rotate_z;
 	t_point             **arr;
     t_window            win;
 }						t_data;
@@ -92,7 +95,7 @@ void					shift_coords(int *x, int *y, int shift);
 
 void					new_image(t_data *data);
 void					draw_plane(t_data *data, int **img_arr);
-void					apply_rotation(t_data *data, int keycode);
+void					apply_rotation(t_data *data);
 void					apply_projection(t_data *data, int keycode);
 
 void					error_message(int index, t_data	*data, char **str);

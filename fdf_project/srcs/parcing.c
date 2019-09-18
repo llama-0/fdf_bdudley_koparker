@@ -85,8 +85,8 @@ void	coord_to_pixel(t_data *data)
 		i = 0;
 		while (i < data->size_x)
 		{
-            (data->arr)[j][i].x *= step_x;
-            (data->arr)[j][i].y *= step_y;
+            (data->arr)[j][i].x = i * step_x;
+            (data->arr)[j][i].y = j * step_y;
 			i++;
 		}
 		j++;
