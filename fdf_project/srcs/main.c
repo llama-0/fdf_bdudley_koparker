@@ -6,7 +6,7 @@
 /*   By: bdudley <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 16:28:36 by koparker          #+#    #+#             */
-/*   Updated: 2019/09/18 19:25:41 by bdudley          ###   ########.fr       */
+/*   Updated: 2019/09/18 19:26:39 by bdudley          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,21 +34,21 @@ void        find_open(t_data *data)
 
    // ptr = key_release;
  //  param = (void *)data;
-   win.mlx_ptr = mlx_init();
-   win.win_ptr = mlx_new_window(win.mlx_ptr, DW_IM, DH_IM, "Koperker");
-   win.img_ptr = mlx_new_image(win.mlx_ptr, DW_IM, DH_IM);
-   win.img_arr = (int *)mlx_get_data_addr(win.img_ptr,
-                                          &win.bits_per_pixel, &win.size_line, &win.endian);
+   data->win.mlx_ptr = mlx_init();
+    data->win.win_ptr = mlx_new_window(data->win.mlx_ptr, DW_IM, DH_IM, "Koperker");
+    data->win.img_ptr = mlx_new_image(data->win.mlx_ptr, DW_IM, DH_IM);
+    data->win.img_arr = (int *)mlx_get_data_addr(data->win.img_ptr,
+                                          &data->win.bits_per_pixel, &data->win.size_line, &data->win.endian);
 //    draw_plane(data, &win.img_arr);
 //    mlx_put_image_to_window(win.mlx_ptr, win.win_ptr,
 //                            win.img_ptr, 0, 0);
-   mlx_hook(win.win_ptr, 17, 0, mlx_close, NULL);
-   mlx_hook(win.win_ptr, 2, 0, key_release, data);
+   mlx_hook(data->win.win_ptr, 17, 0, mlx_close, NULL);
+   mlx_hook(data->win.win_ptr, 2, 0, key_release, data);
   //  draw_plane(data, &win.img_arr);
 //    mlx_put_image_to_window(win.mlx_ptr, win.win_ptr,
 //                            win.img_ptr, 0, 0);
  // mlx_hook(win.win_ptr, 34, 0, &(key_release(7, head, data)), NULL);
-   mlx_loop(win.mlx_ptr);
+   mlx_loop(data->win.mlx_ptr);
 }
 
 int			main(int ac, char **av)

@@ -6,7 +6,7 @@
 /*   By: bdudley <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 16:13:28 by koparker          #+#    #+#             */
-/*   Updated: 2019/09/18 19:16:33 by bdudley          ###   ########.fr       */
+/*   Updated: 2019/09/18 19:25:41 by bdudley          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,24 +44,25 @@ typedef struct			s_point
 	int					color;
 }						t_point;
 
+typedef struct			s_window
+{
+    void				*mlx_ptr;
+    void				*win_ptr;
+    void				*img_ptr;
+    int					*img_arr;
+    int					bits_per_pixel;
+    int					size_line;
+    int					endian;
+}						t_window;
+
 typedef struct			s_data
 {
 	size_t				size_x;
 	size_t				capacity_y;
 	size_t				size_y;
 	t_point             **arr;
+    t_window            win;
 }						t_data;
-
-typedef struct			s_window
-{
-	void				*mlx_ptr;
-	void				*win_ptr;
-	void				*img_ptr;
-	int					*img_arr;
-	int					bits_per_pixel;
-	int					size_line;
-	int					endian;
-}						t_window;
 
 typedef struct			s_draw_line
 {
@@ -73,7 +74,6 @@ typedef struct			s_draw_line
     int					y;
     int					x;
 }						t_draw_line;
-t_window    win;
 
 int						valid_nbr(char *spl, t_data *data, int i, int j);
 int						valid_color(char *spl, t_data *data, int i, int j);
