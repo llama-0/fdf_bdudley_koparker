@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/18 17:19:15 by koparker          #+#    #+#             */
-/*   Updated: 2019/09/18 20:19:01 by koparker         ###   ########.fr       */
+/*   Updated: 2019/09/18 20:52:46 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static void	draw_line_high(t_point *p1, t_point *p2, int **img_arr)
 	while (l.y < p2->y + SHIFT_Y / 2 + 1)
 	{
 		if (l.x >= 0 && l.y >= 0 && l.y < DH_IM * DW_IM && l.x < DW_IM)
-			(*img_arr)[l.x + l.y * DW_IM] = WHITE;
+			(*img_arr)[l.x + l.y * DW_IM] = DEFAULT;
 		if (l.diff > 0)
 		{
 			l.x = l.x + l.x_i;

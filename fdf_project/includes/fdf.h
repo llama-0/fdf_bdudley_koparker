@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 16:13:28 by koparker          #+#    #+#             */
-/*   Updated: 2019/09/18 20:43:24 by koparker         ###   ########.fr       */
+/*   Updated: 2019/09/18 20:53:05 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@
 
 # define ALPHA 30
 
-# define WHITE 0xFFFFFF
+# define DEFAULT 0xFFFFF0
 # define BLACK 0x000000
 
 typedef struct			s_point

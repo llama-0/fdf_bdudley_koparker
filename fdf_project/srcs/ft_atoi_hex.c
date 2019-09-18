@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi_hex.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: koparker <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/15 14:20:20 by koparker          #+#    #+#             */
-/*   Updated: 2019/02/15 16:40:11 by koparker         ###   ########.fr       */
+/*   Updated: 2019/09/18 20:59:28 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int	ft_atoi_hex(char *s)
 	int	i;
 	int	res;
 
+	printf("%s\n", s);
 	if (s[0] != '0' || s[1] != 'x')
 		return (0);
 	s += 2;
