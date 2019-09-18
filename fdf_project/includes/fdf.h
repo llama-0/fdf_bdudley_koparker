@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 16:13:28 by koparker          #+#    #+#             */
-/*   Updated: 2019/09/18 14:23:57 by koparker         ###   ########.fr       */
+/*   Updated: 2019/09/18 16:16:21 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@
 //(-6,6) (-4,7) (-3,8) (-1,10) (0,11) 
 #define SIN(x) sin(x * M_PI/180) 
 #define COS(x) cos(x * M_PI/180)
+
+# define WHITE 0xFFFFFF
 
 typedef struct			s_point
 {
