@@ -6,13 +6,13 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/18 17:19:15 by koparker          #+#    #+#             */
-/*   Updated: 2019/09/18 17:51:24 by koparker         ###   ########.fr       */
+/*   Updated: 2019/09/18 20:19:01 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fdf.h>
 
-static void	draw_line_low(t_point *p1, t_point *p2, int **img_arr, t_data *data)
+static void	draw_line_low(t_point *p1, t_point *p2, int **img_arr)
 {
 	t_draw_line	l;
 
@@ -41,8 +41,7 @@ static void	draw_line_low(t_point *p1, t_point *p2, int **img_arr, t_data *data)
 	}
 }
 
-static void	draw_line_high(t_point *p1, t_point *p2, int **img_arr,
-						t_data *data)
+static void	draw_line_high(t_point *p1, t_point *p2, int **img_arr)
 {
 	t_draw_line	l;
 
@@ -71,21 +70,21 @@ static void	draw_line_high(t_point *p1, t_point *p2, int **img_arr,
 	}
 }
 
-static void	plot(t_point *p1, t_point *p2, int **img_arr, t_data *data)
+static void	plot(t_point *p1, t_point *p2, int **img_arr)
 {
 	if (abs(p2->y - p1->y) < abs(p2->x - p1->x))
 	{
 		if (p1->x > p2->x)
-			draw_line_low(p2, p1, img_arr, data);
+			draw_line_low(p2, p1, img_arr);
 		else
-			draw_line_low(p1, p2, img_arr, data);
+			draw_line_low(p1, p2, img_arr);
 	}
 	else
 	{
 		if (p1->y > p2->y)
-			draw_line_high(p2, p1, img_arr, data);
+			draw_line_high(p2, p1, img_arr);
 		else
-			draw_line_high(p1, p2, img_arr, data);
+			draw_line_high(p1, p2, img_arr);
 	}
 }
 
@@ -105,11 +104,11 @@ void		draw_plane(t_data *data, int **img_arr)
 		{
 			if (i < data->size_x - 1)
 			{
-				plot(&((data->arr)[j][i]), &((data->arr)[j][i + 1]), img_arr, data);
+				plot(&((data->arr)[j][i]), &((data->arr)[j][i + 1]), img_arr);
 			}
 			if (j < data->size_y - 1)
 			{
-				plot(&((data->arr)[j][i]), &((data->arr)[j + 1][i]), img_arr, data);
+				plot(&((data->arr)[j][i]), &((data->arr)[j + 1][i]), img_arr);
 			}
 			i++;
 		}

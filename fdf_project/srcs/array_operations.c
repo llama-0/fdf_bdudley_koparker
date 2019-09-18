@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   array_operations.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bdudley <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/15 11:53:46 by bdudley           #+#    #+#             */
-/*   Updated: 2019/09/18 18:34:08 by bdudley          ###   ########.fr       */
+/*   Updated: 2019/09/18 20:20:27 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fdf.h>
 
-void		init_array(t_point ***array, t_data	*data, int j, int i)
+void		init_array(t_point ***array, t_data	*data, size_t j, size_t i)
 {
 	while (j < data->capacity_y)
 	{
@@ -33,7 +33,7 @@ void		init_array(t_point ***array, t_data	*data, int j, int i)
 
 void		delete_array(t_data	*data)
 {
-	int		j;
+	size_t		j;
 
 	j = 0;
 	while (j < data->size_y)

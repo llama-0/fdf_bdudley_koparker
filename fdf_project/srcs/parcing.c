@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parcing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bdudley <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/15 16:47:52 by koparker          #+#    #+#             */
-/*   Updated: 2019/09/18 18:42:56 by bdudley          ###   ########.fr       */
+/*   Updated: 2019/09/18 20:15:16 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fdf.h>
 
-void		error_message(int index, t_data	*data, char ***str)
+void		error_message(int index, t_data	*data, char **str)
 {
 	if (index == 0)
 		ft_putendl("Invalid altitude in the cart");
@@ -24,6 +24,7 @@ void		error_message(int index, t_data	*data, char ***str)
 		perror("Memory allocation failed\n");
 	delete_array(data);
 	//TODO: delete split
+	ft_free_char_arr(&str);
 	exit(1);
 
 }
@@ -53,15 +54,17 @@ t_point		**read_file(const int fd, t_data *data)
 		if (data->size_y >= data->capacity_y)
 			size_array(data, i);
 		if (data->size_x != i)
-			error_message(2, data, &split);
+			error_message(2, data, split);
 		i = -1;
 		while (++i < data->size_x)
 		{
 			if (valid_nbr(split[i], data, i, data->size_y) == 0)
-				error_message(0, data, &split);
+				error_message(0, data, split);
 			if (valid_color(split[i], data, i, data->size_y) == 0)
-				error_message(1, data, &split);
+				error_message(1, data, split);
 		}
+		if (split)
+			ft_free_char_arr(&split);
 		data->size_y++;
 	}
 	return (data->arr);
@@ -73,8 +76,6 @@ void	coord_to_pixel(t_data *data)
 	size_t	j;
 	size_t	step_x;
 	size_t	step_y;
-	size_t	delta_x;
-	size_t	delta_y;
 
 	step_x = (data->size_x > 1) ? (DW - 1) / (data->size_x - 1) : DW - 1;
 	step_y = (data->size_y > 1) ? (DH - 1) / (data->size_y - 1) : DH - 1;

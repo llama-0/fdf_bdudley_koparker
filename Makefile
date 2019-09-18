@@ -6,7 +6,7 @@
 #    By: koparker <koparker@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/10 22:10:26 by bdudley           #+#    #+#              #
-#    Updated: 2019/09/18 17:52:05 by koparker         ###   ########.fr        #
+#    Updated: 2019/09/18 20:21:05 by koparker         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = fdf
 
 DEBUG = -g
 
-#WFLAGS = -Wall -Wextra -Werror
+WFLAGS = -Wall -Wextra -Werror
 
 GFLAGS = -lmlx -framework OpenGL -framework AppKit
 
@@ -31,7 +31,8 @@ SRC = main.c\
       array_operations.c \
 	  draw_and_plot.c \
 	  rotation.c \
-	  projections.c
+	  projections.c \
+	  button_click.c
 	  
 LIBFT = -L libft -lft
 

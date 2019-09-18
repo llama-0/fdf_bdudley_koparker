@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bdudley <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 16:13:28 by koparker          #+#    #+#             */
-/*   Updated: 2019/09/18 19:25:41 by bdudley          ###   ########.fr       */
+/*   Updated: 2019/09/18 20:17:37 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void					print(t_data *data);
 
 t_point					**new_array(t_point		***prev_array, t_data	*data);
 void					delete_array(t_data	*data);
-void					init_array(t_point		***array, t_data	*data, int j, int i);
+void					init_array(t_point		***array, t_data	*data, size_t j, size_t i);
 void					coord_to_pixel(t_data *data);
 void					shift_coords(int *x, int *y, int shift);
 
@@ -91,7 +91,7 @@ void					draw_plane(t_data *data, int **img_arr);
 void					apply_rotation(t_data *data, int keycode);
 void					apply_projection(t_data *data, int keycode);
 
-void					error_message(int index, t_data	*data, char ***str);
+void					error_message(int index, t_data	*data, char **str);
 
 int                     key_release(int keycode, void *param);
 int                     mlx_close(void);
