@@ -90,13 +90,13 @@ static void	plot(t_point *p1, t_point *p2, int **img_arr, t_data *data)
 }
 
 // TODO: add balancer-rotate/iso-by-button-click
-void		draw_plane(t_point ***head, t_data *data, int **img_arr)
+void		draw_plane(t_data *data, int **img_arr)
 {
 	size_t	i;
 	size_t	j;
 
-	apply_rotation(head, data, 7);
-	apply_projection(head, data, 34);
+//	apply_rotation(head, data, 7);
+//	apply_projection(head, data, 34);
 	j = 0;
 	while (j < data->size_y)
 	{
@@ -105,11 +105,11 @@ void		draw_plane(t_point ***head, t_data *data, int **img_arr)
 		{
 			if (i < data->size_x - 1)
 			{
-				plot(&((*head)[j][i]), &((*head)[j][i + 1]), img_arr, data);
+				plot(&((data->arr)[j][i]), &((data->arr)[j][i + 1]), img_arr, data);
 			}
 			if (j < data->size_y - 1)
 			{
-				plot(&((*head)[j][i]), &((*head)[j + 1][i]), img_arr, data);
+				plot(&((data->arr)[j][i]), &((data->arr)[j + 1][i]), img_arr, data);
 			}
 			i++;
 		}

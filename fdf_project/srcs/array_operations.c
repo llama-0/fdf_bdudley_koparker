@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   array_operations.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bdudley <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/15 11:53:46 by bdudley           #+#    #+#             */
-/*   Updated: 2019/09/15 14:40:42 by koparker         ###   ########.fr       */
+/*   Updated: 2019/09/18 18:34:08 by bdudley          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,19 +31,19 @@ void		init_array(t_point ***array, t_data	*data, int j, int i)
 	}
 }
 
-void		delete_array(t_point		***prev_array, t_data	*data)
+void		delete_array(t_data	*data)
 {
 	int		j;
 
 	j = 0;
 	while (j < data->size_y)
 	{
-		free((*prev_array)[j]);
-		(*prev_array)[j] = NULL;
+		free((data->arr)[j]);
+        (data->arr)[j] = NULL;
 		j++;
 	}
-	if (prev_array)
-		free(*prev_array);
+	if (data->arr)
+		free((data->arr));
 }
 
 // TODO: add split to arg list. Reason - to free it, if smth fails
@@ -55,11 +55,11 @@ t_point		**new_array(t_point		***prev_array, t_data	*data)
 
 	j = 0;
 	if (!(array = (t_point **)malloc(sizeof(t_point *) * data->capacity_y)))
-		error_message(3, prev_array, data, NULL);
+		error_message(3, data, NULL);
 	while (j < data->size_y)
 	{
 		if (!(array[j] = (t_point *)malloc(sizeof(t_point) * data->size_x)))
-			error_message(3, prev_array, data, NULL);
+			error_message(3, data, NULL);
 		i = 0;
 		while (i < data->size_x)
 		{
@@ -73,6 +73,6 @@ t_point		**new_array(t_point		***prev_array, t_data	*data)
 		j++;
 	}
 	init_array(&array, data, j , i);
-	delete_array(prev_array, data);
+	delete_array(data);
 	return (array);
 }

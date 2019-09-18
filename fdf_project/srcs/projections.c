@@ -23,7 +23,7 @@ static void iso(int *x, int *y, int z)
     *y = -z + (previous_x + previous_y) * SIN(30);
 }
 
-void	apply_projection(t_point ***head, t_data *data, int keycode)
+void	apply_projection(t_data *data, int keycode)
 {
 	size_t	i;
 	size_t	j;
@@ -35,7 +35,7 @@ void	apply_projection(t_point ***head, t_data *data, int keycode)
        	while (i < data->size_x)
 		{
 			if (keycode == 34)
-				iso(&(*head)[j][i].x, &(*head)[j][i].y, (*head)[j][i].alt * 3);
+				iso(&(data->arr)[j][i].x, &(data->arr)[j][i].y, (data->arr)[j][i].alt * 3);
 			i++;
       	}
        	j++;

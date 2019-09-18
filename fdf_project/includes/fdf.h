@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bdudley <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 16:13:28 by koparker          #+#    #+#             */
-/*   Updated: 2019/09/18 17:49:52 by koparker         ###   ########.fr       */
+/*   Updated: 2019/09/18 19:16:33 by bdudley          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ typedef struct			s_data
 	size_t				size_x;
 	size_t				capacity_y;
 	size_t				size_y;
+	t_point             **arr;
 }						t_data;
 
 typedef struct			s_window
@@ -72,23 +73,26 @@ typedef struct			s_draw_line
     int					y;
     int					x;
 }						t_draw_line;
+t_window    win;
 
-
-int						valid_nbr(char *spl, t_point ***point, int i, int j);
-int						valid_color(char *spl, t_point ***point, int i, int j);
+int						valid_nbr(char *spl, t_data *data, int i, int j);
+int						valid_color(char *spl, t_data *data, int i, int j);
 int						ft_atoi_hex(char *s);
 t_point					**read_file(const int fd, t_data *data);
-void					print(t_point **points, t_data *data);
+void					print(t_data *data);
 
 t_point					**new_array(t_point		***prev_array, t_data	*data);
-void					delete_array(t_point		***prev_array, t_data	*data);
+void					delete_array(t_data	*data);
 void					init_array(t_point		***array, t_data	*data, int j, int i);
-void					coord_to_pixel(t_point ***arr, t_data *data);
+void					coord_to_pixel(t_data *data);
 void					shift_coords(int *x, int *y, int shift);
 
-void					draw_plane(t_point ***head, t_data *data, int **img_arr);
-void					apply_rotation(t_point ***head, t_data *data, int keycode);
-void					apply_projection(t_point ***head, t_data *data, int keycode);
+void					draw_plane(t_data *data, int **img_arr);
+void					apply_rotation(t_data *data, int keycode);
+void					apply_projection(t_data *data, int keycode);
 
-void					error_message(int index, t_point ***points, t_data	*data, char ***str);
+void					error_message(int index, t_data	*data, char ***str);
+
+int                     key_release(int keycode, void *param);
+int                     mlx_close(void);
 #endif

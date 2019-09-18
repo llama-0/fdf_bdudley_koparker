@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parcing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bdudley <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/15 16:47:52 by koparker          #+#    #+#             */
-/*   Updated: 2019/09/18 17:47:11 by koparker         ###   ########.fr       */
+/*   Updated: 2019/09/18 18:42:56 by bdudley          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fdf.h>
 
-void		error_message(int index, t_point ***points, t_data	*data, char ***str)
+void		error_message(int index, t_data	*data, char ***str)
 {
 	if (index == 0)
 		ft_putendl("Invalid altitude in the cart");
@@ -22,13 +22,13 @@ void		error_message(int index, t_point ***points, t_data	*data, char ***str)
 		ft_putendl("Invalid length cart");
 	else if (index == 3)
 		perror("Memory allocation failed\n");
-	delete_array(points, data);
+	delete_array(data);
 	//TODO: delete split
 	exit(1);
 
 }
 
-void		size_array(t_point ***points, t_data *data, size_t length)
+void		size_array(t_data *data, size_t length)
 {
 	if (data->size_y == 0)
 	{
@@ -37,7 +37,7 @@ void		size_array(t_point ***points, t_data *data, size_t length)
 	}
 	else
 		data->capacity_y *= 2;
-	*points = new_array(points, data);
+	data->arr = new_array(&(data->arr), data);
 }
 
 t_point		**read_file(const int fd, t_data *data)
@@ -45,31 +45,29 @@ t_point		**read_file(const int fd, t_data *data)
 	size_t	i;
 	char	*line;
 	char	**split;
-	t_point	**points;
 
-	points = NULL;
 	while (get_next_line(fd, &line) > 0)
 	{
 		split = ft_strsplit(line, ' ');
 		i = ft_2d_strlen(split);
 		if (data->size_y >= data->capacity_y)
-			size_array(&points, data, i);
+			size_array(data, i);
 		if (data->size_x != i)
-			error_message(2, &points, data, &split);
+			error_message(2, data, &split);
 		i = -1;
 		while (++i < data->size_x)
 		{
-			if (valid_nbr(split[i], &points, i, data->size_y) == 0)
-				error_message(0, &points, data, &split);
-			if (valid_color(split[i], &points, i, data->size_y) == 0)
-				error_message(1, &points, data, &split);
+			if (valid_nbr(split[i], data, i, data->size_y) == 0)
+				error_message(0, data, &split);
+			if (valid_color(split[i], data, i, data->size_y) == 0)
+				error_message(1, data, &split);
 		}
 		data->size_y++;
 	}
-	return (points);
+	return (data->arr);
 }
 
-void	coord_to_pixel(t_point ***arr, t_data *data)
+void	coord_to_pixel(t_data *data)
 {
 	size_t	i;
 	size_t	j;
@@ -86,8 +84,8 @@ void	coord_to_pixel(t_point ***arr, t_data *data)
 		i = 0;
 		while (i < data->size_x)
 		{
-			(*arr)[j][i].x *= step_x;
-			(*arr)[j][i].y *= step_y;
+            (data->arr)[j][i].x *= step_x;
+            (data->arr)[j][i].y *= step_y;
 			i++;
 		}
 		j++;

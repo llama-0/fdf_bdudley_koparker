@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rotation.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bdudley <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/18 17:42:36 by koparker          #+#    #+#             */
-/*   Updated: 2019/09/18 17:51:05 by koparker         ###   ########.fr       */
+/*   Updated: 2019/09/18 18:51:03 by bdudley          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void rotate_OZ(int *x, int *y)
 }
 
 // TODO: add rotation_OX, rotation_OY; remove iso. 
-void	apply_rotation(t_point ***head, t_data *data, int keycode)
+void	apply_rotation(t_data *data, int keycode)
 {
 	size_t	i;
 	size_t	j;
@@ -37,8 +37,8 @@ void	apply_rotation(t_point ***head, t_data *data, int keycode)
        	i = 0;
        	while (i < data->size_x)
 		{
-        	if (keycode == 7)
-				rotate_OZ(&(*head)[j][i].x, &(*head)[j][i].y);
+        	if (keycode == 6)
+				rotate_OZ(&(data->arr)[j][i].x, &(data->arr)[j][i].y);
 			i++;
       	}
        	j++;
