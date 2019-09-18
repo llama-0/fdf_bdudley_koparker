@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bdudley <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 16:28:36 by koparker          #+#    #+#             */
-/*   Updated: 2019/09/18 19:58:01 by bdudley          ###   ########.fr       */
+/*   Updated: 2019/09/18 20:40:44 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void        find_open(t_data *data)
 
    // ptr = key_release;
  //  param = (void *)data;
-   data->win.mlx_ptr = mlx_init();
+	data->win.mlx_ptr = mlx_init();
     data->win.win_ptr = mlx_new_window(data->win.mlx_ptr, DW_IM, DH_IM, "Koperker");
     data->win.img_ptr = mlx_new_image(data->win.mlx_ptr, DW_IM, DH_IM);
     data->win.img_arr = (int *)mlx_get_data_addr(data->win.img_ptr,
@@ -56,7 +56,7 @@ void        new_image(t_data *data)
     mlx_clear_window(data->win.mlx_ptr, data->win.win_ptr);
     int i = -1;
     while (++i < DW_IM * DH_IM)
-        (data->win.img_arr)[i] = 0x0;
+        (data->win.img_arr)[i] = BLACK;
     draw_plane(data, &data->win.img_arr);
     mlx_put_image_to_window(data->win.mlx_ptr, data->win.win_ptr,
                             data->win.img_ptr, 0, 0);

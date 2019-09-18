@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   button_click.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bdudley <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/18 16:55:14 by bdudley           #+#    #+#             */
-/*   Updated: 2019/09/18 20:16:04 by bdudley          ###   ########.fr       */
+/*   Updated: 2019/09/18 20:37:25 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int  key_release(int keycode, void *param)
     {
 
     }
+    return (0);
 }
 
 int mlx_close(void)

@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 16:13:28 by koparker          #+#    #+#             */
-/*   Updated: 2019/09/18 20:23:43 by koparker         ###   ########.fr       */
+/*   Updated: 2019/09/18 20:43:24 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,13 @@
 
 //(0,0) (1,1) (2,2) (4,4) (5,5) 
 //(-6,6) (-4,7) (-3,8) (-1,10) (0,11) 
-#define SIN(x) sin(x * M_PI/180) 
-#define COS(x) cos(x * M_PI/180)
+# define SIN(x) sin(x * M_PI/180) 
+# define COS(x) cos(x * M_PI/180)
+
+# define ALPHA 30
 
 # define WHITE 0xFFFFFF
+# define BLACK 0x000000
 
 typedef struct			s_point
 {
