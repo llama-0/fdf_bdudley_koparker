@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bdudley <marvin@42.fr>                     +#+  +:+       +#+         #
+#    By: koparker <koparker@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/10 22:10:26 by bdudley           #+#    #+#              #
-#    Updated: 2019/09/16 12:43:33 by koparker         ###   ########.fr        #
+#    Updated: 2019/09/18 17:52:05 by koparker         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,11 @@ SRC = main.c\
       validate.c\
       ft_atoi_hex.c\
       parcing.c\
-      array_operations.c
+      array_operations.c \
+	  draw_and_plot.c \
+	  rotation.c \
+	  projections.c
+	  
 LIBFT = -L libft -lft
 
 OBJ = $(addprefix $(FDF_SRC), $(SRC:%.c=%.o))

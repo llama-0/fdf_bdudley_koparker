@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 16:13:28 by koparker          #+#    #+#             */
-/*   Updated: 2019/09/18 16:16:21 by koparker         ###   ########.fr       */
+/*   Updated: 2019/09/18 17:49:52 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,18 @@ typedef struct			s_window
 	int					endian;
 }						t_window;
 
+typedef struct			s_draw_line
+{
+	double				diff;
+    int					dx;
+    int					dy;
+    int					y_i;
+	int					x_i;
+    int					y;
+    int					x;
+}						t_draw_line;
+
+
 int						valid_nbr(char *spl, t_point ***point, int i, int j);
 int						valid_color(char *spl, t_point ***point, int i, int j);
 int						ft_atoi_hex(char *s);
@@ -73,6 +85,10 @@ void					delete_array(t_point		***prev_array, t_data	*data);
 void					init_array(t_point		***array, t_data	*data, int j, int i);
 void					coord_to_pixel(t_point ***arr, t_data *data);
 void					shift_coords(int *x, int *y, int shift);
+
+void					draw_plane(t_point ***head, t_data *data, int **img_arr);
+void					apply_rotation(t_point ***head, t_data *data, int keycode);
+void					apply_projection(t_point ***head, t_data *data, int keycode);
 
 void					error_message(int index, t_point ***points, t_data	*data, char ***str);
 #endif

@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/15 16:47:52 by koparker          #+#    #+#             */
-/*   Updated: 2019/09/18 16:21:09 by koparker         ###   ########.fr       */
+/*   Updated: 2019/09/18 17:47:11 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void		error_message(int index, t_point ***points, t_data	*data, char ***str)
 	else if (index == 2)
 		ft_putendl("Invalid length cart");
 	else if (index == 3)
-		ft_putendl("Memory allocation failed");
+		perror("Memory allocation failed\n");
 	delete_array(points, data);
 	//TODO: delete split
 	exit(1);
