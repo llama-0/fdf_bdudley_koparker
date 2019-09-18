@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 16:28:36 by koparker          #+#    #+#             */
-/*   Updated: 2019/09/17 23:55:25 by koparker         ###   ########.fr       */
+/*   Updated: 2019/09/18 14:25:46 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,9 +121,7 @@ void    draw_line_low(t_point *p1, t_point *p2, int **img_arr, t_data *data)
     int x;
 	int step_x;
 	int step_y;
-	int shift_x;
-	int shift_y;
-
+	
 	// step_x = (data->size_x > 1) ? (DW - 1) / (data->size_x - 1) : DW - 1;
 	// step_y = (data->size_y > 1) ? (DH - 1) / (data->size_y - 1) : DH - 1;
     // dx = (p2->x - p1->x) * step_x;
@@ -139,13 +137,11 @@ void    draw_line_low(t_point *p1, t_point *p2, int **img_arr, t_data *data)
     }
     diff = 2 * dy - dx;
 	//printf("!diff = %f dx = %d dy = %d\n", diff, dx, dy);
-	shift_x = DW;
-	shift_y = DH;
-    // y = p1->y * step_y + shift_y;
-    // x = p1->x * step_x + shift_x;
-	y = p1->y + shift_y;
-	x = p1->x + shift_x;
-    while (x < p2->x + shift_x)
+    // y = p1->y * step_y + SHIFT_Y;
+    // x = p1->x * step_x + SHIFT_X;
+	y = p1->y + SHIFT_Y / 2;
+	x = p1->x + SHIFT_X / 2;
+    while (x < p2->x + SHIFT_X / 2)
     {
 		//printf("low == x %d | y * DW_IM %d\n" , x, y * DW_IM); 
         //printf("x %d | y %d\n" , x, y); //delete
@@ -178,8 +174,6 @@ void    draw_line_high(t_point *p1, t_point *p2, int **img_arr, t_data *data)
     int x;
 	int step_x;
 	int step_y;
-	int shift_x;
-	int shift_y;
 
 	// step_x = (data->size_x > 1) ? (DW - 1) / (data->size_x - 1) : DW - 1;
 	// step_y = (data->size_y > 1) ? (DH - 1) / (data->size_y - 1) : DH - 1;
@@ -195,17 +189,15 @@ void    draw_line_high(t_point *p1, t_point *p2, int **img_arr, t_data *data)
         dx = -dx;
     }
     diff = 2 * dx - dy;
-	shift_x = DW;
-	shift_y = DH;
-    // y = p1->y * step_y + shift_y;
-    // x = p1->x * step_x + shift_x;
-	y = p1->y + shift_y;
-	x = p1->x + shift_x;
+    // y = p1->y * step_y + SHIFT_Y;
+    // x = p1->x * step_x + SHIFT_X;
+	y = p1->y + SHIFT_Y / 2;
+	x = p1->x + SHIFT_X / 2;
 	printf("%d %d\n", x, y);
     // printf("p1->y %d and p2->y %d\n", p1->y, p2->y); //delete
 	//  printf("p1->y %d, p2->y %d\n", p1->y, p2->y);
-    // while (y <= p2->y * step_y + shift_y)
-	while (y < p2->y + shift_y)
+    // while (y <= p2->y * step_y + SHIFT_Y)
+	while (y < p2->y + SHIFT_Y / 2 + 1)
     {
        // printf("=======x %d | y %d\n" , x, y); //delete
         //printf("x + y * DW %d\n", x + y * DW); //delete
@@ -262,12 +254,12 @@ static void iso(int *x, int *y)
 	int previous_y;
 	int alpha;
 
-	alpha = 45;
-	previous_x = *x;
-	previous_y = *y;
+	alpha = 330;
+	previous_x = *x - DW / 2;
+	previous_y = *y - DH / 2;
 	// printf("old == %d %d\n", *x, *y);
-	*x = trunc((previous_x * COS(alpha)) - trunc(previous_y * SIN(alpha)));
-	*y = trunc((previous_y * COS(alpha)) + trunc(previous_x * SIN(alpha)));
+	*x = trunc((previous_x * COS(alpha)) - trunc(previous_y * SIN(alpha))) + DW / 2;
+	*y = trunc((previous_y * COS(alpha)) + trunc(previous_x * SIN(alpha))) + DH / 2;
 	// printf("new == %d %d\n", *x, *y);
 }
 

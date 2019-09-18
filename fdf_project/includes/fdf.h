@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 16:13:28 by koparker          #+#    #+#             */
-/*   Updated: 2019/09/16 14:21:26 by koparker         ###   ########.fr       */
+/*   Updated: 2019/09/18 14:23:57 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,19 @@
 # include <mlx.h>
 # include <stdio.h>
 
-# define DW 50
-# define DH 50
+# define DW 600
+# define DH 400
 
-# define DW_IM DW * 4
-# define DH_IM DH * 4
+# define DW_IM (DW * 2)
+# define DH_IM (DH * 2)
 
-#define SIN(x) sin(x * 3.141592653589/180) 
-#define COS(x) cos(x * 3.141592653589/180)
+# define SHIFT_X DW
+# define SHIFT_Y DH
+
+//(0,0) (1,1) (2,2) (4,4) (5,5) 
+//(-6,6) (-4,7) (-3,8) (-1,10) (0,11) 
+#define SIN(x) sin(x * M_PI/180) 
+#define COS(x) cos(x * M_PI/180)
 
 typedef struct			s_point
 {
