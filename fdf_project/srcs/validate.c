@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/15 14:10:37 by koparker          #+#    #+#             */
-/*   Updated: 2019/09/18 20:57:30 by koparker         ###   ########.fr       */
+/*   Updated: 2019/09/20 21:59:52 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	valid_color(char *spl, t_data *data, int i, int j)
 	tmp = spl;
     (data->arr)[j][i].color = DEFAULT;
     (data->arr)[j][i].has_color = 0;
-	printf("|%s|\n", tmp);
+	// printf("|%s|\n", tmp);
 	if ((tmp = ft_strchr(spl, ',')) != NULL)
 	{
 		if ((color = ft_atoi_hex(tmp + 1)) == 0)

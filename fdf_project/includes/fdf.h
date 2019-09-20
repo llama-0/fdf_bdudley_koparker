@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bdudley <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 16:13:28 by koparker          #+#    #+#             */
-/*   Updated: 2019/09/18 22:00:22 by bdudley          ###   ########.fr       */
+/*   Updated: 2019/09/20 22:05:12 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@
 # define DW_IM (DW * 2)
 # define DH_IM (DH * 2)
 
-# define SHIFT_X DW
-# define SHIFT_Y DH
+# define SHIFT_X DW / 2
+# define SHIFT_Y DH / 2
 
 //(0,0) (1,1) (2,2) (4,4) (5,5) 
 //(-6,6) (-4,7) (-3,8) (-1,10) (0,11) 
@@ -35,7 +35,7 @@
 
 # define ALPHA 30
 
-# define DEFAULT 0xFFFFF0
+# define DEFAULT 0xFF0000
 # define BLACK 0x000000
 
 typedef struct			s_point
@@ -97,6 +97,8 @@ void					new_image(t_data *data);
 void					draw_plane(t_data *data, int **img_arr);
 void					apply_rotation(t_data *data);
 void					apply_projection(t_data *data, int keycode);
+
+int						get_color(t_point *p1, t_point *p2, int current);
 
 void					error_message(int index, t_data	*data, char **str);
 

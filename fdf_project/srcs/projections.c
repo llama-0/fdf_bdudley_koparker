@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/18 17:43:46 by koparker          #+#    #+#             */
-/*   Updated: 2019/09/18 17:50:54 by koparker         ###   ########.fr       */
+/*   Updated: 2019/09/20 22:27:16 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	apply_projection(t_data *data, int keycode)
        	while (i < data->size_x)
 		{
 			if (keycode == 34)
-				iso(&(data->arr)[j][i].x, &(data->arr)[j][i].y, (data->arr)[j][i].alt * 3);
+				iso(&(data->arr)[j][i].x, &(data->arr)[j][i].y, (data->arr)[j][i].alt);
 			i++;
       	}
        	j++;

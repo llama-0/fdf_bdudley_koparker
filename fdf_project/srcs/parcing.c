@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/15 16:47:52 by koparker          #+#    #+#             */
-/*   Updated: 2019/09/18 20:15:16 by koparker         ###   ########.fr       */
+/*   Updated: 2019/09/20 22:04:12 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,10 +91,4 @@ void	coord_to_pixel(t_data *data)
 		}
 		j++;
 	}
-}
-
-void	shift_coords(int *x, int *y, int shift)
-{
-	*x += shift;
-	*y += shift; 
 }

@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/18 17:19:15 by koparker          #+#    #+#             */
-/*   Updated: 2019/09/18 22:08:46 by koparker         ###   ########.fr       */
+/*   Updated: 2019/09/20 22:28:30 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,12 @@ static void	draw_line_low(t_point *p1, t_point *p2, int **img_arr)
 		l.dy = -l.dy;
 	}
 	l.diff = 2 * l.dy - l.dx;
-	l.y = p1->y + SHIFT_Y / 2;
-	l.x = p1->x + SHIFT_X / 2;
-	while (l.x < p2->x + SHIFT_X / 2)
+	l.y = p1->y + SHIFT_Y;
+	l.x = p1->x + SHIFT_X;
+	while (l.x < p2->x + SHIFT_X)
 	{
 		if (l.x >= 0 && l.y >= 0 && l.y < DH_IM * DW_IM && l.x < DW_IM)
-			(*img_arr)[l.y * DW_IM + l.x] = 0xFFFFFF;
+			(*img_arr)[l.y * DW_IM + l.x] = get_color(p1, p2, l.x);
 		if (l.diff > 0)
 		{
 			l.y = l.y + l.y_i;
@@ -39,11 +39,6 @@ static void	draw_line_low(t_point *p1, t_point *p2, int **img_arr)
 		l.diff = l.diff + 2 * l.dy;
 		l.x++;
 	}
-}
-
-int			get_color(int prev, int next, int step)
-{
-
 }
 
 static void	draw_line_high(t_point *p1, t_point *p2, int **img_arr)
@@ -59,13 +54,13 @@ static void	draw_line_high(t_point *p1, t_point *p2, int **img_arr)
 		l.dx = -l.dx;
 	}
 	l.diff = 2 * l.dx - l.dy;
-	l.y = p1->y + SHIFT_Y / 2;
-	l.x = p1->x + SHIFT_X / 2;
-	while (l.y < p2->y + SHIFT_Y / 2 + 1)
+	l.y = p1->y + SHIFT_Y;
+	l.x = p1->x + SHIFT_X;
+	while (l.y < p2->y + SHIFT_Y + 1)
 	{
 		if (l.x >= 0 && l.y >= 0 && l.y < DH_IM * DW_IM && l.x < DW_IM)
 		{
-			(*img_arr)[l.x + l.y * DW_IM] = DEFAULT;
+			(*img_arr)[l.x + l.y * DW_IM] = get_color(p1, p2, l.y);
 		}
 		if (l.diff > 0)
 		{
@@ -102,7 +97,7 @@ void		draw_plane(t_data *data, int **img_arr)
 	size_t	j;
 
 //	apply_rotation(head, data, 7);
-//	apply_projection(head, data, 34);
+//	apply_projection(data, 34);
 	j = 0;
 	while (j < data->size_y)
 	{

@@ -6,7 +6,7 @@
 #    By: koparker <koparker@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/10 22:10:26 by bdudley           #+#    #+#              #
-#    Updated: 2019/09/18 20:21:05 by koparker         ###   ########.fr        #
+#    Updated: 2019/09/20 21:58:55 by koparker         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,8 @@ SRC = main.c\
 	  draw_and_plot.c \
 	  rotation.c \
 	  projections.c \
-	  button_click.c
+	  button_click.c \
+	  gradient.c
 	  
 LIBFT = -L libft -lft
 

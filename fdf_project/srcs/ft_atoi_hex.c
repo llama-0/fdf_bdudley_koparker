@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/15 14:20:20 by koparker          #+#    #+#             */
-/*   Updated: 2019/09/18 20:59:28 by koparker         ###   ########.fr       */
+/*   Updated: 2019/09/20 22:20:33 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@ int	ft_atoi_hex(char *s)
 	int	i;
 	int	res;
 
-	printf("%s\n", s);
+//	printf("%s\n", s);
 	if (s[0] != '0' || s[1] != 'x')
 		return (0);
 	s += 2;
-	if (ft_strlen(s) != 6)
-		return (0);
+	// if (ft_strlen(s) != 6)
+	// 	return (0);
 	i = 0;
 	res = 0;
 	while (s[i])
@@ -35,7 +35,7 @@ int	ft_atoi_hex(char *s)
 			res = res * 16 + s[i] - 'A' + 10;
 		i++;
 	}
-	if (i == 6)
+	// if (i == 6)
 		return (res);
 	return (0);
 }
