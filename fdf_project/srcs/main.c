@@ -6,7 +6,7 @@
 /*   By: bdudley <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 16:28:36 by koparker          #+#    #+#             */
-/*   Updated: 2019/09/21 16:56:41 by bdudley          ###   ########.fr       */
+/*   Updated: 2019/09/21 17:27:51 by bdudley          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void        find_open(t_data *data)
     data->win.win_ptr = mlx_new_window(data->win.mlx_ptr, DW_IM, DH_IM, "Koperker");
     data->win.img_ptr = mlx_new_image(data->win.mlx_ptr, DW_IM, DH_IM);
     data->win.img_arr = (int *)mlx_get_data_addr(data->win.img_ptr,
-                                          &data->win.bits_per_pixel, &data->win.size_line, &data->win.endian)ж
+                                          &data->win.bits_per_pixel, &data->win.size_line, &data->win.endian);
 new_image(data);
    mlx_hook(data->win.win_ptr, 17, 0, mlx_close, NULL);
    mlx_hook(data->win.win_ptr, 2, 0, key_release, data);
@@ -60,6 +60,8 @@ int			main(int ac, char **av)
 {
 	int		fd;
 	t_data	data;
+	size_t	step_x;
+	size_t	step_y;
 
 	(void)ac;
 	data.size_x = 0;
@@ -69,7 +71,9 @@ int			main(int ac, char **av)
 	if ((fd = open(av[1], O_RDONLY)) >= 0)
 	{
 		data.arr = read_file(fd, &data);
-
+		step_x = (data.size_x > 1) ? (DW - 1) / (data.size_x - 1) : DW - 1;
+		step_y = (data.size_y > 1) ? (DH - 1) / (data.size_y - 1) : DH - 1;
+		data.step = step_x > step_y ? step_y : step_x;
 		coord_to_pixel(&data);
 	//	print(&data);
 		close(fd);

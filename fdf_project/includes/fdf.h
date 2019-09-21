@@ -6,7 +6,7 @@
 /*   By: bdudley <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 16:13:28 by koparker          #+#    #+#             */
-/*   Updated: 2019/09/21 16:32:30 by bdudley          ###   ########.fr       */
+/*   Updated: 2019/09/21 20:06:44 by bdudley          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,15 @@
 # include <mlx.h>
 # include <stdio.h>
 
-# define DW 1000
-# define DH 1000
+# define DW 500
+# define DH 500
 
 # define DW_IM (DW * 2)
 # define DH_IM (DH * 2)
 
-# define SHIFT_X DW / 2
-# define SHIFT_Y DH / 2
+# define SHIFT_X DW
+# define SHIFT_Y DH
 
-//(0,0) (1,1) (2,2) (4,4) (5,5) 
-//(-6,6) (-4,7) (-3,8) (-1,10) (0,11) 
 # define SIN(x) sin(x * M_PI/180) 
 # define COS(x) cos(x * M_PI/180)
 
@@ -64,6 +62,7 @@ typedef struct			s_data
 	size_t				size_x;
 	size_t				capacity_y;
 	size_t				size_y;
+	size_t 				step;
 	size_t				rotate_x;
 	size_t				rotate_y;
 	size_t				rotate_z;
