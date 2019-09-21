@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bdudley <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 16:13:28 by koparker          #+#    #+#             */
-/*   Updated: 2019/09/20 22:53:50 by koparker         ###   ########.fr       */
+/*   Updated: 2019/09/21 16:32:30 by bdudley          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 # include <mlx.h>
 # include <stdio.h>
 
-# define DW 600
-# define DH 400
+# define DW 1000
+# define DH 1000
 
 # define DW_IM (DW * 2)
 # define DH_IM (DH * 2)
@@ -42,6 +42,7 @@ typedef struct			s_point
 {
 	int					x;
 	int					y;
+	int 				z;
 	int					alt;
 	int					has_color; // default 0 (no color)
 	int					color;

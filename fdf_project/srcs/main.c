@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bdudley <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 16:28:36 by koparker          #+#    #+#             */
-/*   Updated: 2019/09/18 20:40:44 by koparker         ###   ########.fr       */
+/*   Updated: 2019/09/21 16:56:41 by bdudley          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,23 +38,16 @@ void        find_open(t_data *data)
     data->win.win_ptr = mlx_new_window(data->win.mlx_ptr, DW_IM, DH_IM, "Koperker");
     data->win.img_ptr = mlx_new_image(data->win.mlx_ptr, DW_IM, DH_IM);
     data->win.img_arr = (int *)mlx_get_data_addr(data->win.img_ptr,
-                                          &data->win.bits_per_pixel, &data->win.size_line, &data->win.endian);
-//    draw_plane(data, &win.img_arr);
-//    mlx_put_image_to_window(win.mlx_ptr, win.win_ptr,
-//                            win.img_ptr, 0, 0);
+                                          &data->win.bits_per_pixel, &data->win.size_line, &data->win.endian)ж
 new_image(data);
    mlx_hook(data->win.win_ptr, 17, 0, mlx_close, NULL);
    mlx_hook(data->win.win_ptr, 2, 0, key_release, data);
-  //  draw_plane(data, &win.img_arr);
-//    mlx_put_image_to_window(win.mlx_ptr, win.win_ptr,
-//                            win.img_ptr, 0, 0);
- // mlx_hook(win.win_ptr, 34, 0, &(key_release(7, head, data)), NULL);
    mlx_loop(data->win.mlx_ptr);
 }
 
 void        new_image(t_data *data)
 {
-    mlx_clear_window(data->win.mlx_ptr, data->win.win_ptr);
+	mlx_clear_window(data->win.mlx_ptr, data->win.win_ptr);
     int i = -1;
     while (++i < DW_IM * DH_IM)
         (data->win.img_arr)[i] = BLACK;

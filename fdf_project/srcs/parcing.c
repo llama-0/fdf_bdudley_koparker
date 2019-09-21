@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parcing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bdudley <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/15 16:47:52 by koparker          #+#    #+#             */
-/*   Updated: 2019/09/20 22:04:12 by koparker         ###   ########.fr       */
+/*   Updated: 2019/09/21 16:31:25 by bdudley          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,17 +76,20 @@ void	coord_to_pixel(t_data *data)
 	size_t	j;
 	size_t	step_x;
 	size_t	step_y;
+	size_t	step;
 
 	step_x = (data->size_x > 1) ? (DW - 1) / (data->size_x - 1) : DW - 1;
 	step_y = (data->size_y > 1) ? (DH - 1) / (data->size_y - 1) : DH - 1;
+	step = step_x > step_y ? step_y : step_x;
 	j = 0;
 	while (j < data->size_y)
 	{
 		i = 0;
 		while (i < data->size_x)
 		{
-            (data->arr)[j][i].x = i * step_x;
-            (data->arr)[j][i].y = j * step_y;
+            (data->arr)[j][i].x = i * step;
+            (data->arr)[j][i].y = j * step;
+			(data->arr)[j][i].z = (data->arr)[j][i].alt * step;
 			i++;
 		}
 		j++;

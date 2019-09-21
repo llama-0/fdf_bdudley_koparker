@@ -23,6 +23,28 @@ static void rotate_OZ(int *x, int *y, size_t rotate)
 	*y = trunc((previous_y * COS(rotate)) + trunc(previous_x * SIN(rotate))) + DH / 2;
 }
 
+//static void rotate_OY(int *x, int *y,  size_t rotate)
+//{
+//	int previous_x;
+//	int previous_y;
+//
+//	previous_x = *x;
+//	previous_y = *y;
+//	*x = (previous_x - previous_y) * COS(30);
+//	*y = -z + (previous_x + previous_y) * SIN(30);
+//}
+//
+//static void rotate_OX(int *x, int *y, size_t rotate)
+//{
+//	int previous_x;
+//	int previous_y;
+//
+//	previous_x = *x;
+//	previous_y = *y;
+//	*x = (previous_x - previous_y) * COS(30);
+//	*y = -z + (previous_x + previous_y) * SIN(30);
+//}
+
 // TODO: add rotation_OX, rotation_OY; remove iso. 
 void	apply_rotation(t_data *data)
 {
