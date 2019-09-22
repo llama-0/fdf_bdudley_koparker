@@ -32,6 +32,7 @@
 # define COS(x) cos(x * M_PI/180)
 
 # define ALPHA 30
+# define SCALE 0.3
 
 # define DEFAULT 0xFFFFFF
 # define COLOR_HIGH 0xFF0000
@@ -64,6 +65,7 @@ typedef struct			s_data
 	size_t				capacity_y;
 	size_t				size_y;
 	size_t 				step;
+	double				scale;
 	size_t				rotate_x;
 	size_t				rotate_y;
 	size_t				rotate_z;

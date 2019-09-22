@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bdudley <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 16:28:36 by koparker          #+#    #+#             */
-/*   Updated: 2019/09/22 16:01:20 by koparker         ###   ########.fr       */
+/*   Updated: 2019/09/22 18:34:34 by bdudley          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,10 @@ int			main(int ac, char **av)
 	data.size_y = 0;
 	data.capacity_y = 0;
 	data.arr = NULL;
+	data.scale = 0;
+	data.rotate_x = 0;
+	data.rotate_y = 0;
+	data.rotate_z = 0;
 	if ((fd = open(av[1], O_RDONLY)) >= 0)
 	{
 		data.arr = read_file(fd, &data);

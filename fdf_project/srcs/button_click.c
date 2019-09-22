@@ -6,7 +6,7 @@
 /*   By: bdudley <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/18 16:55:14 by bdudley           #+#    #+#             */
-/*   Updated: 2019/09/22 17:24:11 by bdudley          ###   ########.fr       */
+/*   Updated: 2019/09/22 19:58:22 by bdudley          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,19 @@ int  key_release(int keycode, void *param)
 		coord_to_pixel(data);
 		new_image(data);
     }
-    else if (keycode == 23 || keycode == 24) //scale
-    {
-
-    }
+    else if (keycode == 27 || keycode == 24)
+	{
+		coord_to_pixel(data);
+		printf("data->scale %f\n", data->scale);
+		if ((data->scale > -1 + SCALE && data->scale < 3 - SCALE) ||
+		(data->scale < -1 + SCALE && keycode == 24) ||
+		(data->scale > 3 - SCALE && keycode == 27))
+			data->scale += keycode == 27 ? -SCALE : SCALE;
+		apply_rotation(data);
+		new_image(data);
+	}
+    else if (keycode == 53)
+    	mlx_close();
     return (0);
 }
 
