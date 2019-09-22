@@ -6,7 +6,7 @@
 /*   By: bdudley <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/18 17:43:46 by koparker          #+#    #+#             */
-/*   Updated: 2019/09/21 21:08:19 by bdudley          ###   ########.fr       */
+/*   Updated: 2019/09/22 14:35:52 by bdudley          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ static void iso(int *x, int *y, int z)
 
     previous_x = *x;
     previous_y = *y;
-    *x = (previous_x + previous_y) * (-COS(30));
-    *y = -z + (previous_x - previous_y) * SIN(30);
+    *x = (previous_x + previous_y) * (COS(30));
+    *y = -z + (previous_x - previous_y) * (-SIN(30));
 }
 
 void	apply_projection(t_data *data, int keycode)
