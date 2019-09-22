@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/15 14:20:20 by koparker          #+#    #+#             */
-/*   Updated: 2019/09/20 22:20:33 by koparker         ###   ########.fr       */
+/*   Updated: 2019/09/22 16:26:51 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	ft_atoi_hex(char *s)
 			res = res * 16 + s[i] - 'A' + 10;
 		i++;
 	}
-	// if (i == 6)
+	if (i % 2 == 0 && i <= 6)
 		return (res);
 	return (0);
 }

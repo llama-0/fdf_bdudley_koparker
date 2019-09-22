@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   button_click.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bdudley <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/18 16:55:14 by bdudley           #+#    #+#             */
-/*   Updated: 2019/09/21 16:54:20 by bdudley          ###   ########.fr       */
+/*   Updated: 2019/09/22 15:59:30 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,10 @@ int  key_release(int keycode, void *param)
 		data->rotate_x += (keycode == 7) ? ALPHA : 0;
 		data->rotate_y += (keycode == 16) ? ALPHA : 0;
 
-		if (data->rotate_z >= 360 || data->rotate_x >= 360 || data->rotate_y >= 360)
-		{
-			data->rotate_y = (data->rotate_y >= 360) ? 0 : data->rotate_y;
-			data->rotate_x = (data->rotate_x >= 360) ? 0 : data->rotate_x;
-			data->rotate_z = (data->rotate_z >= 360) ? 0 : data->rotate_z;
-		}
+		data->rotate_y = (data->rotate_y >= 360) ? 0 : data->rotate_y;
+		data->rotate_x = (data->rotate_x >= 360) ? 0 : data->rotate_x;
+		data->rotate_z = (data->rotate_z >= 360) ? 0 : data->rotate_z;
+
 		coord_to_pixel(data);
         apply_rotation(data);
         new_image(data);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bdudley <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 16:28:36 by koparker          #+#    #+#             */
-/*   Updated: 2019/09/21 17:27:51 by bdudley          ###   ########.fr       */
+/*   Updated: 2019/09/22 16:01:20 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,10 @@ void        find_open(t_data *data)
     data->win.img_ptr = mlx_new_image(data->win.mlx_ptr, DW_IM, DH_IM);
     data->win.img_arr = (int *)mlx_get_data_addr(data->win.img_ptr,
                                           &data->win.bits_per_pixel, &data->win.size_line, &data->win.endian);
-new_image(data);
-   mlx_hook(data->win.win_ptr, 17, 0, mlx_close, NULL);
-   mlx_hook(data->win.win_ptr, 2, 0, key_release, data);
-   mlx_loop(data->win.mlx_ptr);
+	new_image(data);
+	mlx_hook(data->win.win_ptr, 17, 0, mlx_close, NULL);
+	mlx_hook(data->win.win_ptr, 2, 0, key_release, data);
+	mlx_loop(data->win.mlx_ptr);
 }
 
 void        new_image(t_data *data)

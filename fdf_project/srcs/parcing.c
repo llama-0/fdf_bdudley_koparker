@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parcing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bdudley <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/15 16:47:52 by koparker          #+#    #+#             */
-/*   Updated: 2019/09/21 20:03:53 by bdudley          ###   ########.fr       */
+/*   Updated: 2019/09/22 16:33:53 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void		error_message(int index, t_data	*data, char **str)
 	else if (index == 3)
 		perror("Memory allocation failed\n");
 	delete_array(data);
-	//TODO: delete split
 	ft_free_char_arr(&str);
 	exit(1);
 
@@ -58,10 +57,14 @@ t_point		**read_file(const int fd, t_data *data)
 		i = -1;
 		while (++i < data->size_x)
 		{
-			if (valid_nbr(split[i], data, i, data->size_y) == 0)
-				error_message(0, data, split);
 			if (valid_color(split[i], data, i, data->size_y) == 0)
 				error_message(1, data, split);
+			if (valid_nbr(split[i], data, i, data->size_y) == 0)
+			{
+				printf("split[i] = |%s|\n", split[i]);
+				error_message(0, data, split);
+			}
+				// error_message(0, data, split);
 		}
 		if (split)
 			ft_free_char_arr(&split);

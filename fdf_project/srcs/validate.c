@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/15 14:10:37 by koparker          #+#    #+#             */
-/*   Updated: 2019/09/20 21:59:52 by koparker         ###   ########.fr       */
+/*   Updated: 2019/09/22 17:01:02 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,29 @@
 int	valid_nbr(char *spl, t_data *data, int i, int j)
 {
 	int		n;
+	int		has_color;
 	char	*tmp;
+	char	*t;
 
 	tmp = spl;
 	n = ft_atoi(tmp);
+	has_color = data->arr[j][i].has_color;
 	if (n == 0)
 	{
-		if (ft_strcmp(spl, "0") != 0)
-			return (0);
+		if (has_color == 0)
+		{
+			if (ft_strcmp(spl, "0") != 0)
+				return (0);
+		}
+		else 
+		{
+			if ((t = ft_strchr(spl, ',')) != NULL)
+				if (t - spl != 1)
+				{
+					t = NULL;
+					return (0);
+				}
+		}
 	}
 	(data->arr)[j][i].x = i;
     (data->arr)[j][i].y = j;

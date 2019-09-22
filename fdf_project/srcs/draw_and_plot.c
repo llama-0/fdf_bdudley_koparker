@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/18 17:19:15 by koparker          #+#    #+#             */
-/*   Updated: 2019/09/22 15:54:13 by koparker         ###   ########.fr       */
+/*   Updated: 2019/09/22 16:19:05 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,14 +90,13 @@ static void	plot(t_point *p1, t_point *p2, int **img_arr)
 	}
 }
 
-// TODO: add balancer-rotate/iso-by-button-click
 void		draw_plane(t_data *data, int **img_arr)
 {
 	size_t	i;
 	size_t	j;
 
 //	apply_rotation(head, data, 7);
-	apply_projection(data, 34);
+//	apply_projection(data, 34);
 	j = 0;
 	while (j < data->size_y)
 	{

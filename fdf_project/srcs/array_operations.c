@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/15 11:53:46 by bdudley           #+#    #+#             */
-/*   Updated: 2019/09/18 20:20:27 by koparker         ###   ########.fr       */
+/*   Updated: 2019/09/22 15:57:16 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ void		delete_array(t_data	*data)
 		free((data->arr));
 }
 
-// TODO: add split to arg list. Reason - to free it, if smth fails
 t_point		**new_array(t_point		***prev_array, t_data	*data)
 {
 	t_point	**array;
