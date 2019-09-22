@@ -23,6 +23,11 @@ static void iso(int *x, int *y, int z)
     *y = -z + (previous_x - previous_y) * (-SIN(30));
 }
 
+static void perspective(int *x, int *y, int z)
+{
+
+}
+
 void	apply_projection(t_data *data, int keycode)
 {
 	size_t	i;
