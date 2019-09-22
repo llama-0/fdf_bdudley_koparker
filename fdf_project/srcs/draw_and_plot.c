@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_and_plot.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bdudley <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/18 17:19:15 by koparker          #+#    #+#             */
-/*   Updated: 2019/09/21 17:56:07 by bdudley          ###   ########.fr       */
+/*   Updated: 2019/09/22 15:54:13 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void		draw_plane(t_data *data, int **img_arr)
 	size_t	j;
 
 //	apply_rotation(head, data, 7);
-//	apply_projection(data, 34);
+	apply_projection(data, 34);
 	j = 0;
 	while (j < data->size_y)
 	{
