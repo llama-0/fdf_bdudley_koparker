@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/20 21:56:34 by koparker          #+#    #+#             */
-/*   Updated: 2019/09/20 22:15:49 by koparker         ###   ########.fr       */
+/*   Updated: 2019/09/22 20:27:10 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int				get_color(t_point *p1, t_point *p2, int current)
 	int		blue;
 	int		delta_x;
 	int		delta_y;
+	int		middle;
 	double	percentage;
 
 	// printf("color_1 = %d, color_2 = %d\n", p1->color, p2->color);
@@ -48,11 +49,44 @@ int				get_color(t_point *p1, t_point *p2, int current)
 	if (p1->color == p2->color)
 		return (p1->color);
 	if (delta_x > delta_y)
-		percentage = percent(p1->x, p2->x, current, 0);
+	{
+		if (current < ((middle = delta_x / 2 + p1->x) + SHIFT_X))
+		{
+			percentage = percent(p1->x, middle, current, 0);
+			red = get_light((p1->color >> 16) & 0xFF, (COLOR_MID >> 16) & 0xFF, percentage);
+			green = get_light((p1->color >> 8) & 0xFF, (COLOR_MID >> 8) & 0xFF, percentage);
+			blue = get_light((p1->color) & 0xFF, (COLOR_MID) & 0xFF, percentage);	
+		}
+		else
+		{
+			percentage = percent(middle, p2->x, current, 0);
+			red = get_light((COLOR_MID >> 16) & 0xFF, (p2->color >> 16) & 0xFF, percentage);
+			green = get_light((COLOR_MID >> 8) & 0xFF, (p2->color >> 8) & 0xFF, percentage);
+			blue = get_light((COLOR_MID) & 0xFF, (p2->color) & 0xFF, percentage);
+		}
+	}
 	else
-		percentage = percent(p1->y, p2->y, current, 1);
-	red = get_light((p1->color >> 16) & 0xFF, (p2->color >> 16) & 0xFF, percentage);
-	green = get_light((p1->color >> 8) & 0xFF, (p2->color >> 8) & 0xFF, percentage);
-	blue = get_light((p1->color) & 0xFF, (p2->color) & 0xFF, percentage);
+	{
+		if (current < ((middle = delta_y / 2 + p1->y) + SHIFT_Y))
+		{
+			percentage = percent(p1->y, middle, current, 1);
+			red = get_light((p1->color >> 16) & 0xFF, (COLOR_MID >> 16) & 0xFF, percentage);
+			green = get_light((p1->color >> 8) & 0xFF, (COLOR_MID >> 8) & 0xFF, percentage);
+			blue = get_light((p1->color) & 0xFF, (COLOR_MID) & 0xFF, percentage);	
+		}
+		else
+		{
+			percentage = percent(middle, p2->y, current, 1);
+			red = get_light((COLOR_MID >> 16) & 0xFF, (p2->color >> 16) & 0xFF, percentage);
+			green = get_light((COLOR_MID >> 8) & 0xFF, (p2->color >> 8) & 0xFF, percentage);
+			blue = get_light((COLOR_MID) & 0xFF, (p2->color) & 0xFF, percentage);
+		}
+	}
+	// (delta_x > delta_y) ? (flag = 0) : (flag = 1);
+	// (flag == 0) ? (percentage = percent(p1->x, p2->x, current, 0)) :
+	// 				(percentage = percent(p1->y, p2->y, current, 1));
+	// red = get_light((p1->color >> 16) & 0xFF, (p2->color >> 16) & 0xFF, percentage);
+	// green = get_light((p1->color >> 8) & 0xFF, (p2->color >> 8) & 0xFF, percentage);
+	// blue = get_light((p1->color) & 0xFF, (p2->color) & 0xFF, percentage);
 	return ((red << 16) | (green << 8) | blue);
 }

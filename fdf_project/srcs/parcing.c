@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/15 16:47:52 by koparker          #+#    #+#             */
-/*   Updated: 2019/09/22 16:33:53 by koparker         ###   ########.fr       */
+/*   Updated: 2019/09/22 18:15:21 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,14 +57,10 @@ t_point		**read_file(const int fd, t_data *data)
 		i = -1;
 		while (++i < data->size_x)
 		{
+			if (valid_nbr(split[i], data, i, data->size_y) == 0)
+				error_message(0, data, split);
 			if (valid_color(split[i], data, i, data->size_y) == 0)
 				error_message(1, data, split);
-			if (valid_nbr(split[i], data, i, data->size_y) == 0)
-			{
-				printf("split[i] = |%s|\n", split[i]);
-				error_message(0, data, split);
-			}
-				// error_message(0, data, split);
 		}
 		if (split)
 			ft_free_char_arr(&split);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   projections.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bdudley <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/18 17:43:46 by koparker          #+#    #+#             */
-/*   Updated: 2019/09/22 17:22:26 by bdudley          ###   ########.fr       */
+/*   Updated: 2019/09/22 19:38:16 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ static void iso(int *x, int *y, int z)
     *y = -z + (previous_x - previous_y) * (-SIN(30));
 }
 
-static void perspective(int *x, int *y, int z)
-{
+// static void perspective(int *x, int *y, int z)
+// {
 
-}
+// }
 
 void	apply_projection(t_data *data, int keycode)
 {

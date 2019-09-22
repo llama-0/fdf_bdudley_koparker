@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/15 11:53:46 by bdudley           #+#    #+#             */
-/*   Updated: 2019/09/22 15:57:16 by koparker         ###   ########.fr       */
+/*   Updated: 2019/09/22 18:17:54 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void		init_array(t_point ***array, t_data	*data, size_t j, size_t i)
 		while (i < data->size_x)
 		{
 			(*array)[j][i].alt = 0;
-			(*array)[j][i].has_color = 0;
 			(*array)[j][i].color = 0;
 			(*array)[j][i].x = 0;
 			(*array)[j][i].y = 0;
@@ -63,7 +62,6 @@ t_point		**new_array(t_point		***prev_array, t_data	*data)
 		while (i < data->size_x)
 		{
 			array[j][i].alt = (*prev_array)[j][i].alt;
-			array[j][i].has_color = (*prev_array)[j][i].has_color;
 			array[j][i].color = (*prev_array)[j][i].color;
 			array[j][i].x = (*prev_array)[j][i].x;
 			array[j][i].y = (*prev_array)[j][i].y;
