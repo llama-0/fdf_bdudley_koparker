@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   projections.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bdudley <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/18 17:43:46 by koparker          #+#    #+#             */
-/*   Updated: 2019/09/22 15:53:38 by koparker         ###   ########.fr       */
+/*   Updated: 2019/09/22 17:22:26 by bdudley          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,7 @@ void	apply_projection(t_data *data, int keycode)
        	while (i < data->size_x)
 		{
 			if (keycode == 34)
-//			{
-//				rotate_OX(&(data->arr)[j][i].y, &(data->arr)[j][i].z, data->rotate_x);
-//				rotate_OY(&(data->arr)[j][i].x, &(data->arr)[j][i].z, 0, data->rotate_y);
-//			}
-			iso(&(data->arr)[j][i].x, &(data->arr)[j][i].y, (data->arr)[j][i].z);
+				iso(&(data->arr)[j][i].x, &(data->arr)[j][i].y, (data->arr)[j][i].z);
 			i++;
       	}
        	j++;
