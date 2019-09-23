@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parcing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bdudley <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/15 16:47:52 by koparker          #+#    #+#             */
-/*   Updated: 2019/09/22 18:15:21 by koparker         ###   ########.fr       */
+/*   Updated: 2019/09/23 19:32:01 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fdf.h>
 
-void		error_message(int index, t_data	*data, char **str)
+void		error_message(int index, t_data	*data, char **str, char *line)
 {
 	if (index == 0)
 		ft_putendl("Invalid altitude in the cart");
@@ -24,11 +24,12 @@ void		error_message(int index, t_data	*data, char **str)
 		perror("Memory allocation failed\n");
 	delete_array(data);
 	ft_free_char_arr(&str);
+	ft_strdel(&line);
 	exit(1);
 
 }
 
-void		size_array(t_data *data, size_t length)
+void		size_array(t_data *data, size_t length, char **split, char *line)
 {
 	if (data->size_y == 0)
 	{
@@ -37,7 +38,7 @@ void		size_array(t_data *data, size_t length)
 	}
 	else
 		data->capacity_y *= 2;
-	data->arr = new_array(&(data->arr), data);
+	data->arr = new_array(&(data->arr), data, split, line);
 }
 
 t_point		**read_file(const int fd, t_data *data)
@@ -46,25 +47,28 @@ t_point		**read_file(const int fd, t_data *data)
 	char	*line;
 	char	**split;
 
+	split = NULL;
 	while (get_next_line(fd, &line) > 0)
 	{
 		split = ft_strsplit(line, ' ');
 		i = ft_2d_strlen(split);
 		if (data->size_y >= data->capacity_y)
-			size_array(data, i);
+			size_array(data, i, split, line);
 		if (data->size_x != i)
-			error_message(2, data, split);
+			error_message(2, data, split, line);
 		i = -1;
 		while (++i < data->size_x)
 		{
 			if (valid_nbr(split[i], data, i, data->size_y) == 0)
-				error_message(0, data, split);
+				error_message(0, data, split, line);
 			if (valid_color(split[i], data, i, data->size_y) == 0)
-				error_message(1, data, split);
+				error_message(1, data, split, line);
 		}
 		if (split)
 			ft_free_char_arr(&split);
 		data->size_y++;
+		if (line)
+			ft_strdel(&line);
 	}
 	return (data->arr);
 }

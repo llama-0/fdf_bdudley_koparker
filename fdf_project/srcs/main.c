@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bdudley <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 16:28:36 by koparker          #+#    #+#             */
-/*   Updated: 2019/09/22 18:34:34 by bdudley          ###   ########.fr       */
+/*   Updated: 2019/09/23 20:33:45 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,36 @@ void        find_open(t_data *data)
 
 	data->win.mlx_ptr = mlx_init();
     data->win.win_ptr = mlx_new_window(data->win.mlx_ptr, DW_IM + 10, DH_IM, "Koperker");
-    data->win.img_ptr = mlx_new_image(data->win.mlx_ptr, DW_IM, DH_IM);
+	data->win.img_ptr = mlx_new_image(data->win.mlx_ptr, DW_IM, DH_IM);
     data->win.img_arr = (int *)mlx_get_data_addr(data->win.img_ptr,
                                           &data->win.bits_per_pixel, &data->win.size_line, &data->win.endian);
     new_image(data);
 	mlx_hook(data->win.win_ptr, 17, 0, mlx_close, data);
 	mlx_hook(data->win.win_ptr, 2, 0, key_release, data);
 	mlx_loop(data->win.mlx_ptr);
+}
+
+void		print_usage(t_data *data)
+{
+	int	str;
+	int	step;
+	int	x;
+	int	y;
+
+	step = 20;
+	x = DW_IM * 5 / 8;
+	y = DH_IM * 3 / 4;
+	str = mlx_string_put(data->win.mlx_ptr, data->win.win_ptr, x, y, COLOR_TABLE, "          Usage");
+	str = mlx_string_put(data->win.mlx_ptr, data->win.win_ptr, x, y + step, COLOR_TABLE, "     Press key to:");
+	str = mlx_string_put(data->win.mlx_ptr, data->win.win_ptr, x, y + step * 2, COLOR_TABLE, " show isometric projection  --  i");
+	str = mlx_string_put(data->win.mlx_ptr, data->win.win_ptr, x, y + step * 3, COLOR_TABLE, " show conic projection  --  p");
+	str = mlx_string_put(data->win.mlx_ptr, data->win.win_ptr, x, y + step * 4, COLOR_TABLE, " rotate around OX  --  x");
+	str = mlx_string_put(data->win.mlx_ptr, data->win.win_ptr, x, y + step * 5, COLOR_TABLE, " rotate around OY  --  y");
+	str = mlx_string_put(data->win.mlx_ptr, data->win.win_ptr, x, y + step * 6, COLOR_TABLE, " rotate around OZ  --  z");
+	str = mlx_string_put(data->win.mlx_ptr, data->win.win_ptr, x, y + step * 7, COLOR_TABLE, " zoom in  --  +");
+	str = mlx_string_put(data->win.mlx_ptr, data->win.win_ptr, x, y + step * 8, COLOR_TABLE, " zoom out  --  -");
+	str = mlx_string_put(data->win.mlx_ptr, data->win.win_ptr, x, y + step * 9, COLOR_TABLE, " reset all  --  space");
+	str = mlx_string_put(data->win.mlx_ptr, data->win.win_ptr, x, y + step * 10, COLOR_TABLE, " exit  --  esc");
 }
 
 void        new_image(t_data *data)
@@ -55,6 +78,7 @@ void        new_image(t_data *data)
     draw_plane(data, &data->win.img_arr);
     mlx_put_image_to_window(data->win.mlx_ptr, data->win.win_ptr,
                             data->win.img_ptr, 0, 0);
+	print_usage(data);
 }
 
 int			main(int ac, char **av)

@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/15 11:53:46 by bdudley           #+#    #+#             */
-/*   Updated: 2019/09/22 18:17:54 by koparker         ###   ########.fr       */
+/*   Updated: 2019/09/23 19:24:47 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void		delete_array(t_data	*data)
 		free((data->arr));
 }
 
-t_point		**new_array(t_point		***prev_array, t_data	*data)
+t_point		**new_array(t_point		***prev_array, t_data	*data, char **split, char *line)
 {
 	t_point	**array;
 	size_t	j;
@@ -53,11 +53,11 @@ t_point		**new_array(t_point		***prev_array, t_data	*data)
 
 	j = 0;
 	if (!(array = (t_point **)malloc(sizeof(t_point *) * data->capacity_y)))
-		error_message(3, data, NULL);
+		error_message(3, data, split, line);
 	while (j < data->size_y)
 	{
 		if (!(array[j] = (t_point *)malloc(sizeof(t_point) * data->size_x)))
-			error_message(3, data, NULL);
+			error_message(3, data, split, line);
 		i = 0;
 		while (i < data->size_x)
 		{

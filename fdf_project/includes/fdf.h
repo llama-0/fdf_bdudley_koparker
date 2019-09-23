@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 16:13:28 by koparker          #+#    #+#             */
-/*   Updated: 2019/09/23 16:54:59 by koparker         ###   ########.fr       */
+/*   Updated: 2019/09/23 20:22:50 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@
 # define COLOR_HIGH 0xFF0000
 # define COLOR_MID 0x00FF00
 # define BLACK 0x000000
+# define COLOR_TABLE 0xFFFFFF
 
 typedef struct			s_point
 {
@@ -105,7 +106,7 @@ int						ft_atoi_hex(char *s);
 t_point					**read_file(const int fd, t_data *data);
 void					print(t_data *data);
 
-t_point					**new_array(t_point		***prev_array, t_data	*data);
+t_point					**new_array(t_point		***prev_array, t_data	*data, char **split, char *line);
 void					delete_array(t_data	*data);
 void					init_array(t_point		***array, t_data	*data, size_t j, size_t i);
 void					coord_to_pixel(t_data *data);
@@ -119,7 +120,7 @@ void					apply_projection(t_data *data);
 void					balance_delta_for_color(t_point *p1, t_point *p2, t_gradient *gr);
 int						get_color(t_point *p1, t_point *p2, int current);
 
-void					error_message(int index, t_data	*data, char **str);
+void					error_message(int index, t_data	*data, char **str, char *line);
 
 int                     key_release(int keycode, void *param);
 int                     mlx_close(void *param);
