@@ -19,7 +19,7 @@ int  key_release(int keycode, void *param)
     data = (t_data *)param;
     if (keycode == 7 || keycode == 6 || keycode == 16)
     {
-    	data->camera = NO_PPROJECTION;
+    	data->camera = NO_PROJECTION;
     	data->rotate_z += (keycode == 6) ? ALPHA : 0;
 		data->rotate_x += (keycode == 7) ? ALPHA : 0;
 		data->rotate_y += (keycode == 16) ? ALPHA : 0;
@@ -50,20 +50,21 @@ int  key_release(int keycode, void *param)
 		if ((data->scale > -1 + SCALE) ||
 		(data->scale < -1 + SCALE && keycode == 24))
 			data->scale += keycode == 27 ? -SCALE : SCALE;
-		if (data->camera == NO_PPROJECTION)
+		if (data->camera == NO_PROJECTION)
 			apply_rotation(data);
 		else
 			apply_projection(data);
 		new_image(data);
 	}
     else if (keycode == 53)
-    	mlx_close();
+    	mlx_close(data);
     return (0);
 }
 
-int mlx_close(void)
+int mlx_close(void *param)
 {
 
     //leaks
+    delete_array((t_data *)param);
     exit(0);
 }

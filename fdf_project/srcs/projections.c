@@ -30,7 +30,7 @@ static void iso(int *x, int *y, int z)
 	 int previous_z;
 	 int camera;
 
-	 camera = 1;
+	 camera = -50;
 	 previous_x = *x;
 	 previous_y = *y;
 	 previous_z = *z;

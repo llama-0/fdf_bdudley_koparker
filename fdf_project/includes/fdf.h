@@ -30,7 +30,7 @@
 
 # define ISO 1
 # define CONIC 2
-# define NO_PPROJECTION 0
+# define NO_PROJECTION 0
 
 # define SIN(x) sin(x * M_PI/180) 
 # define COS(x) cos(x * M_PI/180)
@@ -122,5 +122,5 @@ int						get_color(t_point *p1, t_point *p2, int current);
 void					error_message(int index, t_data	*data, char **str);
 
 int                     key_release(int keycode, void *param);
-int                     mlx_close(void);
+int                     mlx_close(void *param);
 #endif

@@ -34,13 +34,14 @@ void        find_open(t_data *data)
 
    // ptr = key_release;
  //  param = (void *)data;
+
 	data->win.mlx_ptr = mlx_init();
-    data->win.win_ptr = mlx_new_window(data->win.mlx_ptr, DW_IM, DH_IM, "Koperker");
+    data->win.win_ptr = mlx_new_window(data->win.mlx_ptr, DW_IM + 10, DH_IM, "Koperker");
     data->win.img_ptr = mlx_new_image(data->win.mlx_ptr, DW_IM, DH_IM);
     data->win.img_arr = (int *)mlx_get_data_addr(data->win.img_ptr,
                                           &data->win.bits_per_pixel, &data->win.size_line, &data->win.endian);
-	new_image(data);
-	mlx_hook(data->win.win_ptr, 17, 0, mlx_close, NULL);
+    new_image(data);
+	mlx_hook(data->win.win_ptr, 17, 0, mlx_close, data);
 	mlx_hook(data->win.win_ptr, 2, 0, key_release, data);
 	mlx_loop(data->win.mlx_ptr);
 }
@@ -79,7 +80,6 @@ int			main(int ac, char **av)
 		step_y = (data.size_y > 1) ? (DH - 1) / (data.size_y - 1) : DH - 1;
 		data.step = step_x > step_y ? step_y : step_x;
 		coord_to_pixel(&data);
-	//	print(&data);
 		close(fd);
 	}
 	else
