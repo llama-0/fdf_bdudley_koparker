@@ -82,7 +82,7 @@ void	coord_to_pixel(t_data *data)
 		{
             (data->arr)[j][i].x = (i * data->step - data->step * data->size_x / 2);
             (data->arr)[j][i].y = (j * data->step - data->step * data->size_y / 2);
-			(data->arr)[j][i].z = ((data->arr)[j][i].alt * data->step);
+			(data->arr)[j][i].z = -((data->arr)[j][i].alt * data->step);
 			i++;
 		}
 		j++;
