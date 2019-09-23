@@ -51,8 +51,9 @@ int  key_release(int keycode, void *param)
     else if (keycode == 27 || keycode == 24)
 	{
 		coord_to_pixel(data);
-		if ((data->scale > -1 + SCALE) ||
-		(data->scale < -1 + SCALE && keycode == 24))
+		if ((data->scale > -1 + SCALE && data->scale < 20 - SCALE) ||
+		(data->scale < -1 + SCALE && keycode == 24) ||
+		(data->scale > 20 - SCALE && keycode == 27))
 			data->scale += keycode == 27 ? -SCALE : SCALE;
 		if (data->camera == NO_PROJECTION)
 			apply_rotation(data);
@@ -65,10 +66,16 @@ int  key_release(int keycode, void *param)
     return (0);
 }
 
-int mlx_close(void *param)
-{
+//int		mouse_move(int x, int y, void *param)
+//{
+//	t_data *data;
+//
+//	data = (t_data *)param;
+//
+//}
 
-    //leaks
+int		mlx_close(void *param)
+{
     delete_array((t_data *)param);
     exit(0);
 }

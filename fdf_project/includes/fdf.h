@@ -121,7 +121,7 @@ void					balance_delta_for_color(t_point *p1, t_point *p2, t_gradient *gr);
 int						get_color(t_point *p1, t_point *p2, int current);
 
 void					error_message(int index, t_data	*data, char **str, char *line);
-
+int						mouse_move(int x, int y, void *param);
 int                     key_release(int keycode, void *param);
 int                     mlx_close(void *param);
 #endif

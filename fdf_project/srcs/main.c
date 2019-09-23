@@ -28,13 +28,6 @@ void	print(t_data *data)
 
 void        find_open(t_data *data)
 {
-
- //   void *param;
-  //  int (*ptr)(int keycode, t_point ***arr, t_data *data);
-
-   // ptr = key_release;
- //  param = (void *)data;
-
 	data->win.mlx_ptr = mlx_init();
     data->win.win_ptr = mlx_new_window(data->win.mlx_ptr, DW_IM + 10, DH_IM, "Koperker");
 	data->win.img_ptr = mlx_new_image(data->win.mlx_ptr, DW_IM, DH_IM);
@@ -43,6 +36,7 @@ void        find_open(t_data *data)
     new_image(data);
 	mlx_hook(data->win.win_ptr, 17, 0, mlx_close, data);
 	mlx_hook(data->win.win_ptr, 2, 0, key_release, data);
+//	mlx_hook(data->win.win_ptr, 6, 0, mouse_move, data);
 	mlx_loop(data->win.mlx_ptr);
 }
 
