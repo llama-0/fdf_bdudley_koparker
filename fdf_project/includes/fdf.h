@@ -28,6 +28,10 @@
 # define SHIFT_X DW
 # define SHIFT_Y DH
 
+# define ISO 1
+# define CONIC 2
+# define NO_PPROJECTION 0
+
 # define SIN(x) sin(x * M_PI/180) 
 # define COS(x) cos(x * M_PI/180)
 
@@ -65,6 +69,7 @@ typedef struct			s_data
 	size_t				capacity_y;
 	size_t				size_y;
 	size_t 				step;
+	int					camera;
 	double				scale;
 	size_t				rotate_x;
 	size_t				rotate_y;
@@ -108,7 +113,7 @@ void					shift_coords(int *x, int *y, int shift);
 void					new_image(t_data *data);
 void					draw_plane(t_data *data, int **img_arr);
 void					apply_rotation(t_data *data);
-void					apply_projection(t_data *data, int keycode);
+void					apply_projection(t_data *data);
 
 int						get_color(t_point *p1, t_point *p2, int current);
 

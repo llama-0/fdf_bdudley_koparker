@@ -19,6 +19,7 @@ int  key_release(int keycode, void *param)
     data = (t_data *)param;
     if (keycode == 7 || keycode == 6 || keycode == 16)
     {
+    	data->camera = NO_PPROJECTION;
     	data->rotate_z += (keycode == 6) ? ALPHA : 0;
 		data->rotate_x += (keycode == 7) ? ALPHA : 0;
 		data->rotate_y += (keycode == 16) ? ALPHA : 0;
@@ -31,10 +32,11 @@ int  key_release(int keycode, void *param)
         apply_rotation(data);
         new_image(data);
     }
-    else if (keycode == 34)
+    else if (keycode == 34 || keycode == 35)
 	{
 		coord_to_pixel(data);
-		apply_projection(data, keycode);
+		data->camera = (keycode == 34) ? ISO : CONIC;
+		apply_projection(data);
 		new_image(data);
 	}
     else if (keycode == 49)
@@ -45,12 +47,13 @@ int  key_release(int keycode, void *param)
     else if (keycode == 27 || keycode == 24)
 	{
 		coord_to_pixel(data);
-		printf("data->scale %f\n", data->scale);
-		if ((data->scale > -1 + SCALE && data->scale < 3 - SCALE) ||
-		(data->scale < -1 + SCALE && keycode == 24) ||
-		(data->scale > 3 - SCALE && keycode == 27))
+		if ((data->scale > -1 + SCALE) ||
+		(data->scale < -1 + SCALE && keycode == 24))
 			data->scale += keycode == 27 ? -SCALE : SCALE;
-		apply_rotation(data);
+		if (data->camera == NO_PPROJECTION)
+			apply_rotation(data);
+		else
+			apply_projection(data);
 		new_image(data);
 	}
     else if (keycode == 53)
