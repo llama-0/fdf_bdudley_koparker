@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 16:28:36 by koparker          #+#    #+#             */
-/*   Updated: 2019/09/23 20:33:45 by koparker         ###   ########.fr       */
+/*   Updated: 2019/09/23 22:12:09 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,10 @@ void		print_usage(t_data *data)
 
 void        new_image(t_data *data)
 {
+	int height;
+	int weight;
+	int	str;
+	
 	mlx_clear_window(data->win.mlx_ptr, data->win.win_ptr);
     int i = -1;
     while (++i < DW_IM * DH_IM)
@@ -73,6 +77,14 @@ void        new_image(t_data *data)
     mlx_put_image_to_window(data->win.mlx_ptr, data->win.win_ptr,
                             data->win.img_ptr, 0, 0);
 	print_usage(data);
+	height = 1;
+	weight = 1;
+	mlx_put_image_to_window(data->win.mlx_ptr, data->win.win_ptr,
+		mlx_xpm_file_to_image(data->win.mlx_ptr, "Photo.xpm", &height, &weight) , 5, DH_IM - 150);
+	str = mlx_string_put(data->win.mlx_ptr, data->win.win_ptr, 5, DH_IM - 50, COLOR_TABLE, "This project is made by super girl's");
+	str = mlx_string_put(data->win.mlx_ptr, data->win.win_ptr, 5, DH_IM - 25, COLOR_TABLE, "Koparker and Bdudley");
+	
+		
 }
 
 int			main(int ac, char **av)
