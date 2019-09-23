@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 16:13:28 by koparker          #+#    #+#             */
-/*   Updated: 2019/09/22 20:25:13 by koparker         ###   ########.fr       */
+/*   Updated: 2019/09/23 16:54:59 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ typedef struct 			s_gradient
 	int					green;
 	int					blue;
 	int					delta;
+	int					flag;
 }						t_gradient;
 
 
@@ -115,6 +116,7 @@ void					draw_plane(t_data *data, int **img_arr);
 void					apply_rotation(t_data *data);
 void					apply_projection(t_data *data);
 
+void					balance_delta_for_color(t_point *p1, t_point *p2, t_gradient *gr);
 int						get_color(t_point *p1, t_point *p2, int current);
 
 void					error_message(int index, t_data	*data, char **str);

@@ -6,7 +6,7 @@
 #    By: koparker <koparker@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/10 22:10:26 by bdudley           #+#    #+#              #
-#    Updated: 2019/09/20 21:58:55 by koparker         ###   ########.fr        #
+#    Updated: 2019/09/23 16:56:56 by koparker         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,8 +33,9 @@ SRC = main.c\
 	  rotation.c \
 	  projections.c \
 	  button_click.c \
-	  gradient.c
-	  
+	  gradient.c \
+	  helpers.c
+
 LIBFT = -L libft -lft
 
 OBJ = $(addprefix $(FDF_SRC), $(SRC:%.c=%.o))
