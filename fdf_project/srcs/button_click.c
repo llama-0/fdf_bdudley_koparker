@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   button_click.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bdudley <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/18 16:55:14 by bdudley           #+#    #+#             */
-/*   Updated: 2019/09/22 19:58:22 by bdudley          ###   ########.fr       */
+/*   Updated: 2019/09/23 22:58:05 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,16 +66,13 @@ int  key_release(int keycode, void *param)
     return (0);
 }
 
-//int		mouse_move(int x, int y, void *param)
-//{
-//	t_data *data;
-//
-//	data = (t_data *)param;
-//
-//}
-
 int		mlx_close(void *param)
 {
-    delete_array((t_data *)param);
+	t_data *data;
+
+    data = (t_data *)param;
+
+	free(data->ptr);
+    delete_array(data);
     exit(0);
 }

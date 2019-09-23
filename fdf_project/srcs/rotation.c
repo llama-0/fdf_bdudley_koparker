@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rotation.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bdudley <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/18 17:42:36 by koparker          #+#    #+#             */
-/*   Updated: 2019/09/22 19:35:53 by bdudley          ###   ########.fr       */
+/*   Updated: 2019/09/23 23:00:53 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ static void rotate_OZ(int *x, int *y, size_t rotate)
 	*y = trunc((previous_y * COS(rotate)) + trunc(previous_x * SIN(rotate)));
 }
 
-// TODO: add rotation_OX, rotation_OY; remove iso. 
 void	apply_rotation(t_data *data)
 {
 	size_t	i;

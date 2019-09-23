@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 16:13:28 by koparker          #+#    #+#             */
-/*   Updated: 2019/09/23 20:22:50 by koparker         ###   ########.fr       */
+/*   Updated: 2019/09/23 22:37:51 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ typedef struct			s_data
 	size_t				rotate_x;
 	size_t				rotate_y;
 	size_t				rotate_z;
+	void				*ptr;
 	t_point             **arr;
     t_window            win;
 }						t_data;
