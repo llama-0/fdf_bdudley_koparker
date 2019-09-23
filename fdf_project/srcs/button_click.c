@@ -42,6 +42,10 @@ int  key_release(int keycode, void *param)
     else if (keycode == 49)
     {
 		coord_to_pixel(data);
+		data->scale = 0;
+		data->rotate_z = 0;
+		data->rotate_y = 0;
+		data->rotate_x = 0;
 		new_image(data);
     }
     else if (keycode == 27 || keycode == 24)
