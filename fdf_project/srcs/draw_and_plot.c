@@ -29,7 +29,7 @@ static void	draw_line_low(t_point *p1, t_point *p2, int **img_arr)
 	l.x = p1->x + SHIFT_X;
 	while (l.x < p2->x + SHIFT_X)
 	{
-		if (l.x >= 0 && l.y >= 0 && l.y < DH_IM * DW_IM && l.x < DW_IM)
+		if (l.x >= 0 && l.y >= 0 && l.y < DH_IM && l.x < DW_IM)
 			(*img_arr)[l.y * DW_IM + l.x] = get_color(p1, p2, l.x);
 		if (l.diff > 0)
 		{
@@ -58,7 +58,7 @@ static void	draw_line_high(t_point *p1, t_point *p2, int **img_arr)
 	l.x = p1->x + SHIFT_X;
 	while (l.y < p2->y + SHIFT_Y + 1)
 	{
-		if (l.x >= 0 && l.y >= 0 && l.y < DH_IM * DW_IM && l.x < DW_IM)
+		if (l.x >= 0 && l.y >= 0 && l.y < DH_IM && l.x < DW_IM)
 		{
 			(*img_arr)[l.x + l.y * DW_IM] = get_color(p1, p2, l.y);
 		}
@@ -95,8 +95,6 @@ void		draw_plane(t_data *data, int **img_arr)
 	size_t	i;
 	size_t	j;
 
-//	apply_rotation(head, data, 7);
-//	apply_projection(data, 34);
 	j = 0;
 	while (j < data->size_y)
 	{

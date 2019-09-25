@@ -36,7 +36,7 @@
 # define COS(x) cos(x * M_PI/180)
 
 # define ALPHA 30
-# define SCALE 0.3
+# define SCALE 0.2
 
 # define DEFAULT 0xFFFFFF
 # define COLOR_HIGH 0xFF0000

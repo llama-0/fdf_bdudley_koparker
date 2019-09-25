@@ -50,15 +50,17 @@ static void iso(int *x, int *y, int z)
 	 int previous_x;
 	 int previous_y;
 	 int previous_z;
-	 int camera;
+	 double camera;
 
 	 camera = 50 + max_z;
+	 if (camera == 0)
+	 	camera = 1;
 	 previous_x = *x;
 	 previous_y = *y;
 	 previous_z = *z;
-	 *x = previous_x * (1 - previous_z / camera);
-	 *y = previous_y * (1 - previous_z / camera);
-	 *z = previous_z * (1 - previous_z / camera);
+	 *x = trunc(previous_x * (1 - previous_z / camera));
+	 *y = trunc(previous_y * (1 - previous_z / camera));
+	 *z = trunc(previous_z * (1 - previous_z / camera));
  }
 
 void	apply_projection(t_data *data)
