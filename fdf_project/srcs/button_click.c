@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/18 16:55:14 by bdudley           #+#    #+#             */
-/*   Updated: 2019/09/25 18:14:17 by koparker         ###   ########.fr       */
+/*   Updated: 2019/09/25 19:46:27 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int  key_release(int keycode, void *param)
 		data->rotate_z = 0;
 		data->rotate_y = 0;
 		data->rotate_x = 0;
+		data->projection = NO_PROJECTION;
 		new_image(data);
     }
     else if (keycode == 27 || keycode == 24)
