@@ -3,18 +3,18 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bdudley <marvin@42.fr>                     +#+  +:+       +#+         #
+#    By: koparker <koparker@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/10 22:10:26 by bdudley           #+#    #+#              #
-#    Updated: 2019/09/15 12:37:13 by bdudley          ###   ########.fr        #
+#    Updated: 2019/09/23 16:56:56 by koparker         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fdf
 
-DEBUG = -g
+#DEBUG = -g
 
-#WFLAGS = -Wall -Wextra -Werror
+WFLAGS = -Wall -Wextra -Werror
 
 GFLAGS = -lmlx -framework OpenGL -framework AppKit
 
@@ -28,12 +28,19 @@ SRC = main.c\
       validate.c\
       ft_atoi_hex.c\
       parcing.c\
-      array_operations.c
+      array_operations.c \
+	  draw_and_plot.c \
+	  rotation.c \
+	  projections.c \
+	  button_click.c \
+	  gradient.c \
+	  helpers.c
+
 LIBFT = -L libft -lft
 
 OBJ = $(addprefix $(FDF_SRC), $(SRC:%.c=%.o))
 
-HDR = -I fdf_project/includes -I libft/includes
+HDR = -I fdf_project/includes -I libft/includes -I tools_fdf/minilibx_macos
 
 all: $(NAME)
 

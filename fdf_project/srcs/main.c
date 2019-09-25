@@ -6,231 +6,115 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 16:28:36 by koparker          #+#    #+#             */
-/*   Updated: 2019/09/15 23:10:26 by koparker         ###   ########.fr       */
+/*   Updated: 2019/09/25 19:57:42 by bdudley          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fdf.h>
 
-
-void	print(t_point **points, t_data *data)
+void			print_usage(t_data *data)
 {
-	for (size_t j = 0; j < data->size_y; j++)
-	{
-		for (size_t i = 0; i < data->size_x; i++)
-		{
-			printf("(%d,", points[j][i].x);
-			printf("%d) ", points[j][i].y);
-		}
-		printf("\n");
-	}
+	mlx_string_put(data->win.mlx_ptr, data->win.win_ptr, M_X, M_Y,
+			COLOR_TABLE, "          Usage");
+	mlx_string_put(data->win.mlx_ptr, data->win.win_ptr, M_X, M_Y + M_STEP,
+			COLOR_TABLE, "     Press key to:");
+	mlx_string_put(data->win.mlx_ptr, data->win.win_ptr, M_X, M_Y + M_STEP * 2,
+			COLOR_TABLE, " show isometric projection  --  i");
+	mlx_string_put(data->win.mlx_ptr, data->win.win_ptr, M_X, M_Y + M_STEP * 3,
+			COLOR_TABLE, " show conic projection  --  p");
+	mlx_string_put(data->win.mlx_ptr, data->win.win_ptr, M_X, M_Y + M_STEP * 4,
+			COLOR_TABLE, " rotate around OX  --  x");
+	mlx_string_put(data->win.mlx_ptr, data->win.win_ptr, M_X, M_Y + M_STEP * 5,
+			COLOR_TABLE, " rotate around OY  --  y");
+	mlx_string_put(data->win.mlx_ptr, data->win.win_ptr, M_X, M_Y + M_STEP * 6,
+			COLOR_TABLE, " rotate around OZ  --  z");
+	mlx_string_put(data->win.mlx_ptr, data->win.win_ptr, M_X, M_Y + M_STEP * 7,
+			COLOR_TABLE, " zoom in  --  +");
+	mlx_string_put(data->win.mlx_ptr, data->win.win_ptr, M_X, M_Y + M_STEP * 8,
+			COLOR_TABLE, " zoom out  --  -");
+	mlx_string_put(data->win.mlx_ptr, data->win.win_ptr, M_X, M_Y + M_STEP * 9,
+			COLOR_TABLE, " reset all  --  space");
+	mlx_string_put(data->win.mlx_ptr, data->win.win_ptr, M_X, M_Y + M_STEP * 10,
+			COLOR_TABLE, " exit  --  esc");
 }
 
-void    draw_line_low(t_point *p1, t_point *p2, int **img_arr, t_data *data)
+void			find_open(t_data *data)
 {
-    double diff;
-    int dx;
-    int dy;
-    int y_i;
-    int y;
-    int x;
+	int height;
+	int weight;
 
-    dx = p2->x - p1->x;
-    dy = p2->y - p1->y;
-    y_i = DW_IM;
-    if (dy < 0)
-    {
-        y_i = -y_i;
-        dy = -dy;
-    }
-    diff = 2 * dy - dx;
-    y = p1->y;
-    x = p1->x;
-    while (x < p2->x)
-    {
-        printf("x %d | y %d\n" , x, y); //delete
-        //printf("x + y %d\n", x + y); //delete
-        if (x >= 0 && y >= 0 && y < DH_IM * DW_IM && x < DW_IM)
-		{	
-			printf("Vilena\n");
-			(*img_arr)[y + x] = 0xFFFFFF;
-		}
-        if (diff > 0)
-        {
-            y = y + y_i;
-            diff = diff - 2 * dx;
-        }
-        diff = diff + 2 * dy;
-        x++;
-    }
-	printf("Buy Vilena\n");
+	height = 1;
+	weight = 1;
+	data->win.mlx_ptr = mlx_init();
+	data->win.win_ptr = mlx_new_window(data->win.mlx_ptr,
+			DW_IM, DH_IM, "Koperker");
+	data->win.img_ptr = mlx_new_image(data->win.mlx_ptr,
+			DW_IM, DH_IM);
+	data->win.img_arr = (int *)mlx_get_data_addr(data->win.img_ptr,
+			&data->win.bits_per_pixel, &data->win.size_line, &data->win.endian);
+	data->ptr = mlx_xpm_file_to_image(data->win.mlx_ptr,
+			"Photo.xpm", &height, &weight);
+	new_image(data);
+	mlx_hook(data->win.win_ptr, 17, 0, mlx_close, data);
+	mlx_hook(data->win.win_ptr, 2, 0, key_release, data);
+	mlx_loop(data->win.mlx_ptr);
 }
 
-void    draw_line_high(t_point *p1, t_point *p2, int **img_arr, t_data *data)
+void			new_image(t_data *data)
 {
-    double diff;
-    int dx;
-    int dy;
-    int x_i;
-    int y;
-    int x;
+	int	i;
 
-    dx = p2->x - p1->x;
-    dy = p2->y - p1->y;
-    x_i = 1;
-    if (dx < 0)
-    {
-        x_i = -1;
-        dx = -dx;
-    }
-    diff = 2 * dx - dy;
-    x = p1->x;
-    y = p1->y;
-    // printf("p1->y %d and p2->y %d\n", p1->y, p2->y); //delete
-	printf("p1->y %d, p2->y %d\n", p1->y, p2->y);
-    while (y < p2->y)
-    {
-        printf("=======x %d | y %d\n" , x, y); //delete
-        //printf("x + y * DW %d\n", x + y * DW); //delete
-		if (x >= 0 && y >= 0 && y < DH_IM * DW_IM && x < DW_IM)
-		{
-			printf("x %d | y %d  !! %d\n" , x, y, y);
-			// printf("Nastya\n"); 
-			(*img_arr)[x + y] = 0xFFFFFF;
-		}
-        if (diff > 0)
-        {
-            x = x + x_i;
-            diff = diff - 2 * dy;
-        }
-        diff = diff + 2 * dx;
-        //printf("%f diff and x %d\n", diff, x); //delete
-        y += DW_IM;
-    }
-     printf("Buy Nastya\n"); //delete
+	i = -1;
+	while (++i < DW_IM * DH_IM)
+		(data->win.img_arr)[i] = BLACK;
+	mlx_clear_window(data->win.mlx_ptr, data->win.win_ptr);
+	draw_plane(data, &data->win.img_arr);
+	mlx_put_image_to_window(data->win.mlx_ptr, data->win.win_ptr,
+							data->win.img_ptr, 0, 0);
+	print_usage(data);
+	mlx_put_image_to_window(data->win.mlx_ptr, data->win.win_ptr,
+			data->ptr, 5, DH_IM - 150);
+	mlx_string_put(data->win.mlx_ptr, data->win.win_ptr, 5, DH_IM - 50,
+			COLOR_TABLE, "This project is made by super girl's");
+	mlx_string_put(data->win.mlx_ptr, data->win.win_ptr, 5, DH_IM - 25,
+			COLOR_TABLE, "Koparker and Bdudley");
 }
 
-void		plot(t_point *p1, t_point *p2, int **img_arr, t_data *data)
+void			init_data(t_data *data)
 {
-	if (abs(p2->y - p1->y) < abs(p2->x - p1->x))
-	{
-		printf("draw_line_low\n"); //delete
-		if (p1->x > p2->x)
-		{
-			draw_line_low(p2, p1, img_arr, data);
-		}
-		else
-		{
-			draw_line_low(p1, p2, img_arr, data);
-		}
-	}
-    else
-    {
-    	printf("draw_line_high\n"); //delete
-		if (p1->y > p2->y)
-		{
-			draw_line_high(p2, p1, img_arr, data);
-		}
-		else
-		{
-			draw_line_high(p1, p2, img_arr, data);
-		}
-	}
+	data->size_x = 0;
+	data->size_y = 0;
+	data->capacity_y = 0;
+	data->arr = NULL;
+	data->scale = 0;
+	data->rotate_x = 0;
+	data->rotate_y = 0;
+	data->rotate_z = 0;
+	data->projection = NO_PROJECTION;
 }
 
-static void iso(int *x, int *y)
-{
-	int previous_x;
-	int previous_y;
-
-	previous_x = *x;
-	previous_y = *y;
-	*x = previous_x * cos(0.523599) - previous_y / DW_IM /DW * sin(0.523599);
-	*y = previous_y * cos(0.523599) + previous_x * sin(0.523599);
-}
-
-void		draw_plane(t_point ***head, t_data *data, int **img_arr)
-{
-	size_t	i;
-	size_t	j;
-
-print(*head, data);
-	j = 0;
-   	while (j < data->size_y)
-   	{
-       i = 0;
-       while (i < data->size_x) {
-       //    printf("POPO\n");
-           printf("x, y %d %d\n", (*head)[j][i].x, (*head)[j][i].y);
-           iso(&(*head)[j][i].x, &(*head)[j][i].y);
-           printf("x, y %d %d\n", (*head)[j][i].x, (*head)[j][i].y);
-           i++;
-       }
-       j++;
-   	}
-	   printf("asss\n");
-	   print(*head, data);
-	j = 0;
-	while (j < data->size_y)
-	{
-		i = 0;
-		while (i < data->size_x)
-		{
-			if (i < data->size_x - 1)
-			{
-				plot(&((*head)[j][i]), &((*head)[j][i + 1]), img_arr, data);
-			}
-			if (j < data->size_y - 1)
-			{
-				plot(&((*head)[j][i]), &((*head)[j + 1][i]), img_arr, data);
-			}
-			i++;
-		}
-		j++;
-	}
-}
-
-void		find_open(t_point ***head, t_data *data)
-{
-	t_window	win;
-
-	win.bits_per_pixel = 0;
-	win.size_line = 0;
-	win.endian = 0;
-	win.mlx_ptr = mlx_init();
-	win.win_ptr = mlx_new_window(win.mlx_ptr, DW_IM * 2, DH_IM * 2, "Koperker");
-	win.img_ptr = mlx_new_image(win.mlx_ptr, DW_IM, DH_IM);
-	win.img_arr = (int *)mlx_get_data_addr(win.img_ptr,
-			&win.bits_per_pixel, &win.size_line, &win.endian);
-	draw_plane(head, data, &win.img_arr);
-	printf("Sofia\n");
-	mlx_put_image_to_window(win.mlx_ptr, win.win_ptr,
-			win.img_ptr, 0, 0);
-	mlx_loop(win.mlx_ptr);
-}
-
-int			main(int ac, char **av)
+int				main(int ac, char **av)
 {
 	int		fd;
-	t_point	**head;
 	t_data	data;
+	size_t	step_x;
+	size_t	step_y;
 
 	(void)ac;
-	data.size_x = 0;
-	data.size_y = 0;
-	data.capacity_y = 0;
+	init_data(&data);
 	if ((fd = open(av[1], O_RDONLY)) >= 0)
 	{
-		head = read_file(fd, &data);
-		coord_to_pixel(&head, &data);
-		print(head, &data);
+		data.arr = read_file(fd, &data);
+		step_x = (data.size_x > 1) ? (DW - 1) / (data.size_x - 1) : DW - 1;
+		step_y = (data.size_y > 1) ? (DH - 1) / (data.size_y - 1) : DH - 1;
+		data.step = step_x > step_y ? step_y : step_x;
+		coord_to_pixel(&data);
 		close(fd);
+		data.camera = get_max_z(&data);
+		data.camera += (data.size_x * data.size_y < 100000) ? 50 : 500;
+		find_open(&data);
 	}
 	else
-	{
 		perror("open: couldn't open the file\n");
-		return (0);
-	}
-	find_open(&head, &data);
 	return (0);
 }

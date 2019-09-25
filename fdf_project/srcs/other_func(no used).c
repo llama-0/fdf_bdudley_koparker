@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   other_func(no used).c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bdudley <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/08 16:11:59 by koparker          #+#    #+#             */
-/*   Updated: 2019/09/15 12:55:15 by bdudley          ###   ########.fr       */
+/*   Updated: 2019/09/22 20:26:03 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,3 +169,69 @@ t_data	*read_data(const int fd)
 	map->height = i;
 	return (map);
 }
+
+
+
+//GRADIENT TMP
+// t_gradient	fn1(t_point *p, int mid, int current, int flag)
+// {
+// 	t_gradient	gr;
+// 	int			percentage;
+// 	int			coord;
+
+// 	(flag == 0) ? (coord = p->x) : (coord = p->y);
+// 	percentage = percent(coord, mid, current, flag);
+// 	gr.red = get_light((p->color >> 16) & 0xFF, (COLOR_MID >> 16) & 0xFF, percentage);
+// 	gr.green = get_light((p->color >> 8) & 0xFF, (COLOR_MID >> 8) & 0xFF, percentage);
+// 	gr.blue = get_light((p->color) & 0xFF, (COLOR_MID) & 0xFF, percentage);
+// 	return (gr);
+// }
+
+// t_gradient	fn2(int mid, t_point *p, int current, int flag)
+// {
+// 	t_gradient	gr;
+// 	int			percentage;
+// 	int			coord;
+
+// 	(flag == 0) ? (coord = p->x) : (coord = p->y);
+// 	percentage = percent(mid, coord, current, flag);
+// 	gr.red = get_light((p->color >> 16) & 0xFF, (COLOR_MID >> 16) & 0xFF, percentage);
+// 	gr.green = get_light((p->color >> 8) & 0xFF, (COLOR_MID >> 8) & 0xFF, percentage);
+// 	gr.blue = get_light((p->color) & 0xFF, (COLOR_MID) & 0xFF, percentage);
+// 	return (gr);
+// }
+
+// int				get_color(t_point *p1, t_point *p2, int current)
+// {
+// 	t_gradient	gr;
+// 	int			tmp;
+// 	int			middle;
+
+// 	// printf("color_1 = %d, color_2 = %d\n", p1->color, p2->color);
+// 	gr.delta = p2->x - p1->x;
+// 	tmp = p2->y - p1->y;
+// 	if (gr.delta > tmp)
+// 		tmp = 0;
+// 	else
+// 	{
+// 		gr.delta = tmp;
+// 		tmp = 1;
+// 	}
+// 	if (p1->color == p2->color)
+// 		return (p1->color);
+// 	if (tmp == 0)
+// 	{
+// 		if (current < ((middle = gr.delta / 2 + p1->x) + SHIFT_X))
+// 			fn1(p1, middle, current, tmp);
+// 		else
+// 			fn2(middle, p2, current, tmp);
+// 	}
+// 	else
+// 	{
+// 		if (current < ((middle = gr.delta / 2 + p1->y) + SHIFT_Y))
+// 			fn1(p1, middle, current, tmp);
+// 		else
+// 			fn2(middle, p2, current, tmp);
+// 	}
+// 	return ((gr.red << 16) | (gr.green << 8) | gr.blue);
+// }

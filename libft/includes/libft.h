@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: koparker <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 17:37:14 by koparker          #+#    #+#             */
-/*   Updated: 2019/02/13 20:31:37 by koparker         ###   ########.fr       */
+/*   Updated: 2019/09/23 18:26:08 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 ** for get_next_line
 */
 
-# define BUFF_SIZE	1
+# define BUFF_SIZE	1024
 # define MAX_FDS	1024
 
 # include <stdlib.h>
@@ -109,6 +109,7 @@ void				ft_putstr_fd(char const *s, int fd);
 void				ft_putendl_fd(char const *s, int fd);
 void				ft_putnbr_fd(int n, int fd);
 char				*ft_itoa(int n);
+void				ft_free_char_arr(char ***arr);
 
 int					get_next_line(const int fd, char **line);
 int					ft_2d_strlen(char **str);
