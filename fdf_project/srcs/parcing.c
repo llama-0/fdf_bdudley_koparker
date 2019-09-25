@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/15 16:47:52 by koparker          #+#    #+#             */
-/*   Updated: 2019/09/23 19:32:01 by koparker         ###   ########.fr       */
+/*   Updated: 2019/09/25 23:05:42 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,17 @@
 void			error_message(int index, t_data *data, char **str, char *line)
 {
 	if (index == 0)
-		ft_putendl("Invalid altitude in the cart");
+		ft_putendl_fd("Invalid data format", 2);
 	else if (index == 1)
-		ft_putendl("Invalid color in the cart");
+		ft_putendl_fd("Invalid color", 2);
 	else if (index == 2)
-		ft_putendl("Invalid length cart");
+		ft_putendl_fd("Invalid line length", 2);
 	else if (index == 3)
-		perror("Memory allocation failed\n");
-	delete_array(data);
+		ft_putendl_fd("Memory allocation failed\n", 2);
+	else if (index == 4)
+		ft_putendl(strerror(errno));
+	if (data && data->arr)
+		delete_array(data);
 	if (str)
 		ft_free_char_arr(&str);
 	if (line)

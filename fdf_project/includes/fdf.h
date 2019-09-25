@@ -6,13 +6,14 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 16:13:28 by koparker          #+#    #+#             */
-/*   Updated: 2019/09/25 18:33:54 by koparker         ###   ########.fr       */
+/*   Updated: 2019/09/25 22:56:19 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
 
+# include <errno.h>
 # include <fcntl.h>
 # include <libft.h>
 # include <math.h>

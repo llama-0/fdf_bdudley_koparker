@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 16:28:36 by koparker          #+#    #+#             */
-/*   Updated: 2019/09/25 19:57:42 by bdudley          ###   ########.fr       */
+/*   Updated: 2019/09/25 23:08:10 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,8 @@ int				main(int ac, char **av)
 	init_data(&data);
 	if ((fd = open(av[1], O_RDONLY)) >= 0)
 	{
-		data.arr = read_file(fd, &data);
+		if (!(data.arr = read_file(fd, &data)))
+			error_message(4, NULL, NULL, NULL);
 		step_x = (data.size_x > 1) ? (DW - 1) / (data.size_x - 1) : DW - 1;
 		step_y = (data.size_y > 1) ? (DH - 1) / (data.size_y - 1) : DH - 1;
 		data.step = step_x > step_y ? step_y : step_x;
@@ -115,6 +116,6 @@ int				main(int ac, char **av)
 		find_open(&data);
 	}
 	else
-		perror("open: couldn't open the file\n");
+		ft_putendl_fd(strerror(errno), 2);
 	return (0);
 }
