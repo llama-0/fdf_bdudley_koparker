@@ -60,15 +60,18 @@ static void iso(int *x, int *y, int z)
 	 previous_z = *z;
 	 *x = trunc(previous_x * (1 - previous_z / camera));
 	 *y = trunc(previous_y * (1 - previous_z / camera));
-	 *z = trunc(previous_z * (1 - previous_z / camera));
+	 *z = max_z;
+	// *z = trunc(previous_z * (1 - previous_z / camera));
  }
 
 void	apply_projection(t_data *data)
 {
 	size_t	i;
 	size_t	j;
+	int 	max_z;
 
 	j = 0;
+	max_z = get_max_z(data);
    	while (j < data->size_y)
    	{
        	i = 0;
@@ -77,7 +80,7 @@ void	apply_projection(t_data *data)
 			if (data->camera == ISO)
 				iso(&(data->arr)[j][i].x, &(data->arr)[j][i].y, (data->arr)[j][i].z);
 			else if (data->camera == CONIC)
-				perspective(&(data->arr)[j][i].x, &(data->arr)[j][i].y, &(data->arr)[j][i].z, get_max_z(data));
+				perspective(&(data->arr)[j][i].x, &(data->arr)[j][i].y, &(data->arr)[j][i].z, max_z);
 			(data->arr)[j][i].x *= 1 + data->scale;
 			(data->arr)[j][i].y *= 1 + data->scale;
 			(data->arr)[j][i].z *= 1 + data->scale;
