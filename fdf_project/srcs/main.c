@@ -75,7 +75,7 @@ void			new_image(t_data *data)
 	mlx_put_image_to_window(data->win.mlx_ptr, data->win.win_ptr,
 			data->ptr, 5, DH_IM - 150);
 	mlx_string_put(data->win.mlx_ptr, data->win.win_ptr, 5, DH_IM - 50,
-			COLOR_TABLE, "This project is made by super girl's");
+			COLOR_TABLE, "This project is made by super girls");
 	mlx_string_put(data->win.mlx_ptr, data->win.win_ptr, 5, DH_IM - 25,
 			COLOR_TABLE, "Koparker and Bdudley");
 }
