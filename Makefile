@@ -12,7 +12,7 @@
 
 NAME = fdf
 
-DEBUG = -g
+#DEBUG = -g
 
 WFLAGS = -Wall -Wextra -Werror
 
