@@ -6,102 +6,102 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 16:28:36 by koparker          #+#    #+#             */
-/*   Updated: 2019/09/25 18:40:44 by koparker         ###   ########.fr       */
+/*   Updated: 2019/09/25 19:57:42 by bdudley          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fdf.h>
 
-void print(t_data *data)
+void			print_usage(t_data *data)
 {
-	for (size_t j = 0; j < data->size_y; j++)
-	{
-		for (size_t i = 0; i < data->size_x; i++)
-		{
-			printf("(%d,", (data->arr)[j][i].x);
-			printf("%d) ", (data->arr)[j][i].y);
-		}
-		printf("\n");
-	}
+	mlx_string_put(data->win.mlx_ptr, data->win.win_ptr, M_X, M_Y,
+			COLOR_TABLE, "          Usage");
+	mlx_string_put(data->win.mlx_ptr, data->win.win_ptr, M_X, M_Y + M_STEP,
+			COLOR_TABLE, "     Press key to:");
+	mlx_string_put(data->win.mlx_ptr, data->win.win_ptr, M_X, M_Y + M_STEP * 2,
+			COLOR_TABLE, " show isometric projection  --  i");
+	mlx_string_put(data->win.mlx_ptr, data->win.win_ptr, M_X, M_Y + M_STEP * 3,
+			COLOR_TABLE, " show conic projection  --  p");
+	mlx_string_put(data->win.mlx_ptr, data->win.win_ptr, M_X, M_Y + M_STEP * 4,
+			COLOR_TABLE, " rotate around OX  --  x");
+	mlx_string_put(data->win.mlx_ptr, data->win.win_ptr, M_X, M_Y + M_STEP * 5,
+			COLOR_TABLE, " rotate around OY  --  y");
+	mlx_string_put(data->win.mlx_ptr, data->win.win_ptr, M_X, M_Y + M_STEP * 6,
+			COLOR_TABLE, " rotate around OZ  --  z");
+	mlx_string_put(data->win.mlx_ptr, data->win.win_ptr, M_X, M_Y + M_STEP * 7,
+			COLOR_TABLE, " zoom in  --  +");
+	mlx_string_put(data->win.mlx_ptr, data->win.win_ptr, M_X, M_Y + M_STEP * 8,
+			COLOR_TABLE, " zoom out  --  -");
+	mlx_string_put(data->win.mlx_ptr, data->win.win_ptr, M_X, M_Y + M_STEP * 9,
+			COLOR_TABLE, " reset all  --  space");
+	mlx_string_put(data->win.mlx_ptr, data->win.win_ptr, M_X, M_Y + M_STEP * 10,
+			COLOR_TABLE, " exit  --  esc");
 }
 
-void print_usage(t_data *data)
-{
-	int str;
-	int step;
-	int x;
-	int y;
-
-	step = 20;
-	x = DW_IM * 5 / 8;
-	y = DH_IM * 3 / 4;
-	str = mlx_string_put(data->win.mlx_ptr, data->win.win_ptr, x, y, COLOR_TABLE, "          Usage");
-	str = mlx_string_put(data->win.mlx_ptr, data->win.win_ptr, x, y + step, COLOR_TABLE, "     Press key to:");
-	str = mlx_string_put(data->win.mlx_ptr, data->win.win_ptr, x, y + step * 2, COLOR_TABLE, " show isometric projection  --  i");
-	str = mlx_string_put(data->win.mlx_ptr, data->win.win_ptr, x, y + step * 3, COLOR_TABLE, " show conic projection  --  p");
-	str = mlx_string_put(data->win.mlx_ptr, data->win.win_ptr, x, y + step * 4, COLOR_TABLE, " rotate around OX  --  x");
-	str = mlx_string_put(data->win.mlx_ptr, data->win.win_ptr, x, y + step * 5, COLOR_TABLE, " rotate around OY  --  y");
-	str = mlx_string_put(data->win.mlx_ptr, data->win.win_ptr, x, y + step * 6, COLOR_TABLE, " rotate around OZ  --  z");
-	str = mlx_string_put(data->win.mlx_ptr, data->win.win_ptr, x, y + step * 7, COLOR_TABLE, " zoom in  --  +");
-	str = mlx_string_put(data->win.mlx_ptr, data->win.win_ptr, x, y + step * 8, COLOR_TABLE, " zoom out  --  -");
-	str = mlx_string_put(data->win.mlx_ptr, data->win.win_ptr, x, y + step * 9, COLOR_TABLE, " reset all  --  space");
-	str = mlx_string_put(data->win.mlx_ptr, data->win.win_ptr, x, y + step * 10, COLOR_TABLE, " exit  --  esc");
-}
-
-void find_open(t_data *data)
+void			find_open(t_data *data)
 {
 	int height;
 	int weight;
 
-	data->win.mlx_ptr = mlx_init();
-	data->win.win_ptr = mlx_new_window(data->win.mlx_ptr, DW_IM, DH_IM, "Koperker");
-	data->win.img_ptr = mlx_new_image(data->win.mlx_ptr, DW_IM, DH_IM);
-	data->win.img_arr = (int *)mlx_get_data_addr(data->win.img_ptr,
-												 &data->win.bits_per_pixel, &data->win.size_line, &data->win.endian);
 	height = 1;
 	weight = 1;
-	data->ptr = mlx_xpm_file_to_image(data->win.mlx_ptr, "Photo.xpm", &height, &weight);
+	data->win.mlx_ptr = mlx_init();
+	data->win.win_ptr = mlx_new_window(data->win.mlx_ptr,
+			DW_IM, DH_IM, "Koperker");
+	data->win.img_ptr = mlx_new_image(data->win.mlx_ptr,
+			DW_IM, DH_IM);
+	data->win.img_arr = (int *)mlx_get_data_addr(data->win.img_ptr,
+			&data->win.bits_per_pixel, &data->win.size_line, &data->win.endian);
+	data->ptr = mlx_xpm_file_to_image(data->win.mlx_ptr,
+			"Photo.xpm", &height, &weight);
 	new_image(data);
 	mlx_hook(data->win.win_ptr, 17, 0, mlx_close, data);
 	mlx_hook(data->win.win_ptr, 2, 0, key_release, data);
 	mlx_loop(data->win.mlx_ptr);
 }
 
-void new_image(t_data *data)
+void			new_image(t_data *data)
 {
-	int str;
+	int	i;
 
-	mlx_clear_window(data->win.mlx_ptr, data->win.win_ptr);
-	int i = -1;
+	i = -1;
 	while (++i < DW_IM * DH_IM)
 		(data->win.img_arr)[i] = BLACK;
+	mlx_clear_window(data->win.mlx_ptr, data->win.win_ptr);
 	draw_plane(data, &data->win.img_arr);
 	mlx_put_image_to_window(data->win.mlx_ptr, data->win.win_ptr,
 							data->win.img_ptr, 0, 0);
 	print_usage(data);
-	mlx_put_image_to_window(data->win.mlx_ptr, data->win.win_ptr, data->ptr, 5, DH_IM - 150);
-	str = mlx_string_put(data->win.mlx_ptr, data->win.win_ptr, 5, DH_IM - 50, COLOR_TABLE, "This project is made by super girl's");
-	str = mlx_string_put(data->win.mlx_ptr, data->win.win_ptr, 5, DH_IM - 25, COLOR_TABLE, "Koparker and Bdudley");
+	mlx_put_image_to_window(data->win.mlx_ptr, data->win.win_ptr,
+			data->ptr, 5, DH_IM - 150);
+	mlx_string_put(data->win.mlx_ptr, data->win.win_ptr, 5, DH_IM - 50,
+			COLOR_TABLE, "This project is made by super girl's");
+	mlx_string_put(data->win.mlx_ptr, data->win.win_ptr, 5, DH_IM - 25,
+			COLOR_TABLE, "Koparker and Bdudley");
 }
 
-int main(int ac, char **av)
+void			init_data(t_data *data)
 {
-	int fd;
-	t_data data;
-	size_t step_x;
-	size_t step_y;
-	size_t	num;
+	data->size_x = 0;
+	data->size_y = 0;
+	data->capacity_y = 0;
+	data->arr = NULL;
+	data->scale = 0;
+	data->rotate_x = 0;
+	data->rotate_y = 0;
+	data->rotate_z = 0;
+	data->projection = NO_PROJECTION;
+}
+
+int				main(int ac, char **av)
+{
+	int		fd;
+	t_data	data;
+	size_t	step_x;
+	size_t	step_y;
 
 	(void)ac;
-	data.size_x = 0;
-	data.size_y = 0;
-	data.capacity_y = 0;
-	data.arr = NULL;
-	data.scale = 0;
-	data.rotate_x = 0;
-	data.rotate_y = 0;
-	data.rotate_z = 0;
-	data.projection = 0;
+	init_data(&data);
 	if ((fd = open(av[1], O_RDONLY)) >= 0)
 	{
 		data.arr = read_file(fd, &data);
@@ -111,16 +111,10 @@ int main(int ac, char **av)
 		coord_to_pixel(&data);
 		close(fd);
 		data.camera = get_max_z(&data);
-		if ((num = data.size_x * data.size_y) < 100000)
-			data.camera += 50;
-		else
-			data.camera += 500;
+		data.camera += (data.size_x * data.size_y < 100000) ? 50 : 500;
+		find_open(&data);
 	}
 	else
-	{
 		perror("open: couldn't open the file\n");
-		return (0);
-	}
-	find_open(&data);
 	return (0);
 }

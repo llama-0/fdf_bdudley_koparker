@@ -12,7 +12,7 @@
 
 #include <fdf.h>
 
-static void rotate_OX(int *y, int *z, size_t rotate)
+static void	rotate_ox(int *y, int *z, size_t rotate)
 {
 	int previous_y;
 	int previous_z;
@@ -23,18 +23,18 @@ static void rotate_OX(int *y, int *z, size_t rotate)
 	*z = -previous_y * SIN(rotate) + previous_z * COS(rotate);
 }
 
-static void rotate_OY(int *x, int *z,  size_t rotate)
+static void	rotate_oy(int *x, int *z, size_t rotate)
 {
 	int previous_x;
 	int previous_z;
 
 	previous_x = *x;
-	previous_z= *z;
+	previous_z = *z;
 	*x = previous_x * COS(rotate) + previous_z * SIN(rotate);
 	*z = previous_z * COS(rotate) - previous_x * SIN(rotate);
 }
 
-static void rotate_OZ(int *x, int *y, size_t rotate)
+static void	rotate_oz(int *x, int *y, size_t rotate)
 {
 	int previous_x;
 	int previous_y;
@@ -45,25 +45,28 @@ static void rotate_OZ(int *x, int *y, size_t rotate)
 	*y = trunc((previous_y * COS(rotate)) + trunc(previous_x * SIN(rotate)));
 }
 
-void	apply_rotation(t_data *data)
+void		apply_rotation(t_data *data)
 {
 	size_t	i;
 	size_t	j;
 
 	j = 0;
-   	while (j < data->size_y)
-   	{
-       	i = 0;
-       	while (i < data->size_x)
+	while (j < data->size_y)
+	{
+		i = 0;
+		while (i < data->size_x)
 		{
-       		rotate_OX(&(data->arr)[j][i].y, &(data->arr)[j][i].z, data->rotate_x);
-       		rotate_OY(&(data->arr)[j][i].x, &(data->arr)[j][i].z, data->rotate_y);
-       		rotate_OZ(&(data->arr)[j][i].x, &(data->arr)[j][i].y, data->rotate_z);
+			rotate_ox(&(data->arr)[j][i].y, &(data->arr)[j][i].z,
+					data->rotate_x);
+			rotate_oy(&(data->arr)[j][i].x, &(data->arr)[j][i].z,
+					data->rotate_y);
+			rotate_oz(&(data->arr)[j][i].x, &(data->arr)[j][i].y,
+					data->rotate_z);
 			(data->arr)[j][i].x *= 1 + data->scale;
 			(data->arr)[j][i].y *= 1 + data->scale;
 			(data->arr)[j][i].z *= 1 + data->scale;
 			i++;
-      	}
-       	j++;
-   	}
+		}
+		j++;
+	}
 }

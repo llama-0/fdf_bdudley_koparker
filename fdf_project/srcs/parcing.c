@@ -12,7 +12,7 @@
 
 #include <fdf.h>
 
-void		error_message(int index, t_data	*data, char **str, char *line)
+void			error_message(int index, t_data *data, char **str, char *line)
 {
 	if (index == 0)
 		ft_putendl("Invalid altitude in the cart");
@@ -23,13 +23,15 @@ void		error_message(int index, t_data	*data, char **str, char *line)
 	else if (index == 3)
 		perror("Memory allocation failed\n");
 	delete_array(data);
-	ft_free_char_arr(&str);
-	ft_strdel(&line);
+	if (str)
+		ft_free_char_arr(&str);
+	if (line)
+		ft_strdel(&line);
 	exit(1);
-
 }
 
-void		size_array(t_data *data, size_t length, char **split, char *line)
+void			size_array(t_data *data, size_t length,
+				char **split, char *line)
 {
 	if (data->size_y == 0)
 	{
@@ -41,13 +43,12 @@ void		size_array(t_data *data, size_t length, char **split, char *line)
 	data->arr = new_array(&(data->arr), data, split, line);
 }
 
-t_point		**read_file(const int fd, t_data *data)
+t_point			**read_file(const int fd, t_data *data)
 {
 	size_t	i;
 	char	*line;
 	char	**split;
 
-	split = NULL;
 	while (get_next_line(fd, &line) > 0)
 	{
 		split = ft_strsplit(line, ' ');
@@ -64,16 +65,14 @@ t_point		**read_file(const int fd, t_data *data)
 			if (valid_color(split[i], data, i, data->size_y) == 0)
 				error_message(1, data, split, line);
 		}
-		if (split)
-			ft_free_char_arr(&split);
 		data->size_y++;
-		if (line)
-			ft_strdel(&line);
+		ft_free_char_arr(&split);
+		ft_strdel(&line);
 	}
 	return (data->arr);
 }
 
-void	coord_to_pixel(t_data *data)
+void			coord_to_pixel(t_data *data)
 {
 	size_t	i;
 	size_t	j;
@@ -84,8 +83,10 @@ void	coord_to_pixel(t_data *data)
 		i = 0;
 		while (i < data->size_x)
 		{
-            (data->arr)[j][i].x = (i * data->step - data->step * data->size_x / 2);
-            (data->arr)[j][i].y = (j * data->step - data->step * data->size_y / 2);
+			(data->arr)[j][i].x = (i * data->step -
+					data->step * data->size_x / 2);
+			(data->arr)[j][i].y = (j * data->step -
+					data->step * data->size_y / 2);
 			(data->arr)[j][i].z = -((data->arr)[j][i].alt * data->step);
 			i++;
 		}

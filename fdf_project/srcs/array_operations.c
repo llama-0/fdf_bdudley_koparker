@@ -12,7 +12,7 @@
 
 #include <fdf.h>
 
-void		init_array(t_point ***array, t_data	*data, size_t j, size_t i)
+void			init_array(t_point ***array, t_data *data, size_t j, size_t i)
 {
 	while (j < data->capacity_y)
 	{
@@ -30,7 +30,7 @@ void		init_array(t_point ***array, t_data	*data, size_t j, size_t i)
 	}
 }
 
-void		delete_array(t_data	*data)
+void			delete_array(t_data *data)
 {
 	size_t		j;
 
@@ -38,14 +38,15 @@ void		delete_array(t_data	*data)
 	while (j < data->size_y)
 	{
 		free((data->arr)[j]);
-        (data->arr)[j] = NULL;
+		(data->arr)[j] = NULL;
 		j++;
 	}
 	if (data->arr)
 		free((data->arr));
 }
 
-t_point		**new_array(t_point		***prev_array, t_data	*data, char **split, char *line)
+t_point			**new_array(t_point ***prev_array,
+				t_data *data, char **split, char *line)
 {
 	t_point	**array;
 	size_t	j;
@@ -69,7 +70,7 @@ t_point		**new_array(t_point		***prev_array, t_data	*data, char **split, char *l
 		}
 		j++;
 	}
-	init_array(&array, data, j , i);
+	init_array(&array, data, j, i);
 	delete_array(data);
 	return (array);
 }

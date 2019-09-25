@@ -32,11 +32,14 @@
 # define CONIC 2
 # define NO_PROJECTION 0
 
-# define SIN(x) sin(x * M_PI/180) 
+# define SIN(x) sin(x * M_PI/180)
 # define COS(x) cos(x * M_PI/180)
 
 # define ALPHA 30
 # define SCALE 0.2
+# define M_STEP 20
+# define M_X DW_IM * 5 / 8
+# define M_Y DH_IM * 3 / 4
 
 # define DEFAULT 0xFFFFFF
 # define COLOR_HIGH 0xFF0000
@@ -48,20 +51,20 @@ typedef struct			s_point
 {
 	int					x;
 	int					y;
-	int 				z;
+	int					z;
 	int					alt;
 	int					color;
 }						t_point;
 
 typedef struct			s_window
 {
-    void				*mlx_ptr;
-    void				*win_ptr;
-    void				*img_ptr;
-    int					*img_arr;
-    int					bits_per_pixel;
-    int					size_line;
-    int					endian;
+	void				*mlx_ptr;
+	void				*win_ptr;
+	void				*img_ptr;
+	int					*img_arr;
+	int					bits_per_pixel;
+	int					size_line;
+	int					endian;
 }						t_window;
 
 typedef struct			s_data
@@ -69,7 +72,7 @@ typedef struct			s_data
 	size_t				size_x;
 	size_t				capacity_y;
 	size_t				size_y;
-	size_t 				step;
+	size_t				step;
 	double				camera;
 	int					projection;
 	double				scale;
@@ -77,22 +80,22 @@ typedef struct			s_data
 	size_t				rotate_y;
 	size_t				rotate_z;
 	void				*ptr;
-	t_point             **arr;
-    t_window            win;
+	t_point				**arr;
+	t_window			win;
 }						t_data;
 
 typedef struct			s_draw_line
 {
 	double				diff;
-    int					dx;
-    int					dy;
-    int					y_i;
+	int					dx;
+	int					dy;
+	int					y_i;
 	int					x_i;
-    int					y;
-    int					x;
+	int					y;
+	int					x;
 }						t_draw_line;
 
-typedef struct 			s_gradient
+typedef struct			s_gradient
 {
 	int					red;
 	int					green;
@@ -101,30 +104,30 @@ typedef struct 			s_gradient
 	int					flag;
 }						t_gradient;
 
-
 int						valid_nbr(char *spl, t_data *data, int i, int j);
 int						valid_color(char *spl, t_data *data, int i, int j);
 int						ft_atoi_hex(char *s);
 t_point					**read_file(const int fd, t_data *data);
-void					print(t_data *data);
 
-t_point					**new_array(t_point		***prev_array, t_data	*data, char **split, char *line);
+t_point					**new_array(t_point ***prev_array, t_data *data,
+						char **split, char *line);
 void					delete_array(t_data	*data);
-void					init_array(t_point		***array, t_data	*data, size_t j, size_t i);
+void					init_array(t_point ***array, t_data *data,
+						size_t j, size_t i);
 void					coord_to_pixel(t_data *data);
-void					shift_coords(int *x, int *y, int shift);
 
 void					new_image(t_data *data);
 void					draw_plane(t_data *data, int **img_arr);
 void					apply_rotation(t_data *data);
 void					apply_projection(t_data *data);
 
-void					balance_delta_for_color(t_point *p1, t_point *p2, t_gradient *gr);
+void					balance_delta_for_color(t_point *p1, t_point *p2,
+						t_gradient *gr);
 int						get_color(t_point *p1, t_point *p2, int current);
 
-void					error_message(int index, t_data	*data, char **str, char *line);
-int						mouse_move(int x, int y, void *param);
-int                     key_release(int keycode, void *param);
-int                     mlx_close(void *param);
+void					error_message(int index, t_data	*data,
+						char **str, char *line);
+int						key_release(int keycode, void *param);
+int						mlx_close(void *param);
 int						get_max_z(t_data *data);
 #endif

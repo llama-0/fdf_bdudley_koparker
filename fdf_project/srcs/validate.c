@@ -28,18 +28,15 @@ int	valid_nbr(char *spl, t_data *data, int i, int j)
 			if (ft_strcmp(spl, "0") != 0)
 				return (0);
 		}
-		else 
+		else if (t - spl != 1)
 		{
-			if (t - spl != 1)
-			{
-				t = NULL;
-				return (0);
-			}
+			t = NULL;
+			return (0);
 		}
 	}
 	(data->arr)[j][i].x = i;
-    (data->arr)[j][i].y = j;
-    (data->arr)[j][i].alt = n;
+	(data->arr)[j][i].y = j;
+	(data->arr)[j][i].alt = n;
 	return (1);
 }
 
@@ -49,14 +46,13 @@ int	valid_color(char *spl, t_data *data, int i, int j)
 	char	*tmp;
 
 	tmp = spl;
-    ((data->arr)[j][i].alt == 0) ? ((data->arr)[j][i].color = DEFAULT) :
+	((data->arr)[j][i].alt == 0) ? ((data->arr)[j][i].color = DEFAULT) :
 		((data->arr)[j][i].color = COLOR_HIGH);
-	// printf("|%s|\n", tmp);
 	if ((tmp = ft_strchr(spl, ',')) != NULL)
 	{
 		if ((color = ft_atoi_hex(tmp + 1)) == 0)
 			return (0);
-        (data->arr)[j][i].color = color;
+		(data->arr)[j][i].color = color;
 		return (1);
 	}
 	return (1);

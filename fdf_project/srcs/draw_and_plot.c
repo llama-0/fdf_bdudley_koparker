@@ -59,9 +59,7 @@ static void	draw_line_high(t_point *p1, t_point *p2, int **img_arr)
 	while (l.y < p2->y + SHIFT_Y + 1)
 	{
 		if (l.x >= 0 && l.y >= 0 && l.y < DH_IM && l.x < DW_IM)
-		{
 			(*img_arr)[l.x + l.y * DW_IM] = get_color(p1, p2, l.y);
-		}
 		if (l.diff > 0)
 		{
 			l.x = l.x + l.x_i;

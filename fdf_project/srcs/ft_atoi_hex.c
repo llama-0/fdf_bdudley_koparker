@@ -17,12 +17,9 @@ int	ft_atoi_hex(char *s)
 	int	i;
 	int	res;
 
-//	printf("%s\n", s);
 	if (s[0] != '0' || s[1] != 'x')
 		return (0);
 	s += 2;
-	// if (ft_strlen(s) != 6)
-	// 	return (0);
 	i = 0;
 	res = 0;
 	while (s[i])
