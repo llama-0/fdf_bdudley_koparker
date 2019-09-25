@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 16:13:28 by koparker          #+#    #+#             */
-/*   Updated: 2019/09/23 22:37:51 by koparker         ###   ########.fr       */
+/*   Updated: 2019/09/25 18:33:54 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,8 @@ typedef struct			s_data
 	size_t				capacity_y;
 	size_t				size_y;
 	size_t 				step;
-	int					camera;
+	double				camera;
+	int					projection;
 	double				scale;
 	size_t				rotate_x;
 	size_t				rotate_y;
@@ -125,4 +126,5 @@ void					error_message(int index, t_data	*data, char **str, char *line);
 int						mouse_move(int x, int y, void *param);
 int                     key_release(int keycode, void *param);
 int                     mlx_close(void *param);
+int						get_max_z(t_data *data);
 #endif

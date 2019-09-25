@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/18 16:55:14 by bdudley           #+#    #+#             */
-/*   Updated: 2019/09/23 22:58:05 by koparker         ###   ########.fr       */
+/*   Updated: 2019/09/25 18:14:17 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int  key_release(int keycode, void *param)
     data = (t_data *)param;
     if (keycode == 7 || keycode == 6 || keycode == 16)
     {
-    	data->camera = NO_PROJECTION;
+    	data->projection = NO_PROJECTION;
     	data->rotate_z += (keycode == 6) ? ALPHA : 0;
 		data->rotate_x += (keycode == 7) ? ALPHA : 0;
 		data->rotate_y += (keycode == 16) ? ALPHA : 0;
@@ -35,7 +35,7 @@ int  key_release(int keycode, void *param)
     else if (keycode == 34 || keycode == 35)
 	{
 		coord_to_pixel(data);
-		data->camera = (keycode == 34) ? ISO : CONIC;
+		data->projection = (keycode == 34) ? ISO : CONIC;
 		apply_projection(data);
 		new_image(data);
 	}
@@ -57,7 +57,7 @@ int  key_release(int keycode, void *param)
 		(data->scale <= -1 && keycode == 24) ||
 		(data->scale >= 20 && keycode == 27))
 			data->scale += keycode == 27 ? -SCALE : SCALE;
-		if (data->camera == NO_PROJECTION)
+		if (data->projection == NO_PROJECTION)
 			apply_rotation(data);
 		else
 			apply_projection(data);
