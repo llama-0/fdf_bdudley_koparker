@@ -32,7 +32,7 @@ int	ft_atoi_hex(char *s)
 			res = res * 16 + s[i] - 'A' + 10;
 		i++;
 	}
-	if (i % 2 == 0 && i <= 6)
+	if (res <= 0x7FFFFFFF && res >= 0)
 		return (res);
-	return (0);
+	return (-1);
 }

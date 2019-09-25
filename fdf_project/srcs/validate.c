@@ -12,6 +12,7 @@
 
 #include <fdf.h>
 
+// TODO: check number 9e,0xff -> 0 and e,0xff -> 0. Stop validation or replace all with 0's ??
 int	valid_nbr(char *spl, t_data *data, int i, int j)
 {
 	int		n;

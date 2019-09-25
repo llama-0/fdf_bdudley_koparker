@@ -21,7 +21,7 @@
 # include <stdio.h>
 
 # define DW 500
-# define DH 500
+# define DH 400
 
 # define DW_IM (DW * 2)
 # define DH_IM (DH * 2)
@@ -43,8 +43,8 @@
 # define M_Y DH_IM * 3 / 4
 
 # define DEFAULT 0xFFFFFF
-# define COLOR_HIGH 0xFF0000
-# define COLOR_MID 0x00FF00
+# define COLOR_HIGH 0xF51234
+# define COLOR_MID 0x080808
 # define BLACK 0x000000
 # define COLOR_TABLE 0xFFFFFF
 

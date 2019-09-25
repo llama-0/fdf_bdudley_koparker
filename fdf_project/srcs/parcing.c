@@ -65,7 +65,7 @@ t_point			**read_file(const int fd, t_data *data)
 		{
 			if (valid_nbr(split[i], data, i, data->size_y) == 0)
 				error_message(0, data, split, line);
-			if (valid_color(split[i], data, i, data->size_y) == 0)
+			if (valid_color(split[i], data, i, data->size_y) == -1)
 				error_message(1, data, split, line);
 		}
 		data->size_y++;

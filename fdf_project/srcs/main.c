@@ -21,7 +21,7 @@ void			print_usage(t_data *data)
 	mlx_string_put(data->win.mlx_ptr, data->win.win_ptr, M_X, M_Y + M_STEP * 2,
 			COLOR_TABLE, " show isometric projection  --  i");
 	mlx_string_put(data->win.mlx_ptr, data->win.win_ptr, M_X, M_Y + M_STEP * 3,
-			COLOR_TABLE, " show conic projection  --  p");
+			COLOR_TABLE, " show perspective projection  --  p");
 	mlx_string_put(data->win.mlx_ptr, data->win.win_ptr, M_X, M_Y + M_STEP * 4,
 			COLOR_TABLE, " rotate around OX  --  x");
 	mlx_string_put(data->win.mlx_ptr, data->win.win_ptr, M_X, M_Y + M_STEP * 5,
@@ -75,7 +75,7 @@ void			new_image(t_data *data)
 	mlx_put_image_to_window(data->win.mlx_ptr, data->win.win_ptr,
 			data->ptr, 5, DH_IM - 150);
 	mlx_string_put(data->win.mlx_ptr, data->win.win_ptr, 5, DH_IM - 50,
-			COLOR_TABLE, "This project is made by super girls");
+			COLOR_TABLE, "This project is made by");
 	mlx_string_put(data->win.mlx_ptr, data->win.win_ptr, 5, DH_IM - 25,
 			COLOR_TABLE, "Koparker and Bdudley");
 }
