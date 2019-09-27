@@ -13,7 +13,6 @@
 #ifndef FDF_H
 # define FDF_H
 
-# include <errno.h>
 # include <fcntl.h>
 # include <libft.h>
 # include <math.h>

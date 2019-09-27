@@ -23,7 +23,7 @@ void			error_message(int index, t_data *data, char **str, char *line)
 	else if (index == 3)
 		ft_putendl_fd("Memory allocation failed\n", 2);
 	else if (index == 4)
-		ft_putendl(strerror(errno));
+		perror(NULL);
 	if (data && data->arr)
 		delete_array(data);
 	if (str)

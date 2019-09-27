@@ -116,6 +116,6 @@ int				main(int ac, char **av)
 		find_open(&data);
 	}
 	else
-		ft_putendl_fd(strerror(errno), 2);
+		perror(NULL);
 	return (0);
 }
