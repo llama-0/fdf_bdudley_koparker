@@ -6,7 +6,7 @@
 /*   By: koparker <koparker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 16:13:28 by koparker          #+#    #+#             */
-/*   Updated: 2019/09/25 22:56:19 by koparker         ###   ########.fr       */
+/*   Updated: 2019/09/25 18:33:54 by koparker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <stdio.h>
 
 # define DW 500
-# define DH 400
+# define DH 500
 
 # define DW_IM (DW * 2)
 # define DH_IM (DH * 2)
@@ -42,8 +42,8 @@
 # define M_Y DH_IM * 3 / 4
 
 # define DEFAULT 0xFFFFFF
-# define COLOR_HIGH 0xF51234
-# define COLOR_MID 0x080808
+# define COLOR_HIGH 0xFF0000
+# define COLOR_MID 0x00FF00
 # define BLACK 0x000000
 # define COLOR_TABLE 0xFFFFFF
 

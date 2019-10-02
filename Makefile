@@ -6,7 +6,7 @@
 #    By: koparker <koparker@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/10 22:10:26 by bdudley           #+#    #+#              #
-#    Updated: 2019/09/23 16:56:56 by koparker         ###   ########.fr        #
+#    Updated: 2019/10/02 18:52:46 by koparker         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,6 +62,5 @@ clean:
 fclean: clean
 	@rm -f $(NAME)
 	@make -C libft fclean
-#	@make -C $(MLX) clean
 
 re: fclean all
